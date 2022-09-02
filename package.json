@@ -1,7 +1,7 @@
 {
-  "name": "cotazo-testing-automation",
+  "name": "lmpt-cotazo-testing-automation",
   "version": "1.0.0",
-  "description": "Cotazo Testing Automation by Smart Consulting LDA.",
+  "description": "LMPT Cotazo Testing Automation",
   "main": "index.js",
   "scripts": {
     "test": "env-cmd cypress open",
@@ -10,7 +10,7 @@
   "keywords": [
     "cypress"
   ],
-  "author": "Smart Consulting LDA.",
+  "author": "Jessica Fuentes <jfuentes@smartconsulting.pt> (https://smartconsulting.pt/)",
   "license": "Unlicensed",
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^11.4.0",
