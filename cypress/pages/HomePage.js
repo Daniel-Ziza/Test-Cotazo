@@ -1,7 +1,8 @@
 class HomePage {
     elements = {
         toCreateBtn: () => cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .small-box > .cotazo-card-bottom > .budget-painel-badge-name'),
-        assistanceRequestBtn: () => cy.get('.nav-pills > :nth-child(5) > .cotazo-menu-nav-li-background-div > .nav-link'),
+        supportRequestBtn: () => cy.get('[id="menu.item.assistance"]'),
+        logsOutBtn:() => cy.get('[class="user-menu-sign-off d-block"]')
     };
 
 

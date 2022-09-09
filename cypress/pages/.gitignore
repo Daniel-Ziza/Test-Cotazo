@@ -34,3 +34,6 @@
 !prerequisites/PrerequisitesInstalaServiceOrderCreationPage.js
 !prerequisites/PrerequisitesInstalaServiceOrderManagement.js
 !prerequisites/PrerequisitesIntalaAcceptanceTermPage.js
+!supportRequest
+!supportRequest/SupportRequestManagementPage.js
+!supportRequest/SupportRequestPage.js
