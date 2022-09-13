@@ -6,7 +6,7 @@ class PrerequisitesInstalaLoginPage {
     };
 
     loginInstala () {
-        this.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAM'));
+        this.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAME'));
         this.elements.passwordInstalaInput().type(Cypress.env('ADEO_PASSWORD'));
         this.elements.signOnBtn().click()
     };
