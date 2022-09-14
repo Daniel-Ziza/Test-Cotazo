@@ -218,7 +218,7 @@ import {
     });
   });
 
-  And('The user edits the amount of the service', () => {
+  And('The user edits the quantity of the service', () => {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
@@ -226,6 +226,14 @@ import {
     pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('2').then(() => {
       pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
     });
+  });
+
+  And('The user modifies the quantity of service', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+      return false;
+    });
+      pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('4');
+
   });
 
   And('The user verifies that the edit is correct', () => {

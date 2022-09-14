@@ -84,7 +84,7 @@ Feature: Budget creation
       And The user enters invalid quantity
       Then The "service information" table is empty
       And The user adds a valid service
-      And The user edits the amount of the service
+      And The user edits the quantity of the service
       Then The user verifies that the edit is correct
       And The user removes the previously added service
       Then The "service information" table is empty
@@ -158,10 +158,16 @@ Feature: Budget creation
       When The user clicks on the button budgets to be created
       And The user searches in cotazo for the service order created in the prerequisites
       And Check if the modal appears or not
-      And The information of the filled service order appears
       And The user continues to the next step
-      And The user selects a group of service
+      And The user searches for the service description "Km extra Abrigo Metal"
       And The user selects "Km extra Abrigo Metal [REF.ª 49010901]"
+      And The user searches for the service description "Visita OrçPaineis AquecAgua"
+      And The user selects "Visita OrçPaineis AquecAgua [REF.ª 49010522]"
+      And The user searches for the service description "Trabalho Extra Paineis Solares"
+      And The user adds a new description of the service and inserts
+      And The user searches for the service description "Km extra Paineis Solares"
+      And The user modifies the quantity of service
+      And The user selects "Km extra Paineis Solares [REF.ª 49010524]"
       And The user continues to the next step
       And The user completes the material information form
         |    description    |  quantity  |  unit  |    observation    |

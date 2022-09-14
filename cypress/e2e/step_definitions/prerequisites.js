@@ -77,8 +77,8 @@ Then('The user clicks on the save button', () => {
             throw new Error('The source order code cannot be obtained');
         }
         let text = responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico;
-        const myArray = text.split('https://instalalmptuat.page.link/');
-        const statusLink = 'https://instalalmptuat.page.link/' + myArray[1];
+        const myArray = text.split(Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL'));
+        const statusLink = Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL') + myArray[1];
         assert(true, `The service order status link is: ${statusLink}`);
         Cypress.env('statusLink', statusLink);
     });
@@ -112,7 +112,7 @@ And('The user searches for the service order', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL')+'serviceOrder');
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 
@@ -129,7 +129,7 @@ And('The client confirms the service', () => {
     })
     cy.visit(Cypress.env("statusLink"));
     prerequisitesInstalaServiceOrderManagement.confirmService();
-    cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL')+'serviceOrder');
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 

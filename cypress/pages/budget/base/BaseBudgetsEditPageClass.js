@@ -200,7 +200,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
     };
 
     searchDescription(description) {
-        this.commonPageElements.serviceSearchInput().type(description);
+        this.commonPageElements.serviceSearchInput().clear().type(description);
     };
 
     verifyServiceQuantityCotazo() {
