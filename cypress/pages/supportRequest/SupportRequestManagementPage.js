@@ -14,20 +14,22 @@ class SupportRequestManagementPage {
         timeLineView: () => cy.get('.cotazo-timeline'),
         sentCommentBtn: () => cy.get('.cotazo-timeline-send-btn-container > .btn'),
         currentStatus: () => cy.get('.cotazo-assistance-state-badge'),
+        statusSelect: () => cy.get('#assistance_autocomplete_states_input_multiselect'),
     };
 
-    editIncident(incidentNumber){
+    searchIncident(incidentNumber){
         this.elements.incidentNumber().type(incidentNumber);
-        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('searchIncident');
+        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
-        cy.wait('@searchIncident').its('response.statusCode').should('eq', 200).then( () =>{
-            cy.wait(3000);
-            this.elements.editSupportRequestBtn().click();
+        cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
+            assert('response 200');
         });
     };
 
-    chanceStatusSupportRequest (status, incidentNumber){
-        this.editIncident(incidentNumber);
+    chanceStatusSupportRequest (status){
+        this.searchIncident(Cypress.env('requestNumber'));
+        cy.wait(3000);
+        this.elements.editSupportRequestBtn().click();
         this.elements.statusSupportRequestInput().click();
         if (status === 'in analysis'){
             this.elements.analyzingOption().click();
@@ -48,10 +50,10 @@ class SupportRequestManagementPage {
 
     checkStatus(status,incidentNumber) {
         this.elements.incidentNumber().type(incidentNumber);
-        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('searchIncident');
+        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
-        cy.wait('@searchIncident').its('response.statusCode').should('eq', 200).then( () =>{
-            cy.wait(2000);
+        cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
+            cy.wait(3000);
             cy.get('.assistanceList-col-request-order').each($el => {
                 if ($el.text().includes(incidentNumber)) {
                     assert(true, 'Searchable Value Found');
@@ -78,9 +80,9 @@ class SupportRequestManagementPage {
 
     verifyCreateSupportRequest(incidentNumber, type){
         this.elements.incidentNumber().type(incidentNumber);
-        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('searchIncident');
+        cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
-        cy.wait('@searchIncident').its('response.statusCode').should('eq', 200).then( () =>{
+        cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
             cy.wait(3000);
             if (type === 'access problems'){
                 this.elements.supportRequestInformationTable().should('be.visible')
@@ -95,6 +97,24 @@ class SupportRequestManagementPage {
                     .should('contain.text', 'Sem registos');
             }
         });
+    };
+
+    verifyFilter(filter){
+        if (filter === 'incident number') {
+            this.elements.incidentNumber().type(Cypress.env('requestNumber'));
+            this.elements.supportRequestInformationTable().should('be.visible')
+                .should('contain.text', Cypress.env('requestNumber'))
+                .and('contain.text', Cypress.env('subject'));
+        }
+        if (filter === 'status') {
+            this.elements.statusSelect().click();
+            this.elements.analyzingOption().click();
+            cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
+            this.elements.searchSupportRequestBtn().click();
+        }
+        if (filter === 'creation date') {
+
+        }
     }
 }
 

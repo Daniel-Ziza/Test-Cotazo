@@ -36,7 +36,6 @@ Feature to create a support request
     And The "installer" can see the request on the support request page
 
   Scenario: Flow of a support request management
-    Given The user opens cotazo website
     When An "administrator" logs in to cotazo
     And The user goes to the support request page
     Then The administrator changes the status of the order to "in analysis"
@@ -66,3 +65,18 @@ Feature to create a support request
     When An "installer" logs in to cotazo
     And The user goes to the support request page
     Then The installer checks the status of the support request
+
+  Scenario: Negative flow of support request creation
+    Given The user opens cotazo website
+    When The user goes to the support request
+    And The user enters invalid "email" values
+    And The subject is in read-only
+    And The user enters invalid "messages" values
+    Then The support request cannot be sent
+    And The user returns to the login page
+    When An "installer" logs in to cotazo
+    And The user goes to the support request page
+    And The user go to the create new support request
+    And The user enters invalid "subject" values
+    And The user enters invalid "messages" values
+    Then The support request cannot be sent

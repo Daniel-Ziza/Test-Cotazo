@@ -123,7 +123,7 @@ And ('The administrator changes the status of the order to {string}', (status) =
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    supportRequestManagementPage.chanceStatusSupportRequest(status, Cypress.env('requestNumber'));
+    supportRequestManagementPage.chanceStatusSupportRequest(status);
     Cypress.env('status', status);
 });
 
@@ -154,7 +154,44 @@ Then ('The administrator checks the comment received', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    supportRequestManagementPage.editIncident(Cypress.env('requestNumber'));
+    supportRequestManagementPage.searchIncident(Cypress.env('requestNumber'));
+    cy.wait(3000);
+    supportRequestManagementPage.elements.editSupportRequestBtn().click()
     supportRequestManagementPage.checkComment(Cypress.env('comment'));
     homePage.elements.supportRequestBtn().click();
+});
+
+And ('The user enters invalid {string} values', (element) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    supportRequestPage.verifyValue(element);
+});
+
+And ('The subject is in read-only', (element) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    supportRequestPage.elements.subjectSupportRequestInput().should('have.attr', 'readonly');
+});
+
+Then ('The support request cannot be sent', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    supportRequestPage.elements.sendSupportRequestBtn().should('be.disabled');
+});
+
+And ('The user go to the create new support request', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    supportRequestManagementPage.elements.createNewIncidentBtn().contains('Criar Incidente').click();
+});
+
+And ('The user checks search filter by {string}', (filter) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    supportRequestManagementPage.verifyFilter(filter);
 });
