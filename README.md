@@ -6,9 +6,6 @@ Before you use this project you only need to have Node Js >= 16.16.0 installed i
 
 https://nodejs.org/es/download/
 
-Also, download and install the JSON fomatter depending on your OS.
-
-https://github.com/cucumber/json-formatter
 ```
 
 ## Create the .env file
