@@ -8,7 +8,11 @@ class PrerequisitesInstalaLoginPage {
     loginInstala () {
         this.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAME'));
         this.elements.passwordInstalaInput().type(Cypress.env('ADEO_PASSWORD'));
+        cy.intercept('/newCockpit').as('homePage');
         this.elements.signOnBtn().click()
+        cy.wait('@homePage').then(() => {
+            cy.get('[id="breadcrumb-bar"]').should('contains.text', 'Cockpit');
+        })
     };
 }
 

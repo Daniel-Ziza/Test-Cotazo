@@ -71,7 +71,8 @@ class PrerequisitesInstalaServiceOrderCreationPage {
             cy.wait('@searchPyxisOrder').its('response.statusCode').should('eq', 200).then( () =>{
                 this.elements.taxNumberInput().clear().type(Cypress.env('CUSTOMER_FISCAL_ID'));
                 this.elements.emailInput().clear().type(Cypress.env('CUSTOMER_EMAIL'));
-                this.elements.phoneNumberCustomerInput().clear().type(Cypress.env('CUSTOMER_PHONE_NUMBER'));this.typeDayDatePicker();
+                this.elements.phoneNumberCustomerInput().clear().type(Cypress.env('CUSTOMER_PHONE_NUMBER'));
+                this.typeDayDatePicker();
                 this.elements.turnOrderServiceCreateSelect().click().type('Manhã');
                 this.elements.turnSelect().click();
             });
