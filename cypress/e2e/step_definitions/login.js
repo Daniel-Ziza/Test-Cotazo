@@ -51,3 +51,17 @@ const loginPage = require('../../pages/LoginPage');
     });
     loginPage.verifyErrorMessage();
   });
+
+  When('The user clicks on the employee login link', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+      return false;
+    });
+    loginPage.elements.loginAsEmployeeBtn().click();
+  });
+
+  And('The user logs in with his login credentials', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+      return false;
+    });
+    loginPage.singInWithAdeo();
+  });

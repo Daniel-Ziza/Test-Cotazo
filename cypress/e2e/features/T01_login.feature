@@ -12,5 +12,8 @@ Feature: Login page
         When A user provides incorrect credentials
         And A user clicks on the login button
         Then An error is displayed
-
+    Scenario: Login as a leroy merlin employee
+        When The user clicks on the employee login link
+        And The user logs in with his login credentials
+        Then Main page is displayed
     

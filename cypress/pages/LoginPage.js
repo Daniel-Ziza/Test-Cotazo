@@ -6,6 +6,10 @@ class loginPage {
     dashboardText: () => cy.get('[class="text-dark"]'),
     errorMessage: () => cy.get('[class="cotazo-login-error"]'),
     assistanceRequestWithoutLogin: () => cy.get('.cotazo-login-assistance-click-here'),
+    loginAsEmployeeBtn: () => cy.get('[class="cotazo-login-collaborator-click-here-clickable"]'),
+    usernameAdeoInput: () => cy.get('[name="pf.username"]'),
+    passwordAdeoInput: () => cy.get('[name="pf.pass"]'),
+    signOnAdeoBtn: () => cy.get('[id="my_sign_on_button"]')
   };
 
   typeUsername(username) {
@@ -52,6 +56,12 @@ class loginPage {
       this.elements.passwordInput().type(Cypress.env('TECHNICIAN_COTAZO_PASSWORD'));
     }
     this.elements.loginBtn().click();
+  };
+
+  singInWithAdeo () {
+    this.elements.usernameAdeoInput().type(Cypress.env('ADEO_USERNAME'));
+    this.elements.passwordAdeoInput().type(Cypress.env('ADEO_PASSWORD'));
+    this.elements.signOnAdeoBtn().click();
   }
 }
 
