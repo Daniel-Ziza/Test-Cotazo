@@ -37,14 +37,14 @@ class PrerequisitesInstalaServiceOrderCreationPage {
     };
 
     completeTheForm() {
-        if (Cypress.env('INSTALA_BASE_URL') === 'https://instala-uat.leroymerlin.pt/'){
+        if (Cypress.env('INSTALA_BASE_URL') === 'instala-uat.leroymerlin.pt/'){
             this.elements.storeCodeSelect().click().type(Cypress.env('STORE_NAME'));
             this.elements.nameStoreInput().click();
             this.generatePyxisNumber();
             this.elements.taxNumberInput().clear().type(Cypress.env('CUSTOMER_FISCAL_ID'));
             this.elements.customerNameInput().clear().type(Cypress.env('CUSTOMER_NAME'));
             this.elements.emailInput().clear().type(Cypress.env('CUSTOMER_EMAIL'));
-            this.elements.phoneNumberCustomerInput().clear().type(Cypress.env('CUSTOMER_PHONE_NUMBER'));
+            this.elements.phoneNumberCustomerInput().type(Cypress.env('CUSTOMER_PHONE_NUMBER'));
             this.elements.zipInput().clear().type(Cypress.env('CUSTOMER_POSTAL_CODE'));
             this.elements.countryInput().clear().type(Cypress.env('CUSTOMER_COUNTRY'));
             this.elements.cityInput().clear().type(Cypress.env('CUSTOMER_CITY'));

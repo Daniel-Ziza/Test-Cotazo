@@ -4,6 +4,7 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
+import prerequisiteInstalaLoginPage from "../../pages/prerequisites/PrerequisitesInstalaLoginPage";
 const prerequisitesInstalaServiceOrderCreationPage = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderCreationPage');
 const prerequisitesIntalaAcceptanceTermPage = require('../../pages/prerequisites/PrerequisitesIntalaAcceptanceTermPage');
 const prerequisitesInstalaServiceOrderManagement = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement');
@@ -31,6 +32,15 @@ Given('The user successfully access the INSTALA system using a pre-existing URL 
     });
 });
 
+Given('The user logs in Instala', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
+    prerequisiteInstalaLoginPage.loginInstala();
+
+})
+
 And('The user clicks on service order creation', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
@@ -50,7 +60,7 @@ Then('The user clicks on the save button', () => {
         return false;
     });
     cy.intercept('POST', '/lm-instala-api/orders/services').as('orderCode'); // this has to be placed in environment variables
-    cy.intercept('GET', '/lm-instala-api/orders/services/*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
+    cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
     cy.intercept('GET', '/lm-instala-api/short-link?path=terms-acceptance*').as('termsAcceptance'); // this has to be placed in environment variables
     prerequisitesInstalaServiceOrderCreationPage.elements.createServiceOrderBtn().click();
     cy.wait('@orderCode').then((responseData) =>{

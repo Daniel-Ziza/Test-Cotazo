@@ -311,7 +311,7 @@ import {
     }
   });
 
-  Then('An an error message appears', () => {
+  Then('An error message appears', () => {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
