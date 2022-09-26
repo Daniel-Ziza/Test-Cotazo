@@ -3,6 +3,6 @@
 !.gitignore
 !T01_login.feature
 !T02_prerequisites.feature
-!T03_budget_creation.feature
-!T04_support_request.feature
+!T04_budget_creation.feature
+!T05_support_request.feature
 !test.feature
