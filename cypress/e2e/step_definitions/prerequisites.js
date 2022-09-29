@@ -122,7 +122,7 @@ And('The user searches for the service order', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    cy.visit(Cypress.env('INSTALA_BASE_URL')+'serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 
@@ -137,7 +137,7 @@ And('The client confirms the service', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         return false;
     })
-    cy.visit(Cypress.env("statusLink"));
+    cy.visit(Cypress.env('statusLink'));
     prerequisitesInstalaServiceOrderManagement.confirmService();
     cy.visit(Cypress.env('INSTALA_BASE_URL')+'serviceOrder');
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
@@ -195,4 +195,39 @@ And('The technician terminates the service', () => {
         expect(statusCode).to.eq('06');
         assert(true, 'The technician terminated the service. The service order must already be in Cotazo');
     });
+});
+
+// FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
+Then ('The user verifies that the budgets are correctly loaded', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    prerequisitesInstalaServiceOrderManagement.elements.customerBudgetContainer()
+        .should('contain.text', 'Orçamento Cliente OS '+ Cypress.env('orderServiceNumber'));
+    prerequisitesInstalaServiceOrderManagement.elements.storeBudgetContainer()
+        .should('contain.text', 'Orçamento Técnico OS ' + Cypress.env('orderServiceNumber'));
+});
+
+Then ('The user indicates that the budget has been sent to the customer', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    prerequisitesInstalaServiceOrderManagement.elements.sendToCustomerCheck().click();
+    prerequisitesInstalaServiceOrderManagement.elements.sendConfirmationBtn().contains('Sim').click();
+});
+
+Then ('The user indicates that the budget was approved by the customer', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    prerequisitesInstalaServiceOrderManagement.elements.customerApprovalCheck().click();
+    prerequisitesInstalaServiceOrderManagement.elements.serviceOrderUpdateBtn().click();
+});
+
+Then ('The user indicates that the budget was refused by the customer', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    prerequisitesInstalaServiceOrderManagement.elements.customerRefusalCheck().click();
+    prerequisitesInstalaServiceOrderManagement.elements.serviceOrderUpdateBtn().click();
 });

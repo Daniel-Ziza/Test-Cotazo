@@ -25,7 +25,7 @@ class PrerequisitesInstalaServiceOrderManagement {
         searchFieldInput: () => cy.get('[name="currentSearchFieldValue"]'),
         searchBtn: () => cy.get('[class="glyph glyph-magnifier"'),
         orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/${Cypress.env('orderServiceNumber')}"] > .heading-4`),
-        //orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/58346"] > .heading-4`),
+        //orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/XXXX"] > .heading-4`), //line for test development
         pickerSelect: () => cy.get('#date'),
         calendarSelect: () => cy.get('.SingleDatePicker__picker'),
         calendarMonth: () => cy.get('.SingleDatePicker__picker > .DayPicker > div > .DayPicker__focus-region > .transition-container > .CalendarMonthGrid > .CalendarMonth:nth-child(2) > .CalendarMonth__caption'),
@@ -40,11 +40,17 @@ class PrerequisitesInstalaServiceOrderManagement {
         turnOrderServiceManagementSelect: () => cy.get('#idSlotApplication'),
         confirmServiceBtn: () => cy.get('[class="generic-submit-button mt-1"]'),
         confirmServiceText: () => cy.get('.big-title'),
+        customerBudgetContainer: () => cy.get('.service-order-edit-body > :nth-child(2)'),
+        storeBudgetContainer: () => cy.get('.service-order-edit-body > :nth-child(3)'),
+        sendToCustomerCheck: () => cy.get('.text-option'),
+        sendConfirmationBtn: () => cy.get('[class="button button-primary button-full"]'),
+        customerApprovalCheck: () => cy.get(':nth-child(1) > .body-budgets-accepted > .body > :nth-child(1) > .text-option'),
+        customerRefusalCheck: () => cy.get(':nth-child(2) > .text-option'),
     };
 
     serviceOrderSearch () {
         this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber'));
-        //this.elements.searchFieldInput().type('58346');
+        //this.elements.searchFieldInput().type('XXXXX'); //line for test development
         this.elements.searchBtn().click();
         this.elements.orderServiceSelect().click();
     };

@@ -1,7 +1,7 @@
 *
 */
 !.gitignore
-!budget_creation.js
+!budget_management.js
 !common_steps.js
 !login.js
 !prerequisites.js

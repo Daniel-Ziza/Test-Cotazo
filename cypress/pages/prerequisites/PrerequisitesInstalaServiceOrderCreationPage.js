@@ -37,7 +37,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
     };
 
     completeTheForm() {
-        if (Cypress.env('INSTALA_BASE_URL') === 'instala-uat.leroymerlin.pt/'){
+        if (Cypress.env('INSTALA_BASE_URL') === 'instala-uat.leroymerlin.pt'){
             this.elements.storeCodeSelect().click().type(Cypress.env('STORE_NAME'));
             this.elements.nameStoreInput().click();
             this.generatePyxisNumber();

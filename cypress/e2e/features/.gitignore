@@ -5,5 +5,7 @@
 !T02_prerequisites.feature
 !T03_budget_creation_steps.feature
 !T04_budget_creation.feature
-!T05_support_request.feature
+!T05_budget_acceptance_flow.feature
+!T06_budget_refusal_flow.feature
+!T07_support_request.feature
 !test.feature

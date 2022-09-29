@@ -50,7 +50,7 @@ module.exports = defineConfig({
       "cypress/e2e/features/T01_login.feature",
       'cypress/e2e/features/T02_prerequisites.feature',
       'cypress/e2e/features/T04_budget_creation.feature',
-      'cypress/e2e/features/T05_support_request.feature',
+      'cypress/e2e/features/T07_support_request.feature',
       'cypress/e2e/features/test.feature',
     ],*/
     baseUrl: process.env.BASE_URL,

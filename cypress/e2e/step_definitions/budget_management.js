@@ -1,16 +1,20 @@
 import {
-    When,
-    And,
-    Then,
-  } from '@badeball/cypress-cucumber-preprocessor';
+  When,
+  And,
+  Then, Given,
+} from '@badeball/cypress-cucumber-preprocessor';
   import moment, {duration} from 'moment';
+import loginPage from "../../pages/LoginPage";
+import prerequisitesInstalaServiceOrderManagement
+  from "../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement";
   const homePage =require('../../pages/HomePage');
   const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
   const inProgressBudgetsEditPage = require ('../../pages/budget/inProgress/InProgressBudgetsEditPage');
   const inProgressBudgetsListPage = require ('../../pages/budget/inProgress/InProgressBudgetsListPage')
   const completedBudgetsListPage = require ('../../pages/budget/completed/CompletedBudgetsListPage');
   const pendingBudgetsEditPage = require ('../../pages/budget/pending/PendingBudgetsEditPage');
-  const sentBudgetsEditPage = require ('../../pages/budget/sent/SentBudgetsEditPage');
+  const sentBudgetsListPage = require ('../../pages/budget/sent/SentBudgetsListPage');
+
 
 
   
@@ -506,3 +510,52 @@ import {
     pendingBudgetsListPage.commonPageElements.budgetDeleteBtn().click();
   });
 
+// FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
+Given('User logs in Cotazo', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.visit(Cypress.env('BASE_URL'))
+  loginPage.typeUsername(Cypress.env('ADMIN_COTAZO_USERNAME'));
+  loginPage.typePassword(Cypress.env('ADMIN_COTAZO_PASSWORD'));
+  loginPage.clickLogin();
+});
+
+Given('The user logs in instala', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.visit(Cypress.env('INSTALA_LOGIN_URL'));
+  // Set as cypress env vars some values defined by previous tests.
+  cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
+    Cypress.env("orderServiceNumber", serviceOrderNumber);
+    assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`)
+  });
+  cy.get('#breadcrumb-bar', {timeout : 15000}).should('be.visible').and('contain', 'Cockpit');
+});
+
+When('The user searches a budget', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.log(Cypress.env('orderServiceNumber'));
+  homePage.elements.searchBox().type(Cypress.env('orderServiceNumber'));
+  homePage.elements.searchHomePageBtn().click();
+});
+
+Then ('The user should see the tag {string}', (text) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  if (text === 'budget available in store') {
+    sentBudgetsListPage.commonPageElements.statusTag().should('have.text', 'Orçamento Disponível em loja');
+  }else if (text === 'waiting for customer response') {
+    sentBudgetsListPage.commonPageElements.statusTag().should('have.text', 'Aguardando Resposta Cliente');
+  }else if (text === 'budget Accepted') {
+    sentBudgetsListPage.commonPageElements.statusTag().should('have.text', 'Orçamento aceite');
+  }else if (text === 'budget refused by the customer') {
+    sentBudgetsListPage.commonPageElements.statusTag().should('have.text', 'Orçamento recusado pelo cliente');
+  }else {
+    //pending
+  }
+});

@@ -9,6 +9,7 @@ class BaseBudgetsListPageClass extends UserLayout {
         pageSubmittedBtn: () => cy.get('.budget-painel-each-tab > a.cotazo-state-text-SUBMITTED'),
         pagePendingBtn: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_LAUNCH'),
         budgetDeleteBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-danger'),
+        statusTag: () => cy.get('.budget-painel-last-budgetevent-status-badget-container > .budget-painel-last-budgetevent-status-badge'),
     }
 
     findListItem(searchableValue, findBy = 'contactNumber', actionButtonNumber = 0) {
