@@ -141,7 +141,7 @@ import prerequisitesInstalaServiceOrderManagement
     });
   });
 
-  Then('The user creates and synchronizes a quotation and verifies that it is on sent', () => {
+  Then('The user creates and synchronizes a budget and verifies that it is on sent', () => {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
@@ -486,6 +486,9 @@ import prerequisitesInstalaServiceOrderManagement
     if (element === 'end notes') {
       pendingBudgetsEditPage.commonPageElements.stepFourBtn().click();
     }
+    if (element === 'material information') {
+      inProgressBudgetsEditPage.commonPageElements.stepThreeBtn().click();
+    }
   });
 
   And('The user verifies that the text tool appears', () => {
@@ -511,15 +514,7 @@ import prerequisitesInstalaServiceOrderManagement
   });
 
 // FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
-Given('User logs in Cotazo', () => {
-  cy.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-  cy.visit(Cypress.env('BASE_URL'))
-  loginPage.typeUsername(Cypress.env('ADMIN_COTAZO_USERNAME'));
-  loginPage.typePassword(Cypress.env('ADMIN_COTAZO_PASSWORD'));
-  loginPage.clickLogin();
-});
+
 
 Given('The user logs in instala', () => {
   cy.on('uncaught:exception', (err, runnable) => {

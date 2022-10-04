@@ -9,7 +9,7 @@ const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudget
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
 const pendingBudgetsEditPage = require ('../../pages/budget/pending/PendingBudgetsEditPage');
 
-Given('User logs in online', () => {
+Given('The user logs in Cotazo', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });

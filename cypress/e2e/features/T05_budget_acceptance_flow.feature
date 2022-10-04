@@ -4,7 +4,7 @@ Feature Budget acceptance flow between Cotazo and Instala
 
 
   Scenario: Verify budged available in store in Cotazo
-    Given User logs in online
+    Given The user logs in Cotazo
     When The user searches a budget
     Then The user should see the tag "budget available in store"
 
@@ -15,7 +15,7 @@ Feature Budget acceptance flow between Cotazo and Instala
     And The user indicates that the budget has been sent to the customer
 
   Scenario: Verify that the budget is awaiting a response from the customer in Cotazo
-    Given User logs in online
+    Given The user logs in Cotazo
     When The user searches a budget
     Then The user should see the tag "waiting for customer response"
 
@@ -25,6 +25,6 @@ Feature Budget acceptance flow between Cotazo and Instala
     Then The user indicates that the budget was approved by the customer
 
   Scenario: Verify that the budget is accepted by the customer in Cotazo
-    Given User logs in online
+    Given The user logs in Cotazo
     When The user searches a budget
     Then The user should see the tag "budget Accepted"

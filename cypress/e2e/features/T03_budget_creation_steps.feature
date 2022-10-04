@@ -3,7 +3,7 @@ Feature: Budget creation steps
 Feature to test each of the steps for budget creation
 
   Background:
-    Given User logs in online
+    Given The user logs in Cotazo
 
   Scenario: The user leaves the budget information form empty
     When The user clicks on the button budgets to be created

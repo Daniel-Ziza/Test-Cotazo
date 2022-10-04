@@ -3,7 +3,7 @@ Feature: Budget creation
     Feature for creating a new budget
 
     Background:
-      Given User logs in online
+      Given The user logs in Cotazo
 
     Scenario: The user starts creating the budget and saves it
       When The user clicks on the button budgets to be created
@@ -79,4 +79,4 @@ Feature: Budget creation
       And The user completes the final notes form
         | duration |     End_Notes     |
         |    2h    | example End Notes |
-      Then The user creates and synchronizes a quotation and verifies that it is on sent
+      Then The user creates and synchronizes a budget and verifies that it is on sent
