@@ -7,6 +7,8 @@ Feature Prerequisites to create budgets in cotazo
     And The user clicks on service order creation
     When The user fills out the service order creation form
     Then The user clicks on the save button
+    And Search for service order
+    And The link to the terms and conditions of sale is obtained
     And The user accepts the terms of service
     And The user searches for the service order
     And The user makes a manual distribution of the service

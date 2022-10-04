@@ -60,8 +60,8 @@ Then('The user clicks on the save button', () => {
         return false;
     });
     cy.intercept('POST', '/lm-instala-api/orders/services').as('orderCode'); // this has to be placed in environment variables
-    cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
-    cy.intercept('GET', '/lm-instala-api/short-link?path=terms-acceptance*').as('termsAcceptance'); // this has to be placed in environment variables
+    //cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
+    //cy.intercept('GET', '/lm-instala-api/short-link?path=terms-acceptance*').as('termsAcceptance'); // this has to be placed in environment variables
     prerequisitesInstalaServiceOrderCreationPage.elements.createServiceOrderBtn().click();
     cy.wait('@orderCode').then((responseData) =>{
         if (!responseData.response ||
@@ -77,7 +77,7 @@ Then('The user clicks on the save button', () => {
         Cypress.env('orderServiceNumber', sourceOrderCode);
         cy.task('setServiceOrderNumber', sourceOrderCode);
     });
-    cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
+    /*cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
         if (!responseData2.response ||
             !responseData2.response.body ||
             !responseData2.response.body.data ||
@@ -107,7 +107,7 @@ Then('The user clicks on the save button', () => {
     });
     cy.waitUntil(()=> typeof Cypress.env('acceptanceTerms') !== 'undefined').then(() => {
         assert(true, `The url has been obtained ${Cypress.env('acceptanceTerms')}`);
-    });
+    });*/
 });
 
 And('The user accepts the terms of service', () => {
@@ -123,7 +123,59 @@ And('The user searches for the service order', () => {
         return false;
     });
     cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
+    cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
+});
+
+//temporary alternative step
+And('Search for service order', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
+    cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
+    prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
+    //Temporal
+    cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
+        if (!responseData2.response ||
+            !responseData2.response.body ||
+            !responseData2.response.body.data ||
+            !responseData2.response.body.data[0] ||
+            !responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico) {
+            assert(false, 'The source order code cannot be obtained');
+            throw new Error('The source order code cannot be obtained');
+        }
+        let text = responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico;
+        const myArray = text.split(Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL'));
+        const statusLink = Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL') + myArray[1];
+        assert(true, `The service order status link is: ${statusLink}`);
+        Cypress.env('statusLink', statusLink);
+    })
+});
+
+//temporary alternative step
+And('The link to the terms and conditions of sale is obtained', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    cy.intercept('GET', '/lm-instala-api/short-link?path=terms-acceptance*').as('termsAcceptance');
+    cy.get('div > .button-hollow').click();
+    cy.wait('@termsAcceptance').then((responseData3) =>{
+        if (!responseData3.response ||
+            !responseData3.response.body ||
+            !responseData3.response.body.data ||
+            !responseData3.response.body.data[0] ||
+            !responseData3.response.body.data[0]) {
+            assert(false, 'The source order code cannot be obtained');
+            throw new Error('The source order code cannot be obtained');
+        }
+        const acceptanceTermLink = responseData3.response.body.data;
+        assert(true, `The terms and conditions link is: ${acceptanceTermLink}`);
+        Cypress.env('acceptanceTerms', acceptanceTermLink);
+    });
+    cy.waitUntil(()=> typeof Cypress.env('acceptanceTerms') !== 'undefined').then(() => {
+        assert(true, `The url has been obtained ${Cypress.env('acceptanceTerms')}`);
+    })
 });
 
 And('The user makes a manual distribution of the service', () => {
@@ -139,7 +191,7 @@ And('The client confirms the service', () => {
     })
     cy.visit(Cypress.env('statusLink'));
     prerequisitesInstalaServiceOrderManagement.confirmService();
-    cy.visit(Cypress.env('INSTALA_BASE_URL')+'serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 

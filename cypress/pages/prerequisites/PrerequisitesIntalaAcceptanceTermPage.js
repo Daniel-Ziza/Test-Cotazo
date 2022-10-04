@@ -1,7 +1,7 @@
 class PrerequisitesIntalaAcceptanceTermPage {
     elements = {
         conditionAcceptanceCheck: () => cy.get(':nth-child(4) > span > input'),
-        signatureInput: () => cy.get('[style="display: block; position: absolute; z-index: 15;"]'),
+        signatureInput: () => cy.get('.signature > div'),
         sendAcceptanceTermsBtn: () => cy.get('.button-primary'),
         confirmationAcceptanceTermsLabel: () => cy.get('.container-fluid')
     };
