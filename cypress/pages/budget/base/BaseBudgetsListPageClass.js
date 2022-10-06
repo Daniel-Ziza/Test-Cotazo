@@ -10,6 +10,11 @@ class BaseBudgetsListPageClass extends UserLayout {
         pagePendingBtn: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_LAUNCH'),
         budgetDeleteBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-danger'),
         statusTag: () => cy.get('.budget-painel-last-budgetevent-status-badget-container > .budget-painel-last-budgetevent-status-badge'),
+        viewServiceOrderBtn: () => cy.get('.budget-rect-icons > :nth-child(1)'),
+        editServiceOrderBtn: () => cy.get('.budget-rect-icons > :nth-child(2)'),
+        downloadCustomerBudget: () => cy.get('.budget-rect-icons > :nth-child(3)'),
+        downloadTechnicalBudget: () => cy.get('.budget-rect-icons > :nth-child(4)'),
+        budgetIdentifier: () => cy.get('.budget-painel-externalCode'),
     }
 
     findListItem(searchableValue, findBy = 'contactNumber', actionButtonNumber = 0) {
@@ -75,7 +80,8 @@ class BaseBudgetsListPageClass extends UserLayout {
                     });
                 });
         });
-    }
+    };
+
 }
 
 module.exports = BaseBudgetsListPageClass

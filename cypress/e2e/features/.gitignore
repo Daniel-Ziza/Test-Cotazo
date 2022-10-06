@@ -7,5 +7,7 @@
 !T04_budget_creation.feature
 !T05_budget_acceptance_flow.feature
 !T06_budget_refusal_flow.feature
+!T07_new_budget_version-budget_acceptance_flow.feature
+!T08_new_budget_version-budget_refusal_flow.feature
 !T09_support_request.feature
 !test.feature

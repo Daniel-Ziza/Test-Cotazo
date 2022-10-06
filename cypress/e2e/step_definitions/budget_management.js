@@ -4,10 +4,8 @@ import {
   Then, Given,
 } from '@badeball/cypress-cucumber-preprocessor';
   import moment, {duration} from 'moment';
-import loginPage from "../../pages/LoginPage";
-import prerequisitesInstalaServiceOrderManagement
-  from "../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement";
-  const homePage =require('../../pages/HomePage');
+  const loginPage = require ('../../pages/LoginPage') ;
+  const homePage = require('../../pages/HomePage');
   const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
   const inProgressBudgetsEditPage = require ('../../pages/budget/inProgress/InProgressBudgetsEditPage');
   const inProgressBudgetsListPage = require ('../../pages/budget/inProgress/InProgressBudgetsListPage')
@@ -513,8 +511,9 @@ import prerequisitesInstalaServiceOrderManagement
     pendingBudgetsListPage.commonPageElements.budgetDeleteBtn().click();
   });
 
-// FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
-
+/*
+    FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
+*/
 
 Given('The user logs in instala', () => {
   cy.on('uncaught:exception', (err, runnable) => {
@@ -524,7 +523,7 @@ Given('The user logs in instala', () => {
   // Set as cypress env vars some values defined by previous tests.
   cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
     Cypress.env("orderServiceNumber", serviceOrderNumber);
-    assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`)
+    assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`);
   });
   cy.get('#breadcrumb-bar', {timeout : 15000}).should('be.visible').and('contain', 'Cockpit');
 });
@@ -551,6 +550,73 @@ Then ('The user should see the tag {string}', (text) => {
   }else if (text === 'budget refused by the customer') {
     sentBudgetsListPage.commonPageElements.statusTag().should('have.text', 'Orçamento recusado pelo cliente');
   }else {
-    //pending
+    assert.isBoolean(false, 'The budget has no tag ');
   }
+});
+
+Then('The user edits the budget', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  completedBudgetsListPage.commonPageElements.editServiceOrderBtn().click();
+});
+
+And('The user goes to {string}', (element) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  if (element === 'in edition') {
+    inProgressBudgetsListPage.commonPageElements.pageEditBtn().click();
+  }
+  if (element === 'in pending') {
+    inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click();
+  }
+  if (element === 'already launched') {
+    completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
+  }
+});
+
+Then('The user verifies that the budget has version {string}', (element) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  inProgressBudgetsListPage.commonPageElements.budgetIdentifier()
+      .should('have.text','Orçamento ' + Cypress.env('orderServiceNumber') + ' - ' + element);
+  cy.wait(1000);
+});
+
+And('The user adds new material information', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  inProgressBudgetsEditPage.newMaterialInformation();
+});
+
+Then('The user saves the budget', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.intercept('POST', '/lm-cotazo-budget/budget/partial').as('save');
+  pendingBudgetsEditPage.clickSaveBtn();
+  cy.wait('@save').its('response.statusCode').should('eq', 200);
+});
+
+Then('The user completes the budget', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
+  pendingBudgetsEditPage.clickFinishBtn();
+  cy.wait('@create').its('response.statusCode').should('eq', 200);
+});
+
+Then('The user synchronizes the budget', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+  cy.intercept('POST', '/lm-cotazo-budget/budget/finish/sync/*').as('sync');
+  pendingBudgetsEditPage.clickSyncBtn();
+  pendingBudgetsEditPage.commonPageElements.confirmModalBtn().click().then(() => {
+    cy.wait('@sync').its('response.statusCode').should('eq',200);
+  });
 });

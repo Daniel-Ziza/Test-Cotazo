@@ -60,6 +60,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         importConfirmationBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-success'),
         closeModalBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn'),
         stepFourBtn: () => cy.get('.budget-steps > :nth-child(7)'),
+        stepThreeBtn: () => cy.get('.budget-steps > :nth-child(5)'),
         formatBox: () => cy.get('.jodit-ui-group_line_true > .jodit-ui-group'),
     };
 
@@ -246,6 +247,14 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.materialUnitInput().invoke('val').should('be.empty');
         this.commonPageElements.materialObservationsInput().invoke('val').should('be.empty');
     };
+
+    newMaterialInformation () {
+        let description = 'Description for new version ' + Math.trunc(Date.now()/1000);
+        this.commonPageElements.materialDescriptionInput().type(description);
+        this.commonPageElements.materialQuantityInput().type('2');
+        this.commonPageElements.materialUnitInput().type('unit');
+        this.commonPageElements.addBtn().click();
+    }
 }
 
 module.exports = BaseBudgetsEditPageClass

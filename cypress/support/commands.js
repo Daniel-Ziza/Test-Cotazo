@@ -35,25 +35,42 @@ Cypress.Commands.add('pollServiceOrderInfo', ({ baseUrl, apiKey, authorization, 
             lastResponse = await fetch(`${baseUrl}/lm-instala-api/orders/services/list-filters?servcOrdCd=${serviceOrderNumber}`, {
                 mode: 'cors',
                 headers: {
+                    /*Accept: 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8',*/
                     apiKey,
                     authorization,
                 },
             });
-            lastResponseInJson = await lastResponse.json();
+
+            try {
+                lastResponseInJson = await lastResponse.json();
+            } catch (err) {
+                console.log('The response does not contains a valid JSON document');
+
+                lastResponseInJson = null;
+            }
+
+
             if (lastResponseInJson && lastResponseInJson.data[0] && lastResponseInJson.data[0].servcOrdStusCd) {
                 obtainedStatus = lastResponseInJson.data[0].servcOrdStusCd;
-            } else {
+            }
+
+            /*else {
                 assert(false, 'The service order information can not be obtained');
                 reject(`The service information can not be obtained`);
                 throw new Error(`The service information can not be obtained`);
-            }
+            }*/
+
             if (obtainedStatus === expectedStatus) {
                 assert(true, `The expected service order status (${expectedStatus}) has been found`);
                 resolve(obtainedStatus);
                 return;
             }
+
             await new Promise(r => setTimeout(r, interval));
+
             attempts++;
+
             if (obtainedStatus !== expectedStatus && attempts >= maxAttempts) {
                 assert(false, `The expected service order status (${expectedStatus}) can not be found`);
                 reject(`The expected service order status (${expectedStatus}) can not be found`);
