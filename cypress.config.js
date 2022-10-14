@@ -46,8 +46,7 @@ module.exports = defineConfig({
     },
     specPattern: "cypress/e2e/features/*.feature",
     /*specPattern: [
-      "cypress/e2e/features/*.feature",
-      "cypress/e2e/features/T01_login.feature",
+      'cypress/e2e/features/T01_login.feature',
       'cypress/e2e/features/T02_prerequisites.feature',
       'cypress/e2e/features/T03_budget_creation_steps.feature',
       'cypress/e2e/features/T04_budget_creation.feature',

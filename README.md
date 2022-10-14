@@ -30,3 +30,7 @@ if you want to run a specific test in the terminal, change the specPattern param
 Example:
 specPattern: 'cypress/e2e/features/test.feature',
 ```
+
+## Documentation:
+
+https://jira.adeo.com/confluence/display/INSTALMBU/Cotazo+Testing+Automation
