@@ -64,9 +64,9 @@ Feature: Budget creation
       And The user continues to the next step
       And The user searches for the service description "Km extra Abrigo Metal"
       And The user selects "Km extra Abrigo Metal [REF.ª 49010901]"
-      And The user searches for the service description "Visita OrçPaineis AquecAgua"
-      And The user selects "Visita OrçPaineis AquecAgua [REF.ª 49010522]"
-      And The user searches for the service description "Trabalho Extra Paineis Solares"
+      And The user searches for the service description "Visita Orç.Paineis Aquec.Agua"
+      And The user selects "Visita Orç.Paineis Aquec.Agua [REF.ª 49010522]"
+      And The user searches for the service description "Trab. Complementar Paineis Solares"
       And The user adds a new description of the service and inserts
       And The user searches for the service description "Km extra Paineis Solares"
       And The user modifies the quantity of service

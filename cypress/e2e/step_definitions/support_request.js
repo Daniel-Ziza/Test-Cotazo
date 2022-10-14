@@ -155,7 +155,6 @@ Then ('The administrator checks the comment received', () => {
         return false;
     });
     supportRequestManagementPage.searchIncident(Cypress.env('requestNumber'));
-    cy.wait(3000);
     supportRequestManagementPage.elements.editSupportRequestBtn().click()
     supportRequestManagementPage.checkComment(Cypress.env('comment'));
     homePage.elements.supportRequestBtn().click();

@@ -4,6 +4,8 @@ import {
   Then, Given,
 } from '@badeball/cypress-cucumber-preprocessor';
   import moment, {duration} from 'moment';
+  import { slowCypressDown} from "cypress-slow-down";
+  import 'cypress-slow-down/commands'
   const loginPage = require ('../../pages/LoginPage') ;
   const homePage = require('../../pages/HomePage');
   const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
@@ -13,15 +15,16 @@ import {
   const pendingBudgetsEditPage = require ('../../pages/budget/pending/PendingBudgetsEditPage');
   const sentBudgetsListPage = require ('../../pages/budget/sent/SentBudgetsListPage');
 
-
+  slowCypressDown(false);
 
   
   When('The user clicks on the button budgets to be created', () =>{
     cy.on('uncaught:exception', (err, runnable) => {
       return false
     });
-    cy.wait(3000);
+    cy.slowDown(1000);
     homePage.elements.toCreateBtn().click();
+    cy.slowDownEnd();
   });
 
   And("The user searches for a service order according to the customer's phone {string} and starts editing", (phoneNumber) => {
@@ -42,7 +45,7 @@ import {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
-    cy.wait(3000);
+    cy.slowDown(600);
     cy.document().then((doc) => {
       if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
         assert(true,'Modal shown');
@@ -51,6 +54,7 @@ import {
         assert(true,'Modal not shown');
       }
     });
+    cy.slowDownEnd();
   });
 
   And('The information of the filled service order appears', () => {
@@ -114,11 +118,13 @@ import {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
+    cy.slowDown(400);
     cy.intercept('POST', '/lm-cotazo-budget/budget/partial').as('save');
     pendingBudgetsEditPage.clickSaveBtn();
     cy.wait('@save').its('response.statusCode').should('eq', 200).then( () =>{
       cy.visit("/budgets").then(() => {
         inProgressBudgetsListPage.commonPageElements.pageEditBtn().click().then(() => {
+          cy.slowDownEnd();
           inProgressBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber',  0);
         });
       });
@@ -129,11 +135,12 @@ import {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
+    cy.slowDown(400);
     cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
     pendingBudgetsEditPage.clickFinishBtn();
     cy.wait('@create').its('response.statusCode').should('eq', 200).then((responseData) =>{
       inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click().then(() => {
-        cy.wait(3000);
+        cy.slowDownEnd();
         completedBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
       });
     });
@@ -143,12 +150,13 @@ import {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
+    cy.slowDown(500);
     cy.intercept('POST', '/lm-cotazo-budget/budget/finish/sync/*').as('sync');
     pendingBudgetsEditPage.clickSyncBtn();
     pendingBudgetsEditPage.commonPageElements.confirmModalBtn().click().then(() => {
       cy.wait('@sync').its('response.statusCode').should('eq',200).then((responseData) => {
         inProgressBudgetsListPage.commonPageElements.pageSubmittedBtn().click().then(() => {
-          cy.wait(3000);
+          cy.slowDownEnd();
           pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber',  0);
         });
       });
@@ -507,8 +515,10 @@ import {
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
+    cy.slowDown(100);
     pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber',  3);
     pendingBudgetsListPage.commonPageElements.budgetDeleteBtn().click();
+    cy.slowDownEnd();
   });
 
 /*
@@ -532,9 +542,10 @@ When('The user searches a budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
-  cy.log(Cypress.env('orderServiceNumber'));
+  cy.slowDown(500);
   homePage.elements.searchBox().type(Cypress.env('orderServiceNumber'));
   homePage.elements.searchHomePageBtn().click();
+  cy.slowDownEnd();
 });
 
 Then ('The user should see the tag {string}', (text) => {
@@ -596,27 +607,33 @@ Then('The user saves the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+  cy.slowDown(500);
   cy.intercept('POST', '/lm-cotazo-budget/budget/partial').as('save');
   pendingBudgetsEditPage.clickSaveBtn();
   cy.wait('@save').its('response.statusCode').should('eq', 200);
+  cy.slowDownEnd();
 });
 
 Then('The user completes the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+  cy.slowDown(500);
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
   pendingBudgetsEditPage.clickFinishBtn();
   cy.wait('@create').its('response.statusCode').should('eq', 200);
+  cy.slowDownEnd();
 });
 
 Then('The user synchronizes the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+  cy.slowDown(500);
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/sync/*').as('sync');
   pendingBudgetsEditPage.clickSyncBtn();
   pendingBudgetsEditPage.commonPageElements.confirmModalBtn().click().then(() => {
     cy.wait('@sync').its('response.statusCode').should('eq',200);
+    cy.slowDownEnd();
   });
 });

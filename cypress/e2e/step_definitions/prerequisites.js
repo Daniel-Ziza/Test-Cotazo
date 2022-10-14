@@ -38,7 +38,6 @@ Given('The user logs in Instala', () => {
     });
     cy.visit(Cypress.env('INSTALA_BASE_URL'));
     prerequisiteInstalaLoginPage.loginInstala();
-
 })
 
 And('The user clicks on service order creation', () => {
@@ -77,7 +76,7 @@ Then('The user clicks on the save button', () => {
         Cypress.env('orderServiceNumber', sourceOrderCode);
         cy.task('setServiceOrderNumber', sourceOrderCode);
     });
-    /*cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
+   /* cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
         if (!responseData2.response ||
             !responseData2.response.body ||
             !responseData2.response.body.data ||
@@ -107,7 +106,7 @@ Then('The user clicks on the save button', () => {
     });
     cy.waitUntil(()=> typeof Cypress.env('acceptanceTerms') !== 'undefined').then(() => {
         assert(true, `The url has been obtained ${Cypress.env('acceptanceTerms')}`);
-    });*/
+    }); */
 });
 
 And('The user accepts the terms of service', () => {
@@ -123,7 +122,6 @@ And('The user searches for the service order', () => {
         return false;
     });
     cy.visit(Cypress.env('INSTALA_BASE_URL')+'/serviceOrder');
-    cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 
