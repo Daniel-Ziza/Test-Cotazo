@@ -18,17 +18,18 @@ class SupportRequestManagementPage {
     };
 
     searchIncident(incidentNumber){
+        cy.slowDown(500);
         this.elements.incidentNumber().type(incidentNumber);
         cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
         cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
             assert('response 200');
         });
+        cy.slowDownEnd();
     };
 
     chanceStatusSupportRequest (status){
         this.searchIncident(Cypress.env('requestNumber'));
-        cy.wait(3000);
         this.elements.editSupportRequestBtn().click();
         this.elements.statusSupportRequestInput().click();
         if (status === 'in analysis'){
@@ -49,11 +50,11 @@ class SupportRequestManagementPage {
     };
 
     checkStatus(status,incidentNumber) {
+        cy.slowDown(500);
         this.elements.incidentNumber().type(incidentNumber);
         cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
         cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
-            cy.wait(3000);
             cy.get('.assistanceList-col-request-order').each($el => {
                 if ($el.text().includes(incidentNumber)) {
                     assert(true, 'Searchable Value Found');
@@ -72,6 +73,7 @@ class SupportRequestManagementPage {
                 }
             });
         });
+        cy.slowDownEnd();
     };
 
     checkComment(comment){
@@ -79,11 +81,11 @@ class SupportRequestManagementPage {
     };
 
     verifyCreateSupportRequest(incidentNumber, type){
+        cy.slowDown(500);
         this.elements.incidentNumber().type(incidentNumber);
         cy.intercept('POST', 'lm-cotazo-core/assistance/*').as('search_Incident');
         this.elements.searchSupportRequestBtn().click();
         cy.wait('@search_Incident').its('response.statusCode').should('eq', 200).then( () =>{
-            cy.wait(3000);
             if (type === 'access problems'){
                 this.elements.supportRequestInformationTable().should('be.visible')
                     .should('contain.text', Cypress.env('requestNumber'))
@@ -97,6 +99,7 @@ class SupportRequestManagementPage {
                     .should('contain.text', 'Sem registos');
             }
         });
+        cy.slowDownEnd();
     };
 
     verifyFilter(filter){
