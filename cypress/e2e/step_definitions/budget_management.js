@@ -95,10 +95,6 @@ import {
       return false;
     });
     table.hashes().forEach((row) => {
-      cy.log(row.description);
-      cy.log(row.quantity);
-      cy.log(row.unit);
-      cy.log(row.observation);
       pendingBudgetsEditPage.typeMaterialInformationForm(row.description, row.quantity, row.unit, row.observation);
     });
   });
@@ -570,21 +566,6 @@ Then('The user edits the budget', () => {
     return false;
   });
   completedBudgetsListPage.commonPageElements.editServiceOrderBtn().click();
-});
-
-And('The user goes to {string}', (element) => {
-  cy.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-  if (element === 'in edition') {
-    inProgressBudgetsListPage.commonPageElements.pageEditBtn().click();
-  }
-  if (element === 'in pending') {
-    inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click();
-  }
-  if (element === 'already launched') {
-    completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
-  }
 });
 
 Then('The user verifies that the budget has version {string}', (element) => {
