@@ -70,8 +70,6 @@ class PrerequisitesInstalaServiceOrderManagement {
         this.elements.turnOrderServiceManagementSelect().select('Manhã');
         this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME'));
         this.elements.supplierInput().click();
-        //this.elements.installerSelect().click().select('Luis Gonçalves Teste UAT');
-        //this.elements.installerInput().click();
         this.elements.commentInput().type('Lorem Ipsum is simply dummy');
         this.elements.serviceOrderUpdateBtn().click();
     };

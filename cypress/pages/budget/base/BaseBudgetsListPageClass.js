@@ -65,12 +65,14 @@ class BaseBudgetsListPageClass extends UserLayout {
                                         clicked = true;
                                         cy.wrap($el).parent().parent().next().next().find(actionButtonLocator).click();
                                     }
+                                    if (findBy === 'quotationNumber' && actionButtonNumber === 0) {
+                                        clicked = true;
+                                        assert(true, 'Searchable Value Found');
+                                    }
                                 }
                             }).then( () => {
                                 if (currentPage !== maxPageNumber && validServiceOrder === 0) {
-                                    this.commonPageElements.nextPageButton().then(($el) => {
-                                        assert(true, 'Searchable Value Found');
-                                    });
+                                    this.commonPageElements.nextPageButton().click();
                                 }
                                 if (currentPage === maxPageNumber && validServiceOrder === 0) {
                                     assert(false, 'Searchable Value Not Found');
