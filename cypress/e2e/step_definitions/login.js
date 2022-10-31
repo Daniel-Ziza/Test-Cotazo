@@ -17,8 +17,8 @@ const loginPage = require('../../pages/LoginPage');
     cy.on('uncaught:exception', (err, runnable) => {
       return false;
     });
-    loginPage.typeUsername(Cypress.env('ADMIN_COTAZO_USERNAME'));
-    loginPage.typePassword(Cypress.env('ADMIN_COTAZO_PASSWORD'));
+    loginPage.typeUsername(Cypress.env('INSTALLER_COTAZO_USERNAME'));
+    loginPage.typePassword(Cypress.env('INSTALLER_COTAZO_PASSWORD'));
   });
 
   When('A user provides incorrect credentials', () => {
