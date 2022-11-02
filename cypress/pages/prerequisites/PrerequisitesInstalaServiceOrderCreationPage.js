@@ -5,7 +5,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
     elements = {
         serviceOrderCreationBtn: () => cy.get('[title="Cadastro de Ordens de Serviço"] > .menu-item > a'),
         storeCodeSelect: () => cy.get('#issuerPlant > .react-select__control'),
-        nameStoreInput: () => cy.get('div[id^="react-select-2-option-"]'),
+        nameStoreInput: () => cy.get('.react-select__option'),
         pyxisNumberInput: () => cy.get('[name="sourceOrderNumber"]'),
         searchPyxisOrderBtn: () => cy.get(':nth-child(4) > .col-xs-6 > .button'),
         taxNumberInput: () => cy.get('[name="customerFiscalId"]'),
@@ -18,7 +18,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
         addressCustomerInput: () => cy.get('[name="customerAddressStreetName"]'),
         numberAddressCustomerInput: () => cy.get('[name="customerAddressStreetNumber"]'),
         serviceGroupSelect: () => cy.get('#serviceGroupCode > .css-iwfcan-control'),
-        nameServiceSelect: () => cy.get('div[id^="react-select-3-option-0"]'),
+        nameServiceSelect: () => cy.get('[id^="react-select-3"]'),
         calendarSelect: () => cy.get('[name="date"]'),
         turnOrderServiceCreateSelect: () => cy.get('.react-select__placeholder'),
         turnSelect: () => cy.get('div[id^="react-select-4-option-"]'),
@@ -38,8 +38,8 @@ class PrerequisitesInstalaServiceOrderCreationPage {
 
     completeTheForm() {
         if (Cypress.env('INSTALA_BASE_URL') === 'https://instala-uat.leroymerlin.pt'){
-            this.elements.storeCodeSelect().click().type(Cypress.env('STORE_NAME'));
-            this.elements.nameStoreInput().click();
+            this.elements.storeCodeSelect().click();
+            this.elements.nameStoreInput().contains(Cypress.env('STORE_NAME')).click();;
             this.generatePyxisNumber();
             this.elements.taxNumberInput().clear().type(Cypress.env('CUSTOMER_FISCAL_ID'));
             this.elements.customerNameInput().clear().type(Cypress.env('CUSTOMER_NAME'));
@@ -50,8 +50,8 @@ class PrerequisitesInstalaServiceOrderCreationPage {
             this.elements.cityInput().clear().type(Cypress.env('CUSTOMER_CITY'));
             this.elements.addressCustomerInput().clear().type(Cypress.env('CUSTOMER_ADDRESS'));
             this.elements.numberAddressCustomerInput().clear().type(Cypress.env('CUSTOMER_ADDRESS_NUMBER'));
-            this.elements.serviceGroupSelect().click().type('Móvel de casa de banho');
-            this.elements.nameServiceSelect().click();
+            this.elements.serviceGroupSelect().click()
+            this.elements.nameServiceSelect().contains(Cypress.env('SERVICE_GROUP')).click();
             this.typeDayDatePicker();
             this.elements.turnOrderServiceCreateSelect().click().type('Manhã');
             this.elements.turnSelect().click();
