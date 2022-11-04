@@ -48,13 +48,18 @@ class loginPage {
       this.singInWithAdeo();
     }
     if (userType === 'installer') {
-      this.elements.usernameInput().type(Cypress.env('INSTALLER_COTAZO_USERNAME'));
-      this.elements.passwordInput().type(Cypress.env('INSTALLER_COTAZO_PASSWORD'));
+      this.elements.usernameInput().type(Cypress.env('COTAZO_INSTALLER_USERNAME'));
+      this.elements.passwordInput().type(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
       this.elements.loginBtn().click();
     }
     if (userType === 'technician') {
-      this.elements.usernameInput().type(Cypress.env('TECHNICIAN_COTAZO_USERNAME'));
-      this.elements.passwordInput().type(Cypress.env('TECHNICIAN_COTAZO_PASSWORD'));
+      this.elements.usernameInput().type(Cypress.env('COTAZO_TECHNICIAN_USERNAME'));
+      this.elements.passwordInput().type(Cypress.env('COTAZO_TECHNICIAN_PASSWORD'));
+      this.elements.loginBtn().click();
+    }
+    if (userType === 'moderator') {
+      this.elements.usernameInput().type(Cypress.env('COTAZO_MODERATOR_USERNAME'));
+      this.elements.passwordInput().type(Cypress.env('COTAZO_MODERATOR_PASSWORD'));
       this.elements.loginBtn().click();
     }
   };

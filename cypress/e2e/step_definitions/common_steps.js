@@ -15,8 +15,8 @@ Given('The user logs in Cotazo', () => {
         return false;
     });
     cy.visit("/");
-    loginPage.typeUsername(Cypress.env('INSTALLER_COTAZO_USERNAME'));
-    loginPage.typePassword(Cypress.env('INSTALLER_COTAZO_PASSWORD'));
+    loginPage.typeUsername(Cypress.env('COTAZO_INSTALLER_USERNAME'));
+    loginPage.typePassword(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
     loginPage.clickLogin();
     // Set as cypress env vars some values defined by previous tests.
     cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
