@@ -6,6 +6,7 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 import loginPage from '../../pages/LoginPage';
 import inProgressBudgetsListPage from "../../pages/budget/inProgress/InProgressBudgetsListPage";
+import LoginPage from '../../pages/LoginPage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
 const pendingBudgetsEditPage = require ('../../pages/budget/pending/PendingBudgetsEditPage');
@@ -15,9 +16,7 @@ Given('The user logs in Cotazo', () => {
         return false;
     });
     cy.visit("/");
-    loginPage.typeUsername(Cypress.env('COTAZO_INSTALLER_USERNAME'));
-    loginPage.typePassword(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
-    loginPage.clickLogin();
+    loginPage.singIn('installer');
     // Set as cypress env vars some values defined by previous tests.
     cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
         Cypress.env("orderServiceNumber", serviceOrderNumber);
