@@ -10,4 +10,7 @@
 !LMPTCOTAZO-205_new_budget_version-budget_acceptance_flow.feature
 !LMPTCOTAZO-206_new_budget_version-budget_refusal_flow.feature
 !LMPTCOTAZO-207_support_request.feature
+!LMPTCOTAZO-244_user_access_control.feature
+!LMPTCOTAZO-248_user_profile_access_control.feature
+!LMPTCOTAZO-252_user_group_access_control.feature
 !test.feature

@@ -4,7 +4,8 @@ class HomePage {
         supportRequestBtn: () => cy.get('[id="menu.item.assistance"]'),
         logsOutBtn:() => cy.get('[id="Sair"]'),
         searchBox: () => cy.get('.main-header > .form-inline > .input-group > .form-control'),
-        searchHomePageBtn: () => cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text')
+        searchHomePageBtn: () => cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text'),
+        bodyHomePage: () => cy.get('.cotazo-error-content-container-base'),
     };
 
 

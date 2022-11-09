@@ -43,4 +43,16 @@ And('The user goes to {string}', (element) => {
     if (element === 'User profiles'){
         cy.contains('Perfis de Utilizadores').click();
     }
+    if (element === 'User'){
+        cy.contains('Utilizadores').click();
+    }
+    if (element === 'click here'){
+        cy.contains('carregue aqui').click();
+    }
+    if (element === 'User profiles') {
+        cy.contains('Perfis de Utilizadores').click();
+    }
+    if (element === 'User group') {
+        cy.contains('Grupos de Utilizadores').click();
+    }
 });

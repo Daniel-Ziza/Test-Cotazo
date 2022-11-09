@@ -37,3 +37,7 @@
 !supportRequest
 !supportRequest/SupportRequestManagementPage.js
 !supportRequest/SupportRequestPage.js
+!configuration
+!configuration/UserConfiguration.js
+!configuration/UserProfileConfiguration.js
+!configuration/UserGroupConfiguration.js

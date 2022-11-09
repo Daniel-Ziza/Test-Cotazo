@@ -36,6 +36,9 @@ class loginPage {
       else if (text.includes('Login está bloqueado')) {
         assert(true, 'I have found the alternative error message');
       }
+      else if (text.includes('Não foi possível efectuar o login. Tente novamente.')) {
+        assert(true, 'This user does not have access to cotazo')
+      }
       else {
         assert(false, 'I have NOT found any error message');
       }
@@ -43,23 +46,23 @@ class loginPage {
   };
 
   singIn (userType) {
-    if (userType === 'administrator'){
+    if (userType === 'administrator' || userType === 'collaborator'){
       this.elements.loginAsEmployeeBtn().click();
       this.singInWithAdeo();
     }
     if (userType === 'installer') {
-      this.elements.usernameInput().type(Cypress.env('COTAZO_INSTALLER_USERNAME'));
-      this.elements.passwordInput().type(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
+      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_INSTALLER_USERNAME'));
+      this.elements.passwordInput().clear().type(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
       this.elements.loginBtn().click();
     }
     if (userType === 'technician') {
-      this.elements.usernameInput().type(Cypress.env('COTAZO_TECHNICIAN_USERNAME'));
-      this.elements.passwordInput().type(Cypress.env('COTAZO_TECHNICIAN_PASSWORD'));
+      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_TECHNICIAN_USERNAME'));
+      this.elements.passwordInput().clear().type(Cypress.env('COTAZO_TECHNICIAN_PASSWORD'));
       this.elements.loginBtn().click();
     }
     if (userType === 'moderator') {
-      this.elements.usernameInput().type(Cypress.env('COTAZO_MODERATOR_USERNAME'));
-      this.elements.passwordInput().type(Cypress.env('COTAZO_MODERATOR_PASSWORD'));
+      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_MODERATOR_USERNAME'));
+      this.elements.passwordInput().clear().type(Cypress.env('COTAZO_MODERATOR_PASSWORD'));
       this.elements.loginBtn().click();
     }
   };
