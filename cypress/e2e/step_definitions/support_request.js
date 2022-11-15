@@ -56,7 +56,9 @@ When ('An {string} logs in to cotazo', (userType) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+    cy.slowDown(250);
     loginPage.singIn(userType);
+    cy.slowDownEnd();
 });
 
 And ('The user goes to the support request page', () => {

@@ -1,3 +1,4 @@
+import homePage from '../../pages/HomePage';
 class userProfileConfiguration {
     locator = {
         permissionsActionContainer: '.cotazo-profile-action-container'
@@ -32,16 +33,41 @@ class userProfileConfiguration {
             this.elements.profileSearchBtn().click();
         }
     }
-    
+
     enablePermits(table) {
         table.hashes().forEach((row) => {
             this.elements.permissionsContainer()
                 .contains(row.access)
-                .next().find(this.locator.permissionsActionContainer).then( checkOption => {
-                cy.wrap(checkOption)
-                    .eq(row.action).click();
-            });
+                .next().find(this.locator.permissionsActionContainer).then(checkOption => {
+                    cy.wrap(checkOption)
+                        .eq(row.action).click();
+                });
         });
+    }
+
+    togglePermission(access, action) {
+        this.elements.permissionsContainer()
+            .contains(access)
+            .next().find(this.locator.permissionsActionContainer).then(checkOption => {
+                cy.wrap(checkOption)
+                    .eq(action).click();
+            })
+    }
+
+    verifyAccess (access) {
+        if (access === 'dashboard') {
+            homePage.elements.dashboardAccess().should('be.visible');
+        }
+        if (access === 'analysis') {
+            homePage.elements.filtersAnalysisDashboardAccessBtn().should('be.visible')
+                .click();
+            homePage.elements.filtersAnalysisDashboard().should('be.visible');
+            homePage.elements.dashboardAnalysisContent().should('be.visible');
+        }
+        if (access === 'export') {
+            homePage.elements.exportAnalysisDashboard().should('be.visible').click();
+            homePage.verifyExport();
+        }
     }
 
 }

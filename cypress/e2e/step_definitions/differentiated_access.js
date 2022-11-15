@@ -74,6 +74,77 @@ And('The user obtains the profile associated with his collaborator', () => {
     });
 });
 
+//Pending
+And('The user selects the {string} access with the action {string}', (access, action) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    if (action === 'view') {
+        userProfileConfiguration.togglePermission(access, 0);
+    }
+    if (action === 'add') {
+        userProfileConfiguration.togglePermission(access, 1);
+    }
+    if (action === 'edit') {
+        userProfileConfiguration.togglePermission(access, 2);
+    }
+    if (action === 'delete') {
+        userProfileConfiguration.togglePermission(access, 3);
+    }
+    userProfileConfiguration.elements.saveProfile().click();
+});
+
+Then('The user verifies that he has access to all {string} functionalities', (element) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    if (element === 'Dashboard') {
+        userProfileConfiguration.verifyAccess('dashboard');
+        userProfileConfiguration.verifyAccess('analysis');
+        userProfileConfiguration.verifyAccess('export');
+    }
+});
+
+And('The user deactivates the {string} action of {string}', (action, access) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    if (action === 'view') {
+        userProfileConfiguration.togglePermission(access, 0);
+    }
+    if (action === 'add') {
+        userProfileConfiguration.togglePermission(access, 1);
+    }
+    if (action === 'edit') {
+        userProfileConfiguration.togglePermission(access, 2);
+    }
+    if (action === 'delete') {
+        userProfileConfiguration.togglePermission(access, 3);
+    }
+    userProfileConfiguration.elements.saveProfile().click();
+});
+
+And('The user verifies that he does not have access to {string}', (access) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    if (access === 'export') {
+        homePage.elements.exportAnalysisDashboard().should('not.exist');
+    }
+    if (access === 'analysis') {
+        homePage.elements.filtersAnalysisDashboardAccessBtn().should('not.exist');
+        homePage.elements.dashboardAnalysisContent().should('not.exist');;
+    }
+
+});
+
+And('The user verifies that he have access to {string}', (access) => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+    userProfileConfiguration.verifyAccess(access);
+});
+
 //steps for users feature
 Then('The user has no access to the system', () => {
     cy.on('uncaught:exception', (err, runnable) => {
