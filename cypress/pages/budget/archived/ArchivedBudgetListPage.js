@@ -4,6 +4,5 @@ class ArchivedBudgetListPage extends BaseBudgetListPageClass {
     pageElements = {};
 }
 
-export default new ArchivedBudgetListPage()
 
-export { ArchivedBudgetListPage as ArchivedBudgetListPageClass }
+module.exports = new ArchivedBudgetListPage()
