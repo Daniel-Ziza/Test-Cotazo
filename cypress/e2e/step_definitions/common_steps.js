@@ -9,7 +9,8 @@ import inProgressBudgetsListPage from "../../pages/budget/inProgress/InProgressB
 import LoginPage from '../../pages/LoginPage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
-const pendingBudgetsEditPage = require ('../../pages/budget/pending/PendingBudgetsEditPage');
+const pendingBudgetsEditPage = require('../../pages/budget/pending/PendingBudgetsEditPage');
+const homePage = require('../../pages/HomePage');
 
 Given('The user logs in Cotazo', () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -37,22 +38,30 @@ And('The user goes to {string}', (element) => {
     if (element === 'already launched') {
         completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
     }
-    if (element === 'Configuration'){
-        cy.contains('Configurações').click();
-    }
-    if (element === 'User profiles'){
-        cy.contains('Perfis de Utilizadores').click();
-    }
-    if (element === 'User'){
-        cy.contains('Utilizadores').click();
-    }
-    if (element === 'click here'){
-        cy.contains('carregue aqui').click();
+    if (element === 'Configuration') {
+        homePage.toGo('Configurações');
     }
     if (element === 'User profiles') {
-        cy.contains('Perfis de Utilizadores').click();
+        homePage.toGo('Perfis de Utilizadores');
+    }
+    if (element === 'User') {
+        homePage.toGo('Utilizadores');
+    }
+    if (element === 'click here') {
+        homePage.toGo('carregue aqui');
     }
     if (element === 'User group') {
-        cy.contains('Grupos de Utilizadores').click();
+        homePage.toGo('Grupos de Utilizadores');
     }
-});
+    if (element === 'Translations') {
+        homePage.toGo('Traduções');
+    }
+    if (element === 'Parameters') {
+        homePage.toGo('Parâmetros');
+    }
+    if (element === 'Services') {
+        homePage.toGo('Serviços');
+    }
+}
+
+);

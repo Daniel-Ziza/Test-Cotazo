@@ -15,6 +15,14 @@ class SupportRequestManagementPage {
         sentCommentBtn: () => cy.get('.cotazo-timeline-send-btn-container > .btn'),
         currentStatus: () => cy.get('.cotazo-assistance-state-badge'),
         statusSelect: () => cy.get('#assistance_autocomplete_states_input_multiselect'),
+        pageDescriptionTitleSupportRequest: () => cy.get('.manage-title'),
+        supportRequestSearchContainer: () => cy.get('.cotazo-assistance-search-container'),
+        supportRequestTableContainer: () => cy.get('.cotazo-assistance-table-container > .cotazo-subcontainer'),
+        supportRequestActionColumn: () => cy.get('.assistanceList-col-actions'),
+        viewFistSupportRequest: () => cy.get(':nth-child(1) > .assistanceList-col-actions > .cotazo-table-actions-align-center'),
+        statusSupportRequestSelect:() => cy.get('.cotazo-multiselect-container-selection'),
+        optionAnalyzing: () => cy.get('.cotazo-assistance-state-badge-option-ANALYZING'),
+
     };
 
     searchIncident(incidentNumber){

@@ -11,7 +11,8 @@ class HomePage {
         filtersAnalysisDashboardAccessBtn: () => cy.get('.cotazo-row > .btn'),
         filtersAnalysisDashboard: () => cy.get('[class="container-fluid cotazo-search-data-container"]'),
         dashboardAnalysisContent: () => cy.get('.cotazo-content-data-sub-container'),
-        exportAnalysisDashboard: () => cy.get('.cotazo-exportimport-btn')
+        exportAnalysisDashboard: () => cy.get('.cotazo-exportimport-btn'),
+        budgetAccessContainer: () => cy.get('[class="cotazo-page-container-top"]'),
     };
 
     verifyExport() {
@@ -23,6 +24,9 @@ class HomePage {
         cy.readFile(`cypress\\Downloads\\Analise Orçamentos_${day}-${month}-${year}_${hour}-${minute}.xlsx`).should('exist');
     }
 
+    toGo(page) {
+        cy.contains(page).click();
+    }
 }
 
 module.exports = new HomePage();
