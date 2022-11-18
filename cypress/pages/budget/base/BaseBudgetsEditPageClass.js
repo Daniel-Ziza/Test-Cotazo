@@ -88,7 +88,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.materialQuantityInput().type(quantity);
         this.commonPageElements.materialUnitInput().type(unit);
         this.commonPageElements.materialObservationsInput().type(observation);
-        this.commonPageElements.addBtn().click();
+        this.commonPageElements.addBtn().dblclick();
     }
 
     typeFinalNotesForm(unit, notes) {
@@ -97,15 +97,15 @@ class BaseBudgetsEditPageClass extends UserLayout {
     }
 
     clickSaveBtn() {
-        this.commonPageElements.saveBtn().click();
+        this.commonPageElements.saveBtn().dblclick();
     };
 
     clickFinishBtn() {
-        this.commonPageElements.finishBtn().click();
+        this.commonPageElements.finishBtn().dblclick();
     };
 
     clickSyncBtn() {
-        this.commonPageElements.syncBtn().click();
+        this.commonPageElements.syncBtn().dblclick();
     };
 
     clickCleanBtn() {
@@ -113,7 +113,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
     };
 
     clickAddBtn() {
-        this.commonPageElements.addBtn().click();
+        this.commonPageElements.addBtn().dblclick();
     };
 
     isButtonDeactivated(nameBtn) {

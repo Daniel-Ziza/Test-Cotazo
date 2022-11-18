@@ -22,7 +22,7 @@ When('The user fills in the support request form and send it', () => {
     });
     supportRequestPage.createSupportRequestWithoutLogin();
     cy.intercept('POST', '/lm-cotazo-core/assistance/public').as('createAssistance');
-    supportRequestPage.elements.sendSupportRequestBtn().click();
+    supportRequestPage.elements.sendSupportRequestBtn().dblclick();
     cy.wait('@createAssistance').then((responseData) =>{
         if (!responseData.response ||
             !responseData.response.body ||
@@ -75,7 +75,7 @@ And ('The {string} creates a new support request', (user) => {
     supportRequestManagementPage.elements.createNewIncidentBtn().contains('Criar Incidente').click();
     supportRequestPage.createSupportRequestWithLogin();
     cy.intercept('POST', '/lm-cotazo-core/assistance').as('createAssistance');
-    supportRequestPage.elements.sendSupportRequestBtn().click();
+    supportRequestPage.elements.sendSupportRequestBtn().dblclick();
     cy.wait('@createAssistance').then((responseData) =>{
         if (!responseData.response ||
             !responseData.response.body ||

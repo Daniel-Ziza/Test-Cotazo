@@ -149,7 +149,7 @@ import {
     cy.slowDown(500);
     cy.intercept('POST', '/lm-cotazo-budget/budget/finish/sync/*').as('sync');
     pendingBudgetsEditPage.clickSyncBtn();
-    pendingBudgetsEditPage.commonPageElements.confirmModalBtn().click().then(() => {
+    pendingBudgetsEditPage.commonPageElements.confirmModalBtn().dblclick().then(() => {
       cy.wait('@sync').its('response.statusCode').should('eq',200).then((responseData) => {
         inProgressBudgetsListPage.commonPageElements.pageSubmittedBtn().click().then(() => {
           cy.slowDownEnd();
