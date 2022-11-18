@@ -103,6 +103,54 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('analysis');
         userProfileConfiguration.verifyAccess('export');
     }
+    if (element === 'Budget') {
+        cy.slowDown(500);
+        userProfileConfiguration.verifyAccess('see budget');
+        userProfileConfiguration.verifyAccess('add budget');
+        userProfileConfiguration.verifyAccess('edit budget');
+        userProfileConfiguration.verifyAccess('delete budget');
+        userProfileConfiguration.verifyAccess('download customer budget');
+        userProfileConfiguration.verifyAccess('download technical budget');
+        userProfileConfiguration.verifyAccess('conclude budget');
+        userProfileConfiguration.verifyAccess('sync budget');
+        cy.slowDownEnd();
+    }
+    if (element ==='Configuration'){
+        userProfileConfiguration.verifyAccess('see translations');
+        userProfileConfiguration.verifyAccess('edit translations');
+        userProfileConfiguration.verifyAccess('see parameters');
+        userProfileConfiguration.verifyAccess('edit parameters')
+        userProfileConfiguration.verifyAccess('see services');
+        userProfileConfiguration.verifyAccess('edit services');
+        userProfileConfiguration.verifyAccess('see typology');
+        userProfileConfiguration.verifyAccess('edit typology');
+        userProfileConfiguration.verifyAccess('see IVA');
+        userProfileConfiguration.verifyAccess('edit IVA');
+        userProfileConfiguration.verifyAccess('export services');
+        userProfileConfiguration.verifyAccess('import services');
+        userProfileConfiguration.verifyAccess('see users');
+        userProfileConfiguration.verifyAccess('see user action');
+        userProfileConfiguration.verifyAccess('see user profile');
+        userProfileConfiguration.verifyAccess('create user profile');
+        userProfileConfiguration.verifyAccess('edit user profile');
+        userProfileConfiguration.verifyAccess('toggle action user profile');
+        userProfileConfiguration.verifyAccess('see user group');
+        userProfileConfiguration.verifyAccess('create user group');
+        userProfileConfiguration.verifyAccess('edit user group');
+        userProfileConfiguration.verifyAccess('toggle action user group');
+    }
+    if (element === 'Analysis'){
+        userProfileConfiguration.verifyAccess('see payments');
+        userProfileConfiguration.verifyAccess('see export analysis');
+        userProfileConfiguration.verifyAccess('see import analysis');
+        userProfileConfiguration.verifyAccess('see budget analysis');
+        userProfileConfiguration.verifyAccess('export budget analysis');
+    }
+    if(element === 'Support request'){
+        userProfileConfiguration.verifyAccess('see support request');
+        userProfileConfiguration.verifyAccess('add message to support request');
+        userProfileConfiguration.verifyAccess('edit support request');
+    }
 });
 
 And('The user deactivates the {string} action of {string}', (action, access) => {
@@ -167,14 +215,14 @@ And('The user is disabled', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    userConfiguration.elements.actionUserBtn().click();
+    userConfiguration.elements.actionUserBtn().dblclick();
 });
 
 And('The user is activated', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    userConfiguration.elements.actionUserBtn().click();
+    userConfiguration.elements.actionUserBtn().dblclick();
 });
 
 //Steps for users Group feature
@@ -192,7 +240,7 @@ And('The user group is disabled', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    userGroupConfiguration.elements.actionUserGroupBtn().click();
+    userGroupConfiguration.elements.actionUserGroupBtn().dblclick();
 });
 
 And('The user group is activated', () => {
