@@ -1,6 +1,9 @@
 *
 */
 !.gitignore
+!analysis
+!analysis/BudgetAnalysis.js
+!analysis/PaymentAnalysis.js
 !HomePage.js
 !LoginPage.js
 !budget
@@ -41,3 +44,6 @@
 !configuration/UserConfiguration.js
 !configuration/UserProfileConfiguration.js
 !configuration/UserGroupConfiguration.js
+!configuration/ParametersConfiguration.js
+!configuration/ServicesConfiguration.js
+!configuration/TranslationConfiguration.js
