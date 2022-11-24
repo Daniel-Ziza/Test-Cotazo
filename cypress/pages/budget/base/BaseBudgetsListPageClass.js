@@ -19,8 +19,9 @@ class BaseBudgetsListPageClass extends UserLayout {
         downloadCustomerBudget: () => cy.get('.cotazo-budget-action-client-pdf'), //cy.get('.budget-rect-icons > :nth-child(3)'),
         downloadTechnicalBudget: () => cy.get('.cotazo-budget-action-technical-pdf'), //cy.get('.budget-rect-icons > :nth-child(4)'),
         budgetIdentifier: () => cy.get('.budget-painel-externalCode'),
-        addBudget: () => cy.get('[class="btn btn-success cotazo-spinner-loading-button budget-info-not-found-so-click-here-btn"]'),
+        addBudget: () => cy.get('[class="btn btn-success cotazo-spinner-loading-button budget-info-not-found-so-click-here-btn"]', { timeout: 10000 }),
         editBtnFirstOS: () => cy.get(':nth-child(1) > .col-xs-14 > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(3) > .budget-rect-icons > :nth-child(2)'),
+        viewBtnFirsOS: () => cy.get(':nth-child(1) > .col-xs-14 > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(3) > .budget-rect-icons > .cotazo-budget-action-view'),
         viewFistOSArchived: () => cy.get(':nth-child(1) > .col-xs-14 > :nth-child(1) > :nth-child(1) > :nth-child(2) > .row > .col-lg-3 > .budget-rect-icon-div'),
     }
 

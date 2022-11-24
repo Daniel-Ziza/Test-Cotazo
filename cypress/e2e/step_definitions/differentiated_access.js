@@ -104,7 +104,7 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('export');
     }
     if (element === 'Budget') {
-        cy.slowDown(500);
+        cy.slowDown(300);
         userProfileConfiguration.verifyAccess('see budget');
         userProfileConfiguration.verifyAccess('add budget');
         userProfileConfiguration.verifyAccess('edit budget');
@@ -153,21 +153,21 @@ Then('The user verifies that he has access to all {string} functionalities', (el
     }
 });
 
-And('The user deactivates the {string} action of {string}', (action, access) => {
+And('The user deactivates the {string} action of the {string} access in the {string} functionality', (action, access, feature) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
     if (action === 'view') {
-        userProfileConfiguration.togglePermission(access, 0);
+        userProfileConfiguration.togglePermission(access, 0, feature);
     }
     if (action === 'add') {
-        userProfileConfiguration.togglePermission(access, 1);
+        userProfileConfiguration.togglePermission(access, 1, feature);
     }
     if (action === 'edit') {
-        userProfileConfiguration.togglePermission(access, 2);
+        userProfileConfiguration.togglePermission(access, 2, feature);
     }
-    if (action === 'delete') {
-        userProfileConfiguration.togglePermission(access, 3);
+    if (action === 'delete' || action === 'toggle') {
+        userProfileConfiguration.togglePermission(access, 3, feature);
     }
     userProfileConfiguration.elements.saveProfile().click();
 });
@@ -176,21 +176,18 @@ And('The user verifies that he does not have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    if (access === 'export') {
-        homePage.elements.exportAnalysisDashboard().should('not.exist');
-    }
-    if (access === 'analysis') {
-        homePage.elements.filtersAnalysisDashboardAccessBtn().should('not.exist');
-        homePage.elements.dashboardAnalysisContent().should('not.exist');;
-    }
-
+    cy.slowDown(200);
+    userProfileConfiguration.checkNoAccess(access);
+    cy.slowDownEnd();
 });
 
 And('The user verifies that he have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+    cy.slowDown(200);
     userProfileConfiguration.verifyAccess(access);
+    cy.slowDownEnd();
 });
 
 //steps for users feature
@@ -206,7 +203,7 @@ And('The user searches for the user {string}', (user) => {
         return false;
     });
     let text = user.toUpperCase();
-    cy.slowDown(500);
+    cy.slowDown(250);
     userConfiguration.searchUser(text);
     cy.slowDownEnd();
 });
@@ -231,7 +228,7 @@ And('The user searches for the group', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    cy.slowDown(500);
+    cy.slowDown(250);
     userGroupConfiguration.searchUserGroup();
     cy.slowDownEnd();
 });

@@ -62,17 +62,37 @@ class userProfileConfiguration {
         });
     }
 
-    togglePermission(access, action) {
-        this.elements.permissionsContainer()
-            .contains(access)
-            .next().find(this.locator.permissionsActionContainer).then(checkOption => {
-                cy.wrap(checkOption)
-                    .eq(action).click();
-            })
+    togglePermission(access, action, feature) {
+        let searchLocator
+        if (feature === 'Dashboard') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(2)';
+        }
+        if (feature === 'Budget') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(3)';
+        }
+        if (feature === 'Configuration') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4)';
+        }
+        if (feature === 'Analysis') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5)';
+        }
+        if (feature === 'Support Request') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
+        }
+        if (feature === 'Budget analysis') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5) > :nth-child(2) > :nth-child(2)';
+        }
+        cy.document().then((doc) => {
+            cy.get(searchLocator)
+                .contains(access)
+                .next().find(this.locator.permissionsActionContainer).then(checkOption => {
+                    cy.wrap(checkOption)
+                        .eq(action).click();
+                })
+        })
     }
 
     verifyAccess(access) {
-
         //Access Dashboard
         if (access === 'dashboard') {
             homePage.elements.dashboardAccess().should('be.visible');
@@ -87,7 +107,7 @@ class userProfileConfiguration {
             homePage.elements.exportAnalysisDashboard().should('be.visible').click();
             homePage.verifyExport();
         }
-        //Access Dashboard
+        //Access budget
         if (access === 'see budget') {
             homePage.elements.budgetAccessContainer().should('be.visible');
             pendingBudgetsListPage.commonPageElements.viewServiceOrderBtn().should('be.visible');
@@ -294,19 +314,9 @@ class userProfileConfiguration {
             budgetAnalysis.elements.exportBudgetAnalysis().should('be.visible');
         }
         // Access Support Request
-        if (access === 'see support request') {
-            homePage.toGo('Pedidos de Suporte');
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
-            supportRequest.elements.supportRequestSearchContainer().should('be.visible');
-            supportRequest.elements.supportRequestTableContainer().should('be.visible');
-            supportRequest.elements.supportRequestActionColumn().should('be.visible');
-            supportRequest.elements.viewFistSupportRequest().click();
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
-            homePage.toGo('Pedidos de Suporte');
-        }
         if (access === 'add message to support request') {
             homePage.toGo('Pedidos de Suporte');
-            cy.slowDown(500);
+            cy.slowDown(150);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();
@@ -322,9 +332,9 @@ class userProfileConfiguration {
                 })
             cy.slowDownEnd();
         }
-        if(access === 'edit support request'){
+        if (access === 'edit support request') {
             homePage.toGo('Pedidos de Suporte');
-            cy.slowDown(500);
+            cy.slowDown(150);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();
@@ -336,6 +346,254 @@ class userProfileConfiguration {
             supportRequest.elements.statusSupportRequestInput().click();
             supportRequest.elements.pendingOption().click();
             supportRequest.elements.updateSupportRequestBtn().should('not.be.disabled');
+            cy.slowDownEnd();
+        }
+    }
+
+    checkNoAccess(access) {
+        //Principal Access
+        if (access === 'Início') {
+            cy.get('.sidebar').should('not.have.text', access);
+        }
+        if (access === 'Orçamentos') {
+            cy.get('.sidebar').should('not.have.text', access);
+        }
+        if (access === 'Configurações') {
+            cy.get('.sidebar').should('not.have.text', access);
+        }
+        if (access === 'Análises') {
+            cy.get('.sidebar').should('not.have.text', access);
+        }
+        if (access === 'Pedidos de Suporte') {
+            cy.get('.sidebar').should('not.have.text', access);
+        }
+        //Access Dashboard
+        if (access === 'export') {
+            homePage.elements.exportAnalysisDashboard().should('not.exist');
+        }
+        if (access === 'analysis') {
+            homePage.elements.filtersAnalysisDashboardAccessBtn().should('not.exist');
+            homePage.elements.dashboardAnalysisContent().should('not.exist');
+        }
+        //Access Budget
+        if (access === 'add budget') {
+            pendingBudgetsListPage.commonPageElements.pageCreateButton().click();
+            pendingBudgetsListPage.commonPageElements.addBudget().should('not.exist');
+        }
+        if (access === 'edit budget') {
+            pendingBudgetsListPage.commonPageElements.pageCreateButton().click();
+            pendingBudgetsListPage.commonPageElements.editServiceOrderBtn().should('be.visible');
+            pendingBudgetsListPage.commonPageElements.pageEditBtn().click();
+            inProgressBudgetsListPage.commonPageElements.editServiceOrderBtn().should('not.exist');
+            inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click();
+            completedBudgetsListPage.commonPageElements.editServiceOrderBtn().should('not.exist');
+            completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
+            sentBudgetsListPage.commonPageElements.editServiceOrderBtn().should('not.exist');
+        }
+        if (access === 'delete budget') {
+            pendingBudgetsListPage.commonPageElements.pageEditBtn().click();
+            inProgressBudgetsListPage.commonPageElements.deleteServiceOrderBtn().should('not.exist');
+            inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click();
+            completedBudgetsListPage.commonPageElements.deleteServiceOrderBtn().should('not.exist');
+        }
+        if (access === 'download customer budget') {
+            completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
+            sentBudgetsListPage.commonPageElements.downloadCustomerBudget().should('not.exist');
+            sentBudgetsListPage.commonPageElements.pageArchivedBtn().click();
+            archivedBudgetListPage.commonPageElements.viewFistOSArchived().click();
+            archivedBudgetListPage.commonPageElements.downloadCustomerBudget().should('not.exist');
+            cy.visit("/budgets");
+        }
+        if (access === 'download technical budget') {
+            completedBudgetsListPage.commonPageElements.pageSubmittedBtn().click();
+            sentBudgetsListPage.commonPageElements.downloadTechnicalBudget().should('not.exist');
+            sentBudgetsListPage.commonPageElements.pageArchivedBtn().click();
+            archivedBudgetListPage.commonPageElements.viewFistOSArchived().click();
+            archivedBudgetListPage.commonPageElements.downloadTechnicalBudget().should('not.exist');
+            cy.visit("/budgets");
+        }
+        if (access === 'conclude budget') {
+            pendingBudgetsListPage.commonPageElements.pageEditBtn().click();
+            pendingBudgetsListPage.commonPageElements.editBtnFirstOS().click();
+            inProgressBudgetsEditPage.commonPageElements.stepFourBtn().click();
+            inProgressBudgetsEditPage.commonPageElements.finishBtn().should('not.exist');
+            cy.visit("/budgets");
+        }
+        if (access === 'sync budget') {
+            pendingBudgetsListPage.commonPageElements.pagePendingBtn().click();
+            pendingBudgetsListPage.commonPageElements.syncServiceOrderBtn().should('not.exist');
+            cy.visit("/budgets");
+        }
+        //Access Configuration
+        if (access === 'see translations') {
+            homePage.toGo('Configurações');
+            cy.contains('Traduções').should('not.exist');
+        }
+        if (access === 'edit translations') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Traduções');
+            translationConfiguration.elements.translationAction().should('not.have.class', 'svg-inline--fa fa-pen  budget-rect-icon');
+        }
+        if (access === 'see parameters') {
+            homePage.toGo('Configurações');
+            cy.contains('Parâmetros').should('not.exist');
+        }
+        if (access === 'edit parameters') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Parâmetros');
+            parametersConfiguration.elements.parametersAction().should('not.have.class', 'svg-inline--fa fa-pen  budget-rect-icon');
+        }
+        if (access === 'see services') {
+            homePage.toGo('Configurações');
+            cy.contains('Serviços').should('not.exist');
+        }
+        if (access === 'edit services') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            serviceConfiguration.elements.serviceAction().should('not.exist');
+        }
+        if (access === 'see typology') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            cy.wait(3000);
+            serviceConfiguration.elements.typologyColumn().should('not.exist');
+        }
+        if (access === 'edit typology') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            cy.wait(3000);
+            serviceConfiguration.elements.editTypologyBtn().should('not.exist');
+        }
+        if (access === 'see IVA') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            serviceConfiguration.elements.ivaColumn().should('not.exist');
+        }
+        if (access === 'edit IVA') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            serviceConfiguration.elements.ivaColumn().should('be.visible');
+            serviceConfiguration.elements.viewFirstIvaBtn().click();
+            serviceConfiguration.elements.ivaModal().should('be.visible');
+            serviceConfiguration.elements.editIvaActionBtn().should('not.exist');
+        }
+        if (access === 'export services') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            cy.wait(3000);
+            serviceConfiguration.elements.exportServicesBtn().should('not.exist');
+        }
+        if (access === 'import services') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Serviços');
+            cy.wait(3000);
+            serviceConfiguration.elements.importServicesBtn().should('not.exist');
+        }
+        if (access === 'see users') {
+            homePage.toGo('Configurações');
+            cy.contains('Utilizadores').should('not.exist');
+        }
+        if (access === 'see user action') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Utilizadores');
+            userConfiguration.elements.viewUserActions().should('not.exist');
+        }
+        if (access === 'see user profile') {
+            homePage.toGo('Configurações');
+            cy.contains('Perfis de Utilizadores').should('not.exist');
+        }
+        if (access === 'create user profile') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Perfis de Utilizadores');
+            this.elements.createProfileBtn().should('not.exist');
+        }
+        if (access === 'edit user profile') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Perfis de Utilizadores');
+            this.elements.editProfileBtn().should('not.have.class', 'svg-inline--fa fa-pen  budget-rect-icon');
+        }
+        if (access === 'toggle action user profile') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Perfis de Utilizadores');
+            this.elements.actionUserProfileBtn().should('not.exist');
+        }
+        if (access === 'see user group') {
+            homePage.toGo('Configurações');
+            cy.contains('Grupos de Utilizadores').should('not.exist');
+        }
+        if (access === 'create user group') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Grupos de Utilizadores');
+            userGroupConfiguration.elements.createUserGroupBtn().should('not.exist');
+        }
+        if (access === 'edit user group') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Grupos de Utilizadores');
+            //userGroupConfiguration.elements.viewUserGroupAction().should('not.exist');
+        }
+        if (access === 'toggle action user group') {
+            homePage.toGo('Configurações');
+            homePage.toGo('Grupos de Utilizadores');
+            userGroupConfiguration.elements.actionUserGroupBtn().should('not.exist');
+        }
+
+        //Access Analysis
+        if (access === 'see payments') {
+            homePage.toGo('Análises');
+            cy.contains('Pagamentos').should('not.exist');
+        }
+        if (access === 'see export analysis') {
+            homePage.toGo('Análises');
+            homePage.toGo('Pagamentos');
+            paymentAnalysis.elements.headerTitle().should('contain.text', 'Análise de Pagamentos');
+            cy.wait(3000);
+            paymentAnalysis.elements.exportAnalysis().should('not.exist');
+        }
+        if (access === 'see import analysis') {
+            homePage.toGo('Análises');
+            homePage.toGo('Pagamentos');
+            paymentAnalysis.elements.headerTitle().should('contain.text', 'Análise de Pagamentos');
+            paymentAnalysis.elements.importAnalysis().should('not.exist');
+        }
+        if (access === 'see budget analysis') {
+            homePage.toGo('Análises');
+            cy.contains('Orçamentos').should('not.exist');
+        }
+        if (access === 'export budget analysis') {
+            homePage.toGo('Análises');
+            homePage.toGo('Orçamentos');
+            budgetAnalysis.elements.headerTitleBudgetAnalysis().should('be.visible');
+            cy.wait(3000);
+            budgetAnalysis.elements.exportBudgetAnalysis().should('not.exist');
+        }
+        //Access Support Request
+        if (access === 'see support request') {
+            cy.contains('Pedidos de Suporte').should('not.exist');
+        }
+        if (access === 'add message to support request') {
+            homePage.toGo('Pedido de Suporte');
+            cy.slowDown(150);
+            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequest.elements.statusSelect().click();
+            supportRequest.elements.optionAnalyzing().click();
+            supportRequest.elements.searchSupportRequestBtn().click();
+            supportRequest.elements.viewFistSupportRequest().click();
+            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequest.elements.sentCommentBtn().should('not.exist');
+            supportRequest.elements.commentsTimeline().should('not.exist');
+            cy.slowDownEnd();
+        }
+        if (access === 'edit support request') {
+            homePage.toGo('Pedidos de Suporte');
+            cy.slowDown(150);
+            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequest.elements.statusSelect().click();
+            supportRequest.elements.optionAnalyzing().click();
+            supportRequest.elements.searchSupportRequestBtn().click();
+            supportRequest.elements.viewFistSupportRequest().click();
+            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequest.elements.statusSupportRequestInput().should('not.exist');
+            supportRequest.elements.updateSupportRequestBtn().should('not.exist');
             cy.slowDownEnd();
         }
     }

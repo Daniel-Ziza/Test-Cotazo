@@ -8,11 +8,11 @@ class HomePage {
         searchHomePageBtn: () => cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text'),
         bodyHomePage: () => cy.get('.cotazo-error-content-container-base'),
         dashboardAccess: () => cy.get('[class="row"]'),
-        filtersAnalysisDashboardAccessBtn: () => cy.get('.cotazo-row > .btn'),
+        filtersAnalysisDashboardAccessBtn: () => cy.get('.cotazo-row > .btn', { timeout: 10000 }),
         filtersAnalysisDashboard: () => cy.get('[class="container-fluid cotazo-search-data-container"]'),
-        dashboardAnalysisContent: () => cy.get('.cotazo-content-data-sub-container'),
-        exportAnalysisDashboard: () => cy.get('.cotazo-exportimport-btn'),
-        budgetAccessContainer: () => cy.get('[class="cotazo-page-container-top"]'),
+        dashboardAnalysisContent: () => cy.get('.cotazo-content-data-sub-container', { timeout: 10000 }),
+        exportAnalysisDashboard: () => cy.get('.cotazo-exportimport-btn', { timeout: 10000 }),
+        budgetAccessContainer: () => cy.get('[class="cotazo-page-container-top"]', { timeout: 10000 }),
     };
 
     verifyExport() {
