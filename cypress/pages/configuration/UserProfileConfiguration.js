@@ -104,8 +104,7 @@ class userProfileConfiguration {
             homePage.elements.dashboardAnalysisContent().should('be.visible');
         }
         if (access === 'export') {
-            homePage.elements.exportAnalysisDashboard().should('be.visible').click();
-            homePage.verifyExport();
+            homePage.elements.exportAnalysisDashboard().should('be.visible');
         }
         //Access budget
         if (access === 'see budget') {
@@ -316,7 +315,7 @@ class userProfileConfiguration {
         // Access Support Request
         if (access === 'add message to support request') {
             homePage.toGo('Pedidos de Suporte');
-            cy.slowDown(150);
+            cy.slowDown(200);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();
@@ -334,7 +333,7 @@ class userProfileConfiguration {
         }
         if (access === 'edit support request') {
             homePage.toGo('Pedidos de Suporte');
-            cy.slowDown(150);
+            cy.slowDown(200);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();
@@ -572,7 +571,7 @@ class userProfileConfiguration {
         }
         if (access === 'add message to support request') {
             homePage.toGo('Pedido de Suporte');
-            cy.slowDown(150);
+            cy.slowDown(200);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();
@@ -585,7 +584,7 @@ class userProfileConfiguration {
         }
         if (access === 'edit support request') {
             homePage.toGo('Pedidos de Suporte');
-            cy.slowDown(150);
+            cy.slowDown(200);
             supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
             supportRequest.elements.statusSelect().click();
             supportRequest.elements.optionAnalyzing().click();

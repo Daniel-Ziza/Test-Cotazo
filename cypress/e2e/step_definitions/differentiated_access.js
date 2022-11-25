@@ -104,7 +104,7 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('export');
     }
     if (element === 'Budget') {
-        cy.slowDown(300);
+        cy.slowDown(500);
         userProfileConfiguration.verifyAccess('see budget');
         userProfileConfiguration.verifyAccess('add budget');
         userProfileConfiguration.verifyAccess('edit budget');
@@ -176,9 +176,7 @@ And('The user verifies that he does not have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-    cy.slowDown(200);
     userProfileConfiguration.checkNoAccess(access);
-    cy.slowDownEnd();
 });
 
 And('The user verifies that he have access to {string}', (access) => {

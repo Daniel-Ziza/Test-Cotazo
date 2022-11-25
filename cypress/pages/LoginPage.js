@@ -68,8 +68,8 @@ class loginPage {
   };
 
   singInWithAdeo () {
-    this.elements.usernameAdeoInput().type(Cypress.env('ADEO_USERNAME'));
-    this.elements.passwordAdeoInput().type(Cypress.env('ADEO_PASSWORD'));
+    this.elements.usernameAdeoInput().clear().type(Cypress.env('ADEO_USERNAME'));
+    this.elements.passwordAdeoInput().clear().type(Cypress.env('ADEO_PASSWORD'));
     this.elements.signOnAdeoBtn().click();
   }
 }
