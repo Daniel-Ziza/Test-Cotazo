@@ -2,8 +2,11 @@ Feature: Differentiated access - Dashboard
 
     Feature verify differentiated accesses on the dashboard
 
-    Scenario: Verfy all accesses on the dashboard
+    Background:
+        #@LMPTCOTAZO-196
         Given The user opens cotazo website
+    @LMPTCOTAZO-261
+    Scenario: Verfy all accesses on the dashboard
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -25,8 +28,8 @@ Feature: Differentiated access - Dashboard
         And The user verifies that he does not have access to "Pedidos de Suporte"
         Then The user verifies that he has access to all "Dashboard" functionalities
 
-    Scenario: Verify that the user does not have access to export analysis from the dahboard
-        Given The user opens cotazo website
+    @LMPTCOTAZO-262
+    Scenario: Verify that the user does not have access to export analysis from the dashboard
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -47,8 +50,8 @@ Feature: Differentiated access - Dashboard
         And The user verifies that he have access to "dashboard"
         And The user logs out
 
-    Scenario: Verify that the user does not have access to analysis from the dahboard
-        Given The user opens cotazo website
+    @LMPTCOTAZO-263
+    Scenario: Verify that the user does not have access to analysis from the dashboard
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -69,8 +72,8 @@ Feature: Differentiated access - Dashboard
         And The user verifies that he have access to "dashboard"
         And The user logs out
 
-    Scenario: Verify that the user does not have access to analysis from the dahboard
-        Given The user opens cotazo website
+    @LMPTCOTAZO-264
+    Scenario: Verify that the user does not have access to analysis from the dashboard
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
