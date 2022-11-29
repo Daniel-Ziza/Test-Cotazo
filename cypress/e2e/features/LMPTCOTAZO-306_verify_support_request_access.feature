@@ -2,8 +2,12 @@ Feature: Differentiated access - Support Request
 
     Feature verify differentiated accesses on the Support Request
 
-    Scenario: Verify all accesses on the Support Request
+    Background:
+        #@LMPTCOTAZO-196
         Given The user opens cotazo website
+
+    @LMPTCOTAZO-307
+    Scenario: Verify all accesses on the Support Request
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -27,8 +31,8 @@ Feature: Differentiated access - Support Request
         And The user verifies that he does not have access to "Análises"
         Then The user verifies that he has access to all "Support request" functionalities
 
+    @LMPTCOTAZO-308
     Scenario: Verify that the user does not have access to add a message in support requests
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -48,8 +52,8 @@ Feature: Differentiated access - Support Request
         And The user verifies that he have access to "edit support request"
         And The user verifies that he have access to "see support request"
 
+    @LMPTCOTAZO-309
     Scenario: Verify that the user does not have access to edit support requests
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -69,8 +73,8 @@ Feature: Differentiated access - Support Request
         And The user verifies that he does not have access to "edit support request"
         And The user verifies that he have access to "see support request"
 
-    Scenario: Verify that the user does not have access to see support requests
-        Given The user opens cotazo website
+    @LMPTCOTAZO-310
+    Scenario: Verify that the user does not have access to view support requests
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"

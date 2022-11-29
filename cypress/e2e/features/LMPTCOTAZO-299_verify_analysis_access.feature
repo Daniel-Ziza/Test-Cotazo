@@ -2,8 +2,12 @@ Feature: Differentiated access - Analysis
 
     Feature verify differentiated accesses on the Analysis
 
-    Scenario: Verify all accesses on the Analysis
+    Background:
+        #@LMPTCOTAZO-196
         Given The user opens cotazo website
+
+    @LMPTCOTAZO-300
+    Scenario: Verify all accesses on the Analysis
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -26,8 +30,8 @@ Feature: Differentiated access - Analysis
         And The user verifies that he does not have access to "Pedidos de Suporte"
         Then The user verifies that he has access to all "Analysis" functionalities
 
+    @LMPTCOTAZO-301
     Scenario: Verify that the user does not have access to export budgets
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -40,7 +44,7 @@ Feature: Differentiated access - Analysis
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
-        #And The user verifies that he does not have access to "Orçamentos"
+        And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Pedidos de Suporte"
         And The user verifies that he does not have access to "export budget analysis"
@@ -49,8 +53,8 @@ Feature: Differentiated access - Analysis
         And The user verifies that he have access to "see export analysis"
         And The user verifies that he have access to "see payments"
 
-    Scenario: Verify that the user does not have access to see budgets
-        Given The user opens cotazo website
+    @LMPTCOTAZO-302
+    Scenario: Verify that the user does not have access to view budgets
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -71,8 +75,8 @@ Feature: Differentiated access - Analysis
         And The user verifies that he have access to "see export analysis"
         And The user verifies that he have access to "see payments"
 
+    @LMPTCOTAZO-303
     Scenario: Verify that the user does not have access to import analysis
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -93,8 +97,8 @@ Feature: Differentiated access - Analysis
         And The user verifies that he have access to "see export analysis"
         And The user verifies that he have access to "see payments"
 
+    @LMPTCOTAZO-304
     Scenario: Verify that the user does not have access to export analysis
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -115,8 +119,8 @@ Feature: Differentiated access - Analysis
         And The user verifies that he does not have access to "see export analysis"
         And The user verifies that he have access to "see payments"
 
-    Scenario: Verify that the user does not have access to see payments
-        Given The user opens cotazo website
+    @LMPTCOTAZO-305
+    Scenario: Verify that the user does not have access to view payments
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
