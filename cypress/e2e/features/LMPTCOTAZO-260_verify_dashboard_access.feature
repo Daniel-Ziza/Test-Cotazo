@@ -73,7 +73,7 @@ Feature: Differentiated access - Dashboard
         And The user logs out
 
     @LMPTCOTAZO-264
-    Scenario: Verify that the user does not have access to analysis from the dashboard
+    Scenario: Verify that the user does not have access to view the dashboard
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"

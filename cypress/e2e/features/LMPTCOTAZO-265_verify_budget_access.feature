@@ -2,8 +2,12 @@ Feature: Differentiated access - Budgets
 
     Feature verify differentiated accesses on the Budget
 
-    Scenario: Verify all accesses on the Budgets
+    Background:
+        #@LMPTCOTAZO-196
         Given The user opens cotazo website
+
+    @LMPTCOTAZO-266
+    Scenario: Verify all accesses on the Budgets
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -29,8 +33,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he does not have access to "Pedidos de Suporte"
         Then The user verifies that he has access to all "Budget" functionalities
 
+    @LMPTCOTAZO-267
     Scenario: Verify that the user does not have access to synchronize budgets
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -40,7 +44,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "view" action of the "Sincronizar orçamento" access in the "Budget" functionality
-        #And The user deactivates the "view" action of "Sincronizar orçamento"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "sync budget"
@@ -56,8 +59,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-268
     Scenario: Verify that the user does not have access to conclude budgets
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -82,8 +85,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-269
     Scenario: Verify that the user does not have access to download technical budget
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -93,7 +96,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "view" action of the "Descarregar orçamento de técnico" access in the "Budget" functionality
-        #And The user deactivates the "view" action of "Descarregar orçamento de técnico"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
@@ -109,8 +111,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-270
     Scenario: Verify that the user does not have access to download customer budget
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -120,7 +122,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "view" action of the "Descarregar orçamento de cliente" access in the "Budget" functionality
-        #And The user deactivates the "view" action of "Descarregar orçamento de cliente"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
@@ -136,8 +137,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-271
     Scenario: Verify that the user does not have access to delete budget
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -147,7 +148,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "delete" action of the "Orçamentos" access in the "Budget" functionality
-        #And The user deactivates the "delete" action of "Orçamentos"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
@@ -163,8 +163,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-272
     Scenario: Verify that the user does not have access to edit budget
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -174,7 +174,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "edit" action of the "Orçamentos" access in the "Budget" functionality
-        #And The user deactivates the "edit" action of "Orçamentos"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
@@ -189,8 +188,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he have access to "add budget"
         And The user verifies that he have access to "see budget"
 
+    @LMPTCOTAZO-273
     Scenario: Verify that the user does not have access to add budget
-        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -200,7 +199,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "add" action of the "Orçamentos" access in the "Budget" functionality
-        #And The user deactivates the "add" action of "Orçamentos"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"
@@ -214,8 +212,8 @@ Feature: Differentiated access - Budgets
         And The user verifies that he does not have access to "add budget"
         And The user verifies that he have access to "see budget"
 
-    Scenario: Verify that the user does not have access to see budget
-        Given The user opens cotazo website
+    @LMPTCOTAZO-274
+    Scenario: Verify that the user does not have access to view budget
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
@@ -225,7 +223,6 @@ Feature: Differentiated access - Budgets
         And The user searches for the profile "collaborator"
         And The user edits profile
         And The user deactivates the "view" action of the "Orçamentos" access in the "Budget" functionality
-        #And The user deactivates the "view" action of "Orçamentos"
         And The user logs out
         And An "collaborator" logs in to cotazo
         Then The user verifies that he does not have access to "Início"

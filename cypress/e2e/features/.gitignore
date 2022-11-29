@@ -15,7 +15,7 @@
 !LMPTCOTAZO-252_user_group_access_control.feature
 !test.feature
 !LMPTCOTAZO-260_verify_dashboard_access.feature
-!verify_budget_access.feature
-!verify_configuration_access.feature
+!LMPTCOTAZO-265_verify_budget_access.feature
+!LMPTCOTAZO-275_verify_configuration_access.feature
 !verify_analysis_access.feature
 !verify_support_request_access.feature
