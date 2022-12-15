@@ -18,13 +18,13 @@ class PrerequisitesInstalaServiceOrderCreationPage {
         addressCustomerInput: () => cy.get('[name="customerAddressStreetName"]'),
         numberAddressCustomerInput: () => cy.get('[name="customerAddressStreetNumber"]'),
         serviceGroupSelect: () => cy.get('#serviceGroupCode > .css-iwfcan-control'),
-        nameServiceSelect: () => cy.get('[id^="react-select-3"]'),
+        nameServiceSelect: () => cy.get('[id^="react-select-"]'),
         calendarSelect: () => cy.get('[name="date"]'),
         turnOrderServiceCreateSelect: () => cy.get('.react-select__placeholder'),
-        turnSelect: () => cy.get('div[id^="react-select-4-option-"]'),
+        turnSelect: () => cy.get('div[id^="react-select-"]'),
         addNewItemBtn: () => cy.get(':nth-child(3) > :nth-child(2) > .button'),
         serviceCodeSelect: () => cy.get('#serviceCode > .react-select__control > .react-select__value-container'),
-        serviceSelect: () => cy.get('#react-select-5-option-2'),
+        serviceSelect: () => cy.get('div[id^="react-select-"]'),
         serviceQuantityInput: () => cy.get('[id="serviceQuantity"]'),
         serviceValueInput: () => cy.get('[id="serviceValue"]'),
         saveServiceBtn: () => cy.get('.padding-vertical-double'),
@@ -56,7 +56,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
             this.elements.turnOrderServiceCreateSelect().click().type('Manhã');
             this.elements.turnSelect().click();
             this.elements.addNewItemBtn().click();
-            this.elements.serviceCodeSelect().click().type('Visita');
+            this.elements.serviceCodeSelect().click().type('VISITA ORÇAMENTO');
             this.elements.serviceSelect().click();
             this.elements.serviceQuantityInput().type('1');
             this.elements.serviceValueInput().type('25');
