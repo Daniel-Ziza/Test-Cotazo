@@ -66,6 +66,7 @@ Feature for creating a new budget
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
     And Check if the modal appears or not
+    And The information of the filled service order appears
     And The user continues to the next step
     And The user searches for the service description "Km extra Abrigo Metal"
     And The user selects "Km extra Abrigo Metal [REF.ª 49010901]"

@@ -62,6 +62,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         stepFourBtn: () => cy.get('.budget-steps > :nth-child(7)'),
         stepThreeBtn: () => cy.get('.budget-steps > :nth-child(5)'),
         formatBox: () => cy.get('.jodit-ui-group_line_true > .jodit-ui-group'),
+        taxTypeSelect: () => cy.get('[name="autocomplete-Tipo de IVA"]'),
     };
 
     verifyForm(){
@@ -77,6 +78,8 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.taxIDInput().invoke('val').should('not.be.empty');
         this.commonPageElements.phoneNumberInput().invoke('val').should('not.be.empty');
         this.commonPageElements.emailInput().invoke('val').should('not.be.empty');
+        this.commonPageElements.taxTypeSelect().click();
+        cy.contains('IVA Obra À Taxa Normal').click();
     };
 
     clickContinue() {

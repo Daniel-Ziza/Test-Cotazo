@@ -104,5 +104,6 @@ Feature to test each of the steps for budget creation
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
     And Check if the modal appears or not
+    And The information of the filled service order appears
     And The user goes to the "end notes" page
     And The user verifies that the text tool appears
