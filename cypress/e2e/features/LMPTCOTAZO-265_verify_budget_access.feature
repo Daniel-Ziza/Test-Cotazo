@@ -27,6 +27,7 @@ Feature: Differentiated access - Budgets
             | Orçamentos              | 3      |
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         And The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -46,6 +47,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "view" action of the "Sincronizar orçamento" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "sync budget"
         And The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
@@ -72,6 +74,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "view" action of the "Concluir orçamento" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -98,6 +101,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "view" action of the "Descarregar orçamento de técnico" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -124,6 +128,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "view" action of the "Descarregar orçamento de cliente" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -150,6 +155,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "delete" action of the "Orçamentos" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -176,6 +182,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "edit" action of the "Orçamentos" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -201,6 +208,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "add" action of the "Orçamentos" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -225,6 +233,7 @@ Feature: Differentiated access - Budgets
         And The user deactivates the "view" action of the "Orçamentos" access in the "Budget" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"

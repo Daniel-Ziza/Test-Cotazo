@@ -22,6 +22,7 @@ Feature: Differentiated access - Dashboard
             | Dashboard | 0      |
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -41,6 +42,7 @@ Feature: Differentiated access - Dashboard
         And The user deactivates the "view" action of the "Exportar" access in the "Dashboard" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -63,6 +65,7 @@ Feature: Differentiated access - Dashboard
         And The user deactivates the "view" action of the "Analysis" access in the "Dashboard" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
         And The user verifies that he does not have access to "Análises"
@@ -85,6 +88,7 @@ Feature: Differentiated access - Dashboard
         And The user deactivates the "view" action of the "Dashboard" access in the "Dashboard" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"

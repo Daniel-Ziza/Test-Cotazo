@@ -25,6 +25,7 @@ Feature: Differentiated access - Support Request
             | Adicionar mensagem | 1      |
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         And The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
@@ -44,6 +45,7 @@ Feature: Differentiated access - Support Request
         And The user deactivates the "add" action of the "Adicionar mensagem" access in the "Support Request" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
@@ -65,6 +67,7 @@ Feature: Differentiated access - Support Request
         And The user deactivates the "edit" action of the "Pedidos de suporte" access in the "Support Request" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"
@@ -86,6 +89,7 @@ Feature: Differentiated access - Support Request
         And The user deactivates the "view" action of the "Pedidos de suporte" access in the "Support Request" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Configurações"

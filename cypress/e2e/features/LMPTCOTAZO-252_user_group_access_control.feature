@@ -20,6 +20,7 @@ Feature: User Group Configuration
         And An "collaborator" logs in to cotazo
         Then The user has no access to the system
         And The user logs out
+        And The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User group"

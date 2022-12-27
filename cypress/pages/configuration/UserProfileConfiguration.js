@@ -412,8 +412,10 @@ class userProfileConfiguration {
             cy.visit("/budgets");
         }
         if (access === 'conclude budget') {
-            pendingBudgetsListPage.commonPageElements.pageEditBtn().click();
+            pendingBudgetsListPage.commonPageElements.pagePendingBtn().click();
             pendingBudgetsListPage.commonPageElements.editBtnFirstOS().click();
+            inProgressBudgetsEditPage.commonPageElements.taxTypeSelect().click();
+            cy.contains('IVA Obra À Taxa Normal').click()
             inProgressBudgetsEditPage.commonPageElements.stepFourBtn().click();
             inProgressBudgetsEditPage.commonPageElements.finishBtn().should('not.exist');
             cy.visit("/budgets");

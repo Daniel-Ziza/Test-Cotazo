@@ -176,7 +176,9 @@ And('The user verifies that he does not have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+    cy.slowDown(200);
     userProfileConfiguration.checkNoAccess(access);
+    cy.slowDownEnd();
 });
 
 And('The user verifies that he have access to {string}', (access) => {

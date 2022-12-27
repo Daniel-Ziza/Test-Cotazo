@@ -63,5 +63,8 @@ And('The user goes to {string}', (element) => {
         homePage.toGo('Serviços');
     }
 }
-
 );
+
+And('The user reloads the page', () => {
+    cy.reload();
+})

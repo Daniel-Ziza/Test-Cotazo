@@ -35,6 +35,7 @@ Feature: Differentiated access - Configuration
             | Grupos de Acesso       | 3      |
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         And The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -54,6 +55,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "delete" action of the "Grupos de Acesso" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -94,6 +96,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Grupos de Acesso" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -134,6 +137,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "add" action of the "Grupos de Acesso" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -174,6 +178,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Grupos de Acesso" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -211,6 +216,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "delete" action of the "Perfis de Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -248,6 +254,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Perfis de Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -285,6 +292,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "add" action of the "Perfis de Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -322,6 +330,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Perfis de Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -356,6 +365,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "delete" action of the "Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -390,6 +400,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Utilizadores" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -423,6 +434,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Importar" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -456,6 +468,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Exportar" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -489,6 +502,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "IVA" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -522,6 +536,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "IVA" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -554,6 +569,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Tipologias" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -586,6 +602,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Tipologias" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -618,6 +635,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Serviços" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -650,6 +668,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Serviços" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -676,6 +695,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Parametros" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -702,6 +722,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Parametros" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -727,6 +748,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "edit" action of the "Traduções" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
@@ -752,6 +774,7 @@ Feature: Differentiated access - Configuration
         And The user deactivates the "view" action of the "Traduções" access in the "Configuration" functionality
         And The user logs out
         And An "collaborator" logs in to cotazo
+        And The user reloads the page
         Then The user verifies that he does not have access to "Início"
         And The user verifies that he does not have access to "Orçamentos"
         And The user verifies that he does not have access to "Análises"
