@@ -62,7 +62,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         stepFourBtn: () => cy.get('.budget-steps > :nth-child(7)'),
         stepThreeBtn: () => cy.get('.budget-steps > :nth-child(5)'),
         formatBox: () => cy.get('.jodit-ui-group_line_true > .jodit-ui-group'),
-        taxTypeSelect: () => cy.get('[name="autocomplete-Tipo de IVA"]'),
+        taxTypeSelect: () => cy.get('[name="manage-budget-work-vat-id-Tipo de IVA"]'),
     };
 
     verifyForm(){

@@ -71,16 +71,16 @@ class userProfileConfiguration {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(3)';
         }
         if (feature === 'Configuration') {
-            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4)';
-        }
-        if (feature === 'Analysis') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5)';
         }
+        if (feature === 'Analysis') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4)';
+        }
         if (feature === 'Support Request') {
-            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(7)';
         }
         if (feature === 'Budget analysis') {
-            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5) > :nth-child(2) > :nth-child(2)';
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4) > :nth-child(2) > :nth-child(2)';
         }
         cy.document().then((doc) => {
             cy.get(searchLocator)
