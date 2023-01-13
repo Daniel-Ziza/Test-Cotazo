@@ -1,6 +1,6 @@
 Feature: Budget creation steps
 
-Feature to test each of the steps for budget creation
+  Feature to test each of the steps for budget creation
 
   Background: Pre-Condition: login to cotazo
     #@LMPTCOTAZO-208
@@ -14,7 +14,7 @@ Feature to test each of the steps for budget creation
     And the user leaves the editable fields empty
     Then The "Continue" button is disabled
 
-  @LMPTCOTAZO-209 @LMPTCOTAZO-201
+  @LMPTCOTAZO-210 @LMPTCOTAZO-201
   Scenario: The user fills the budget information form with invalid values
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
@@ -39,7 +39,7 @@ Feature to test each of the steps for budget creation
     Then The user verifies that the edit is correct
     And The user removes the previously added service
     Then The "service information" table is empty
-    And The user searches for the service description "Trabalho Extra Abrigo Metal"
+    And The user searches for the service description "Trab. Complementar Abrigo Metal"
     And The user leaves the new service description empty and tries to add the service
     Then The "service information" table is empty
     And The user adds a new description of the service and inserts
@@ -107,3 +107,78 @@ Feature to test each of the steps for budget creation
     And The information of the filled service order appears
     And The user goes to the "end notes" page
     And The user verifies that the text tool appears
+
+  @LMPTCOTAZO-327
+  Scenario: Verification of character limit in text boxes in budget creation
+    When The user clicks on the button budgets to be created
+    And The user searches in cotazo for the service order created in the prerequisites
+    And Check if the modal appears or not
+    And The information of the filled service order appears
+    And The user continues to the next step
+    And The user searches for the service description "Trab. Complementar Abrigo Metal"
+    And The user tries to write more than "250" characters in "extra work"
+    Then The user verifies that the character counter shows "250/250" characters in "extra work"
+    And The user adds a new description of the service and inserts
+    And The user continues to the next step
+    When The user tries to write more than "250" characters in "material description"
+    Then The user verifies that the character counter shows "250/250" characters in "material description"
+    When The user tries to write more than "250" characters in "material observation"
+    Then The user verifies that the character counter shows "250/250" characters in "material observation"
+    And The user continues to the next step
+    When The user tries to write more than "7000" characters in "endnotes"
+    Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
+
+  @LMPTCOTAZO-214
+  Scenario: The user starts creating the budget and saves it
+    When The user clicks on the button budgets to be created
+    And The user searches in cotazo for the service order created in the prerequisites
+    And Check if the modal appears or not
+    And The information of the filled service order appears
+    And The user continues to the next step
+    And The user selects a group of service
+    And The user selects "Km extra Abrigo Metal [REF.ª 49010901]"
+    And The user continues to the next step
+    And The user completes the material information form
+      | description         | quantity | unit | observation          |
+      | example description | 3        | uni  | example observations |
+    And The user continues to the next step
+    And The user completes the final notes form
+      | duration | End_Notes         |
+      | 2h       | example End Notes |
+    Then The user saves the budget and verifies that it is in editing status
+    And The user deletes the previously created budget
+
+  @LMPTCOTAZO-215
+  Scenario: User creates budget and only concludes it
+    When The user clicks on the button budgets to be created
+    And The user searches in cotazo for the service order created in the prerequisites
+    And Check if the modal appears or not
+    And The information of the filled service order appears
+    And The user continues to the next step
+    And The user selects a group of service
+    And The user selects "Km extra Abrigo Metal [REF.ª 49010901]"
+    And The user continues to the next step
+    And The user completes the material information form
+      | description         | quantity | unit | observation          |
+      | example description | 3        | uni  | example observations |
+    And The user continues to the next step
+    And The user completes the final notes form
+      | duration | End_Notes         |
+      | 2h       | example End Notes |
+    Then The user completes the budget and verifies that it is pending
+    And The user deletes the previously created budget
+
+  @LMPTCOTAZO-216
+  Scenario: The user starts with budget creation, and tries to finish with missing information
+    When The user clicks on the button budgets to be created
+    And The user searches in cotazo for the service order created in the prerequisites
+    And Check if the modal appears or not
+    And The information of the filled service order appears
+    And The user continues to the next step
+    And The user continues to the next step
+    And The user continues to the next step
+    Then The message appears "A lista de serviços para o orçamento encontra-se vazia."
+    And The message appears "A lista de materiais para o orçamento encontra-se vazia."
+    And The message appears "O Campo de Duração da Obra encontra-se vazio"
+    And The "Conclude" button is disabled
+    And The "Conclude and Synchronize" button is disabled
