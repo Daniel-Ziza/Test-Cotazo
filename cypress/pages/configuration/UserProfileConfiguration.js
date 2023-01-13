@@ -13,6 +13,8 @@ const userGroupConfiguration = require('../../pages/configuration/UserGroupConfi
 const paymentAnalysis = require('../../pages/analysis/PaymentAnalysis');
 const budgetAnalysis = require('../../pages/analysis/BudgetAnalysis');
 const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
+const contactPage = require('../../pages/contact/ContactPage');
+const contactManagementPage = require('../../pages/contact/ContactManagementPage');
 
 class userProfileConfiguration {
     locator = {
@@ -70,11 +72,14 @@ class userProfileConfiguration {
         if (feature === 'Budget') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(3)';
         }
+        if (feature === 'Analysis') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4)';
+        }
         if (feature === 'Configuration') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5)';
         }
-        if (feature === 'Analysis') {
-            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4)';
+        if (feature === 'Contact'){
+            searchLocator ='.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
         }
         if (feature === 'Support Request') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(7)';
@@ -347,6 +352,25 @@ class userProfileConfiguration {
             supportRequest.elements.updateSupportRequestBtn().should('not.be.disabled');
             cy.slowDownEnd();
         }
+
+        //Contact Access
+        if(access === 'see contact'){
+            homePage.toGo('Contatos');
+            cy.slowDown(150);
+            contactPage.elements.titleContactPage().should('contain.text', 'Contatos');
+            contactPage.elements.contactFilter().should('be.visible');
+            contactPage.elements.contactTable().should('be.visible');           
+            cy.slowDownEnd();
+        }
+        if(access === 'add contact'){
+            contactPage.elements.createNewContactBtn().should('be.visible').and('not.be.disabled');
+        }
+        if(access === 'edit contact'){
+            contactPage.elements.editContactBtn().should('be.visible').and('not.be.disabled');
+        }
+        if(access === 'delete contact'){
+            contactPage.elements.deleteContactBtn().should('be.visible').and('not.be.disabled');
+        }
     }
 
     checkNoAccess(access) {
@@ -596,6 +620,18 @@ class userProfileConfiguration {
             supportRequest.elements.statusSupportRequestInput().should('not.exist');
             supportRequest.elements.updateSupportRequestBtn().should('not.exist');
             cy.slowDownEnd();
+        }
+
+        //Contact Access
+        if (access === 'delete contact') {
+            homePage.toGo('Contatos');
+            contactPage.elements.deleteContactBtn().should('not.exist')
+        }
+        if (access === 'edit contact') {
+            contactPage.elements.editContactBtn().should('not.have.class', 'svg-inline--fa fa-pen  budget-rect-icon')
+        }
+        if (access === 'add contact') {
+            contactPage.elements.createNewContactBtn().should('not.exist')
         }
     }
 }

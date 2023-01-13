@@ -151,6 +151,12 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('add message to support request');
         userProfileConfiguration.verifyAccess('edit support request');
     }
+    if (element === 'Contact'){
+        userProfileConfiguration.verifyAccess('see contact');
+        userProfileConfiguration.verifyAccess('add contact');
+        userProfileConfiguration.verifyAccess('edit contact');
+        userProfileConfiguration.verifyAccess('delete contact');
+    }
 });
 
 And('The user deactivates the {string} action of the {string} access in the {string} functionality', (action, access, feature) => {

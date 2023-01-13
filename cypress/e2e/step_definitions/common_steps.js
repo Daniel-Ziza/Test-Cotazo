@@ -62,6 +62,9 @@ And('The user goes to {string}', (element) => {
     if (element === 'Services') {
         homePage.toGo('Serviços');
     }
+    if (element === 'Contact') {
+        homePage.toGo('Contatos');
+    }
 }
 );
 
