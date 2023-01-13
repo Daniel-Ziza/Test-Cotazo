@@ -30,7 +30,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         editBtn: () =>cy.get('.budget-rect-icons > :nth-child(1)'),
         serviceQuantityCotazoInput: () =>cy.get('.manage-service-inputs-container > :nth-child(1) > :nth-child(1) > .input-group > .form-control'),
         serviceList: () => cy.get('[class="manage-services-table-row-height "]'),
-        materialDescriptionInput: () => cy.get('[placeholder="Descrição"]'),
+        materialDescriptionInput: () => cy.get('[id="Descrição"]'),
         materialQuantityInput: () => cy.get('[placeholder="Quantidade"]'),
         materialUnitInput: () => cy.get('[placeholder="Unidade"]'),
         materialObservationsInput: () => cy.get('[placeholder="Observações"]'),
@@ -52,7 +52,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         quantityInformationTable: () => cy.get('tbody > tr > .manage-service-col-qt'),
         unitPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pu'),
         totalPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pt'),
-        newServiceDescriptionInput: () =>  cy.get('.manage-services-new-description-description-container > :nth-child(1)'),
+        newServiceDescriptionInput: () =>  cy.get('.manage-services-new-description-description-container > :nth-child(1) > .input-group > .form-control'),//cy.get('.manage-services-new-description-description-container > :nth-child(1)'),
         addExtraServiceBtnDisabled: () => cy.get('.manage-services-new-description-container-icon > .cotazo-icon-disabled'),
         addExtraServiceBtn: () => cy.get('.manage-services-new-description-container-icon'),
         descriptionTable: () => cy.get('tbody > tr > .col-lg-4'),
@@ -63,6 +63,10 @@ class BaseBudgetsEditPageClass extends UserLayout {
         stepThreeBtn: () => cy.get('.budget-steps > :nth-child(5)'),
         formatBox: () => cy.get('.jodit-ui-group_line_true > .jodit-ui-group'),
         taxTypeSelect: () => cy.get('[name="manage-budget-work-vat-id-Tipo de IVA"]'),
+        characterCounterExtraWork: () => cy.get('.manage-services-new-description-description-container > :nth-child(1) > .input-group > .cotazo-input-char-counter'),
+        characterCounterMaterialDescription: () => cy.get('.col-lg-6 .cotazo-input-char-counter'),
+        characterCounterMaterialObservation: () => cy.get('.col-lg-12 > :nth-child(1) > .input-group > .cotazo-input-char-counter'),
+        characterCounterEndnotes: () => cy.get('.cotazo-input-char-counter'),
     };
 
     verifyForm(){
