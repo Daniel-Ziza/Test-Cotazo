@@ -5,17 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "env-cmd cypress open",
-    "test:run": "env-cmd cypress run --browser chrome --headed"
+    "test:run": "env-cmd cypress run --browser chrome --headless"
   },
   "keywords": [
     "cypress"
   ],
+  "nonGlobalStepDefinitions": true,
   "author": "Jessica Fuentes <jfuentes@smartconsulting.pt> (https://smartconsulting.pt/)",
   "license": "Unlicensed",
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^11.4.0",
+    "@badeball/cypress-cucumber-preprocessor": "^12.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.1.3",
-    "cypress": "^10.3.1",
+    "cypress": "^10.5.0",
     "cypress-slow-down": "^1.2.1",
     "esbuild": "^0.14.48",
     "multiple-cucumber-html-reporter": "^1.21.4"
