@@ -18,8 +18,10 @@ Feature: Differentiated access - Dashboard
         And The user verifies that the profile to be selected does not have any access marked
         And The user selects access levels
             #  Action 0 = View; 1 = Add; 2 = Edit; 3 = Delete
-            | access    | action |
-            | Dashboard | 0      |
+            | access                   | action |
+            | Acesso a todas as lojas  | 0      |
+            | Acesso a todo o conteúdo | 0      |
+            | Dashboard                | 0      |
         And The user logs out
         And An "collaborator" logs in to cotazo
         And The user reloads the page
