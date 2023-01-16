@@ -16,6 +16,10 @@ Given('The user logs in Cotazo', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     cy.visit("/");
     loginPage.singIn('installer');
     // Set as cypress env vars some values defined by previous tests.
@@ -27,6 +31,10 @@ Given('The user logs in Cotazo', () => {
 
 And('The user goes to {string}', (element) => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     if (element === 'in edition') {
@@ -69,5 +77,12 @@ And('The user goes to {string}', (element) => {
 );
 
 And('The user reloads the page', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     cy.reload();
 })

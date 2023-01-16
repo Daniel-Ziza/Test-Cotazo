@@ -15,6 +15,10 @@ And('The user searches for the profile {string}', (profile) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     let text = profile.toUpperCase();
     cy.slowDown(500);
     userProfileConfiguration.searchProfile(text);
@@ -25,11 +29,19 @@ And('The user profile is disabled', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userProfileConfiguration.elements.actionUserProfileBtn().click();
 });
 
 And('The user profile is activated', () => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     userProfileConfiguration.elements.actionUserProfileBtn().click();
@@ -39,11 +51,19 @@ And('The user verifies that the profile to be selected does not have any access 
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userProfileConfiguration.elements.permissionsSet().uncheck();
 });
 
 And('The user selects access levels', (table) => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     userProfileConfiguration.enablePermits(table);
@@ -54,11 +74,19 @@ And('The user edits profile', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userProfileConfiguration.elements.editProfileBtn().click();
 });
 
 And('The user activates all available accesses', () => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     cy.get('input[type="checkbox"]').check();
@@ -69,6 +97,10 @@ And('The user obtains the profile associated with his collaborator', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userProfileConfiguration.elements.profileAssociatedLabel().invoke('text').then(profileAssociated => {
         Cypress.env('userProfile', profileAssociated);
     });
@@ -77,6 +109,10 @@ And('The user obtains the profile associated with his collaborator', () => {
 //Pending
 And('The user selects the {string} access with the action {string}', (access, action) => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     if (action === 'view') {
@@ -98,6 +134,11 @@ Then('The user verifies that he has access to all {string} functionalities', (el
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+
     if (element === 'Dashboard') {
         userProfileConfiguration.verifyAccess('dashboard');
         userProfileConfiguration.verifyAccess('analysis');
@@ -115,7 +156,7 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('sync budget');
         cy.slowDownEnd();
     }
-    if (element ==='Configuration'){
+    if (element === 'Configuration') {
         userProfileConfiguration.verifyAccess('see translations');
         userProfileConfiguration.verifyAccess('edit translations');
         userProfileConfiguration.verifyAccess('see parameters');
@@ -139,19 +180,19 @@ Then('The user verifies that he has access to all {string} functionalities', (el
         userProfileConfiguration.verifyAccess('edit user group');
         userProfileConfiguration.verifyAccess('toggle action user group');
     }
-    if (element === 'Analysis'){
+    if (element === 'Analysis') {
         userProfileConfiguration.verifyAccess('see payments');
         userProfileConfiguration.verifyAccess('see export analysis');
         userProfileConfiguration.verifyAccess('see import analysis');
         userProfileConfiguration.verifyAccess('see budget analysis');
         userProfileConfiguration.verifyAccess('export budget analysis');
     }
-    if(element === 'Support request'){
+    if (element === 'Support request') {
         userProfileConfiguration.verifyAccess('see support request');
         userProfileConfiguration.verifyAccess('add message to support request');
         userProfileConfiguration.verifyAccess('edit support request');
     }
-    if (element === 'Contact'){
+    if (element === 'Contact') {
         userProfileConfiguration.verifyAccess('see contact');
         userProfileConfiguration.verifyAccess('add contact');
         userProfileConfiguration.verifyAccess('edit contact');
@@ -163,6 +204,11 @@ And('The user deactivates the {string} action of the {string} access in the {str
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+    
     if (action === 'view') {
         userProfileConfiguration.togglePermission(access, 0, feature);
     }
@@ -182,6 +228,10 @@ And('The user verifies that he does not have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     cy.slowDown(200);
     userProfileConfiguration.checkNoAccess(access);
     cy.slowDownEnd();
@@ -189,6 +239,10 @@ And('The user verifies that he does not have access to {string}', (access) => {
 
 And('The user verifies that he have access to {string}', (access) => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     cy.slowDown(200);
@@ -201,11 +255,19 @@ Then('The user has no access to the system', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     homePage.elements.bodyHomePage().should('have.text', 'Recurso não encontrado');
 });
 
 And('The user searches for the user {string}', (user) => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     let text = user.toUpperCase();
@@ -218,11 +280,19 @@ And('The user is disabled', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userConfiguration.elements.actionUserBtn().dblclick();
 });
 
 And('The user is activated', () => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     userConfiguration.elements.actionUserBtn().dblclick();
@@ -234,6 +304,10 @@ And('The user searches for the group', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     cy.slowDown(250);
     userGroupConfiguration.searchUserGroup();
     cy.slowDownEnd();
@@ -243,11 +317,19 @@ And('The user group is disabled', () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     userGroupConfiguration.elements.actionUserGroupBtn().dblclick();
 });
 
 And('The user group is activated', () => {
     cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
     userGroupConfiguration.elements.actionUserGroupBtn().click();

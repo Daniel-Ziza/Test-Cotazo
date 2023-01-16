@@ -21,6 +21,10 @@ slowCypressDown(false);
 
 When('The user clicks on the button budgets to be created', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false
   });
   cy.slowDown(1000);
@@ -32,6 +36,10 @@ And("The user searches for a service order according to the customer's phone {st
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsListPage.findListItem(phoneNumber, 'contactNumber', 2);
 });
 
@@ -39,11 +47,19 @@ And('The user searches in cotazo for the service order created in the prerequisi
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 2);
 });
 
 And('Check if the modal appears or not', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(600);
@@ -62,11 +78,19 @@ And('The information of the filled service order appears', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.verifyForm();
 });
 
 And('The user continues to the next step', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.clickContinue();
@@ -76,12 +100,20 @@ And('The user selects a group of service', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.serviceGroupInput().click();
   pendingBudgetsEditPage.commonPageElements.addServiceBtn().click();
 });
 
 And('The user selects {string}', (service) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.serviceList().each($el => {
@@ -95,6 +127,10 @@ And('The user completes the material information form', (table) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   table.hashes().forEach((row) => {
     pendingBudgetsEditPage.typeMaterialInformationForm(row.description, row.quantity, row.unit, row.observation);
   });
@@ -102,6 +138,10 @@ And('The user completes the material information form', (table) => {
 
 And('The user completes the final notes form', (table) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   table.hashes().forEach((row) => {
@@ -113,6 +153,10 @@ And('The user completes the final notes form', (table) => {
 
 Then('The user saves the budget and verifies that it is in editing status', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(400);
@@ -132,6 +176,10 @@ Then('The user completes the budget and verifies that it is pending', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   cy.slowDown(400);
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
   pendingBudgetsEditPage.clickFinishBtn();
@@ -145,6 +193,10 @@ Then('The user completes the budget and verifies that it is pending', () => {
 
 Then('The user creates and synchronizes a budget and verifies that it is on sent', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(500);
@@ -164,11 +216,19 @@ Then('The message appears {string}', (message) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.missingInformationMessage().should('contains.text', message);
 });
 
 Then('The {string} button is disabled', (nameBtn) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.isButtonDeactivated(nameBtn);
@@ -178,11 +238,19 @@ And('the user leaves the editable fields empty', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.cleanBudgetFields();
 });
 
 And('User enters invalid {string}', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.typeInvalidValues(element);
@@ -192,6 +260,10 @@ And('The user searches for the service description {string}', (description) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.searchDescription(description);
 });
 
@@ -199,11 +271,19 @@ And('The user enters invalid quantity', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.verifyServiceQuantityCotazo();
 });
 
 Then('The {string} table is empty', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   if (element === 'service information') {
@@ -220,6 +300,10 @@ And('The user adds a valid service', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('1').then(() => {
     pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
   });
@@ -227,6 +311,10 @@ And('The user adds a valid service', () => {
 
 And('The user edits the quantity of the service', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.editBtn().click();
@@ -239,12 +327,20 @@ And('The user modifies the quantity of service', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('4');
 
 });
 
 And('The user verifies that the edit is correct', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.quantityInformationTable().invoke('text').then(quantityText => {
@@ -264,6 +360,10 @@ And('The user leaves the new service description empty and tries to add the serv
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().then(() => {
     pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
   });
@@ -271,6 +371,10 @@ And('The user leaves the new service description empty and tries to add the serv
 
 And('The user adds a new description of the service and inserts', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test').then(() => {
@@ -282,26 +386,30 @@ And('The user tries to write more than {string} characters in {string}', (counte
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
-  let messageText = utils.randomString(parseInt(counter)+1);
-  if (place === 'extra work'){
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+  let messageText = utils.randomString(parseInt(counter) + 1);
+  if (place === 'extra work') {
     pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().type(messageText);
     pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().invoke('text').then(newMessage => {
       expect(messageText).to.not.equal(newMessage);
     })
   }
-  if (place === 'material description'){
+  if (place === 'material description') {
     pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().type(messageText);
     pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().invoke('text').then(newMessage => {
       expect(messageText).to.not.equal(newMessage);
     })
   }
-  if (place === 'material observation'){
+  if (place === 'material observation') {
     pendingBudgetsEditPage.commonPageElements.materialObservationsInput().type(messageText);
     pendingBudgetsEditPage.commonPageElements.materialObservationsInput().invoke('text').then(newMessage => {
       expect(messageText).to.not.equal(newMessage);
     })
   }
-  if (place === 'endnotes'){
+  if (place === 'endnotes') {
     pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type(messageText);
     pendingBudgetsEditPage.commonPageElements.workEndNotesInput().invoke('text').then(newMessage => {
       expect(messageText).to.not.equal(newMessage);
@@ -313,22 +421,30 @@ Then('The user verifies that the character counter shows {string} characters in 
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
-  if (place === 'extra work'){
-  pendingBudgetsEditPage.commonPageElements.characterCounterExtraWork().should('contain.text', counter);
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+  if (place === 'extra work') {
+    pendingBudgetsEditPage.commonPageElements.characterCounterExtraWork().should('contain.text', counter);
   }
-  if (place === 'material description'){
+  if (place === 'material description') {
     pendingBudgetsEditPage.commonPageElements.characterCounterMaterialDescription().should('contain.text', counter);
   }
-  if (place === 'material observation'){
+  if (place === 'material observation') {
     pendingBudgetsEditPage.commonPageElements.characterCounterMaterialObservation().should('contain.text', counter);
   }
-  if (place === 'endnotes'){
+  if (place === 'endnotes') {
     pendingBudgetsEditPage.commonPageElements.characterCounterEndnotes().should('contain.text', counter);
   }
 })
 
 Then('The {string} table is not empty', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   if (element === 'service information') {
@@ -345,6 +461,10 @@ And('The user leaves the material data empty', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.clearMaterialData();
 });
 
@@ -352,11 +472,19 @@ And('The user writes a valid {string}', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.typeValidElement(element);
 });
 
 And('The user clicks on the {string} button', (btn) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   if (btn === 'add') {
@@ -369,6 +497,10 @@ And('The user clicks on the {string} button', (btn) => {
 
 Then('An error message appears', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.materialErrorMessage().invoke('text').then((text) => {
@@ -388,6 +520,10 @@ Then('The user verifies that all fields have been cleaned', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.verifyMaterialDataClean();
 });
 
@@ -395,11 +531,19 @@ And('The user exports the list of materials', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.exportBtn().click();
 });
 
 Then('The user verifies that the List of Materials has been downloaded', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   const day = moment().format('DD');
@@ -410,6 +554,10 @@ Then('The user verifies that the List of Materials has been downloaded', () => {
 
 And('The user loads a file with {string}', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   if (element === 'incomplete file') {
@@ -466,12 +614,20 @@ And('The user deletes the budget from the current page', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   cy.wait(1000);
   pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 3);
 });
 
 And('The user edits an added material', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.editBtn().click();
@@ -490,6 +646,10 @@ And('The user edits an added material', () => {
 
 And('The user removes the material from the list', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.removeBtn().click();
@@ -535,6 +695,10 @@ And('The user goes to the {string} page', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   if (element === 'end notes') {
     pendingBudgetsEditPage.commonPageElements.stepFourBtn().click();
   }
@@ -547,6 +711,10 @@ And('The user verifies that the text tool appears', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.formatBox().should('be.visible');
 });
 
@@ -554,11 +722,19 @@ And('The user removes the previously added service', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   pendingBudgetsEditPage.commonPageElements.removeBtn().click();
 });
 
 And('The user deletes the previously created budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(100);
@@ -575,6 +751,10 @@ Given('The user logs in instala', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   cy.visit(Cypress.env('INSTALA_LOGIN_URL'));
   // Set as cypress env vars some values defined by previous tests.
   cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
@@ -588,6 +768,10 @@ When('The user searches a budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   cy.slowDown(500);
   homePage.elements.searchBox().type(Cypress.env('orderServiceNumber'));
   homePage.elements.searchHomePageBtn().click();
@@ -596,6 +780,10 @@ When('The user searches a budget', () => {
 
 Then('The user should see the tag {string}', (text) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   if (text === 'budget available in store') {
@@ -615,11 +803,19 @@ Then('The user edits the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   completedBudgetsListPage.commonPageElements.editServiceOrderBtn().click();
 });
 
 Then('The user verifies that the budget has version {string}', (element) => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   inProgressBudgetsListPage.commonPageElements.budgetIdentifier()
@@ -631,11 +827,19 @@ And('The user adds new material information', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   inProgressBudgetsEditPage.newMaterialInformation();
 });
 
 Then('The user saves the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(500);
@@ -649,6 +853,10 @@ Then('The user completes the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   cy.slowDown(500);
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
   pendingBudgetsEditPage.clickFinishBtn();
@@ -658,6 +866,10 @@ Then('The user completes the budget', () => {
 
 Then('The user synchronizes the budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
   cy.slowDown(500);

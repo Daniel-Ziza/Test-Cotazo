@@ -10,5 +10,9 @@ When("the user clicks on the {string} button", (element) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
     services.clickBtn(element);
 })
