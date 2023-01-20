@@ -33,4 +33,4 @@ specPattern: 'cypress/e2e/features/test.feature',
 
 ## Documentation:
 
-https://jira.adeo.com/confluence/display/INSTALMBU/Cotazo+Testing+Automation
+https://jira.adeo.com/confluence/display/lmportugalHD/Cotazo+Testing+Automation
