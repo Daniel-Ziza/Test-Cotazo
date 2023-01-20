@@ -377,11 +377,33 @@ And('The user adds a new description of the service and inserts', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test').then(() => {
+  let messageText = utils.randomString(10)
+  pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test ' + messageText).then(() => {
     pendingBudgetsEditPage.commonPageElements.addExtraServiceBtn().should('not.have.class', 'cotazo-icon-disabled').click();
   });
 });
 
+Then('The user verifies that he can add multiple extra jobs with the same reference number', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.get('tbody > :nth-child(1) > .manage-service-col-ref').invoke('text').then(ref1 => {
+    cy.get(':nth-child(2) > .manage-service-col-ref').invoke('text').then(ref2 => {
+      cy.get('tbody > :nth-child(1) > .manage-service-col-descr').invoke('text').then(description1 => {
+        cy.get(':nth-child(2) > .manage-service-col-descr').invoke('text').then(description2 => {
+          if ( ref1 === ref2){
+            expect(description1).to.not.equal(description2);
+          }
+        })
+      })
+    })
+  })
+})
 And('The user tries to write more than {string} characters in {string}', (counter, place) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
@@ -602,6 +624,12 @@ And('The user loads a file with {string}', (element) => {
         pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_7.xlsx`);
       });
   }
+  if (element === 'fields with more characters than allowed') {
+    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+      .should('have.attr', 'style', 'display:block').then(() => {
+        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_9.xlsx`);
+      });
+  }
   if (element === 'valid file') {
     pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
       .should('have.attr', 'style', 'display:block').then(() => {
@@ -683,6 +711,10 @@ Then('The user verifies that message is appropriate for {string}', (element) => 
   }
   if (element === 'invalid unit') {
     pendingBudgetsEditPage.commonPageElements.materialImportMessage().should('contains.text', 'O campo unidade não pode conter apenas números.');
+    pendingBudgetsEditPage.commonPageElements.closeModalBtn().click();
+  }
+  if (element === 'fields with more characters than allowed') {
+    pendingBudgetsEditPage.commonPageElements.materialImportMessage().should('contains.text', 'ultrapassaram o número de caracteres permitidos');
     pendingBudgetsEditPage.commonPageElements.closeModalBtn().click();
   }
   if (element === 'valid file') {
