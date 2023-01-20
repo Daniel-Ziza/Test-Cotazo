@@ -43,7 +43,9 @@ Feature: Budget creation steps
     And The user leaves the new service description empty and tries to add the service
     Then The "service information" table is empty
     And The user adds a new description of the service and inserts
-    Then The "service information" table is not empty
+    And The "service information" table is not empty
+    And The user adds a new description of the service and inserts
+    Then The user verifies that he can add multiple extra jobs with the same reference number
 
   @LMPTCOTAZO-212 @LMPTCOTAZO-201
   Scenario: The user checks actions that can be performed on the Material Information page
@@ -96,6 +98,8 @@ Feature: Budget creation steps
     Then The user verifies that message is appropriate for "invalid quantity"
     And The user loads a file with "invalid unit"
     Then The user verifies that message is appropriate for "invalid unit"
+    And The user loads a file with "fields with more characters than allowed"
+    Then The user verifies that message is appropriate for "fields with more characters than allowed"
     And The user loads a file with "valid file"
     Then The user verifies that message is appropriate for "valid file"
 
@@ -124,9 +128,13 @@ Feature: Budget creation steps
     Then The user verifies that the character counter shows "250/250" characters in "material description"
     When The user tries to write more than "250" characters in "material observation"
     Then The user verifies that the character counter shows "250/250" characters in "material observation"
+    And The user loads a file with "fields with more characters than allowed"
+    Then The user verifies that message is appropriate for "fields with more characters than allowed"
     And The user continues to the next step
     When The user tries to write more than "7000" characters in "endnotes"
     Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
+    And The user saves the budget and verifies that it is in editing status
+    And The user deletes the previously created budget
 
   @LMPTCOTAZO-214
   Scenario: The user starts creating the budget and saves it
