@@ -4,6 +4,7 @@ import {
   And,
   Then,
 } from '@badeball/cypress-cucumber-preprocessor';
+import LoginPage from '../../pages/LoginPage';
 const loginPage = require('../../pages/LoginPage');
 
 Given('The user opens cotazo website', () => {
@@ -27,33 +28,94 @@ When('A user provides correct credentials', () => {
   });
   loginPage.typeUsername(Cypress.env('COTAZO_INSTALLER_USERNAME'));
   loginPage.typePassword(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
-});
-
-When('A user provides incorrect credentials', () => {
-  cy.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-
-  cy.on('uncaught exception', (err, runnable) => {
-    return false;
-  });
-  let username = Math.trunc(Date.now() / 1000).toString().substring(0, 9);
-  let password = 'wrong' + Math.trunc(Date.now() / 1000);
-  loginPage.typeUsername(username);
-  loginPage.typePassword(password);
-});
-
-And('A user clicks on the login button', () => {
-  cy.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
-
-  cy.on('uncaught exception', (err, runnable) => {
-    return false;
-  });
   loginPage.clickLogin();
 });
 
+When('The user provides incorrect credentials', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+  loginPage.typeUsername(Cypress.env('invalidUser'));
+  loginPage.typePassword(Cypress.env('invalidPassword'));
+  loginPage.clickLogin();
+});
+
+When('The user creates an invalid user and password', () => {
+  username = loginPage.generateInvalidUser();
+  password = loginPage.generateInvalidPassword();
+  Cypress.env('invalidUser', username);
+  Cypress.env('invalidPassword', password);
+})
+
+And('The user enters an invalid password 5 times in a row', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+
+  for (var i = 0; i < 5; i++) {
+    loginPage.typeUsername(Cypress.env('invalidUser'));
+    loginPage.typePassword(Cypress.env('invalidPassword'));
+    loginPage.clickLogin();
+  }
+})
+
+When('The user waits {string} min to unlock login', (time) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+
+  time = parseInt(time);
+
+  let msTime = time * 60000
+
+  cy.wait(msTime);
+
+})
+
+Then('The user verifies that the login has been unlocked', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+
+  LoginPage.verifyErrorMessage();
+})
+
+When('The user repeats wrong login 5 times after the first lockout', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+
+  for (var i = 0; i < 4; i++) {
+    loginPage.typeUsername(Cypress.env('invalidUser'));
+    loginPage.typePassword(Cypress.env('invalidPassword'));
+    loginPage.clickLogin();
+    LoginPage.elements.errorMessage().should('contain.text', 'Login está bloqueado, aguarde 60 segundos e tente novamente.');
+    cy.wait(60000);
+  }
+  loginPage.typeUsername(Cypress.env('invalidUser'));
+  loginPage.typePassword(Cypress.env('invalidPassword'));
+  loginPage.clickLogin();
+})
 Then('Main page is displayed', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
@@ -75,6 +137,17 @@ Then('An error is displayed', () => {
   });
   loginPage.verifyErrorMessage();
 });
+
+Then('The user verifies that the login is blocked', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+  loginPage.verifyErrorMessage()
+})
 
 When('The user clicks on the employee login link', () => {
   cy.on('uncaught:exception', (err, runnable) => {

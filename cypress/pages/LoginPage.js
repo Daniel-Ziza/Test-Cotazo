@@ -13,31 +13,47 @@ class loginPage {
   };
 
   typeUsername(username) {
-    this.elements.usernameInput().type(username);
+    this.elements.usernameInput().clear().type(username);
   };
 
   typePassword(password) {
-    this.elements.passwordInput().type(password);
+    this.elements.passwordInput().clear().type(password);
   };
 
   clickLogin() {
     this.elements.loginBtn().click();
   };
 
+  generateInvalidUser() {
+    let username = Math.trunc(Date.now() / 1000).toString().substring(0, 9);
+    return username
+  }
+
   verifyText() {
     this.elements.dashboardText().should('contains.text', 'Painel de controlo');
   };
 
+  generateInvalidPassword() {
+    let password = 'wrong' + Math.trunc(Date.now() / 1000);
+    return password
+  }
+  
   verifyErrorMessage() {
     this.elements.errorMessage().invoke('text').then((text) => {
       if (text.includes('Utilizador ou palavra-passe incorrectos')) {
         assert(true, 'I have found the error message');
       }
-      else if (text.includes('Login está bloqueado')) {
-        assert(true, 'I have found the alternative error message');
+      else if (text.includes('Login está bloqueado, aguarde 59 segundos e tente novamente.')) {
+        assert(true, 'Login is blocked for 1 min');
+      }
+      else if (text.includes('Login está bloqueado, aguarde 5 minutos e tente novamente.')) {
+        assert(true, 'Login is blocked for 5 min');
       }
       else if (text.includes('Não foi possível efectuar o login. Tente novamente.')) {
-        assert(true, 'This user does not have access to cotazo')
+        assert(true, 'This user does not have access to cotazo');
+      }
+      else if (text.includes('Login desbloqueado, tente novamente.')){
+        assert(true, 'The user has been unblocked');
       }
       else {
         assert(false, 'I have NOT found any error message');
@@ -45,8 +61,8 @@ class loginPage {
     });
   };
 
-  singIn (userType) {
-    if (userType === 'administrator' || userType === 'collaborator'){
+  singIn(userType) {
+    if (userType === 'administrator' || userType === 'collaborator') {
       this.elements.loginAsEmployeeBtn().click();
       this.singInWithAdeo();
     }
@@ -67,7 +83,7 @@ class loginPage {
     }
   };
 
-  singInWithAdeo () {
+  singInWithAdeo() {
     this.elements.usernameAdeoInput().clear().type(Cypress.env('ADEO_USERNAME'));
     this.elements.passwordAdeoInput().clear().type(Cypress.env('ADEO_PASSWORD'));
     this.elements.signOnAdeoBtn().click();

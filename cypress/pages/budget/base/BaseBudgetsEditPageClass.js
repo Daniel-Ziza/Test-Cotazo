@@ -67,6 +67,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         characterCounterMaterialDescription: () => cy.get('.col-lg-6 .cotazo-input-char-counter'),
         characterCounterMaterialObservation: () => cy.get('.col-lg-12 > :nth-child(1) > .input-group > .cotazo-input-char-counter'),
         characterCounterEndnotes: () => cy.get('.cotazo-input-char-counter'),
+        serviceContainer: () => cy.get('.manage-service-continar-lg'),
     };
 
     verifyForm(){
@@ -208,7 +209,9 @@ class BaseBudgetsEditPageClass extends UserLayout {
     };
 
     searchDescription(description) {
-        this.commonPageElements.serviceSearchInput().clear().type(description);
+        this.commonPageElements.serviceSearchInput().clear().type(description).then(()=>{
+            this.commonPageElements.serviceContainer().should('be.visible');
+        });
     };
 
     verifyServiceQuantityCotazo() {
