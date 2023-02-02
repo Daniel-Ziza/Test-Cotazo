@@ -396,7 +396,7 @@ Then('The user verifies that he can add multiple extra jobs with the same refere
     cy.get(':nth-child(2) > .manage-service-col-ref').invoke('text').then(ref2 => {
       cy.get('tbody > :nth-child(1) > .manage-service-col-descr').invoke('text').then(description1 => {
         cy.get(':nth-child(2) > .manage-service-col-descr').invoke('text').then(description2 => {
-          if ( ref1 === ref2){
+          if (ref1 === ref2) {
             expect(description1).to.not.equal(description2);
           }
         })
@@ -739,7 +739,7 @@ And('The user goes to the {string} page', (element) => {
   }
 });
 
-And('The user verifies that the text tool appears', () => {
+And('The user verifies that he can format the text in endnotes', () => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -747,7 +747,16 @@ And('The user verifies that the text tool appears', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.formatBox().should('be.visible');
+  pendingBudgetsEditPage.commonPageElements.formatBox().should('be.visible').then(() => {
+    pendingBudgetsEditPage.commonPageElements.iconBold().click();
+    pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type('Title {enter}');
+    pendingBudgetsEditPage.commonPageElements.iconBold().click();
+    pendingBudgetsEditPage.commonPageElements.iconOl().click();
+    pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type('line one {enter}')
+      .type('line two').type('{enter} line three');
+    cy.screenshot({ clip: { x: 0, y: 0, width: 1200, height: 680 } });
+  }
+  );
 });
 
 And('The user removes the previously added service', () => {

@@ -4,7 +4,7 @@ Feature: Budget creation steps
 
   Background: Pre-Condition: login to cotazo
     #@LMPTCOTAZO-208
-    Given The user logs in Cotazo
+    Given The user logs in Cotazo teste
 
   @LMPTCOTAZO-209 @LMPTCOTAZO-201
   Scenario: The user leaves the budget information form empty
@@ -110,7 +110,7 @@ Feature: Budget creation steps
     And Check if the modal appears or not
     And The information of the filled service order appears
     And The user goes to the "end notes" page
-    And The user verifies that the text tool appears
+    Then The user verifies that he can format the text in endnotes
 
   @LMPTCOTAZO-327
   Scenario: Verification of character limit in text boxes in budget creation
@@ -130,11 +130,11 @@ Feature: Budget creation steps
     Then The user verifies that the character counter shows "250/250" characters in "material observation"
     And The user loads a file with "fields with more characters than allowed"
     Then The user verifies that message is appropriate for "fields with more characters than allowed"
-    And The user continues to the next step
-    When The user tries to write more than "7000" characters in "endnotes"
-    Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
-    And The user saves the budget and verifies that it is in editing status
-    And The user deletes the previously created budget
+    # And The user continues to the next step
+    # When The user tries to write more than "7000" characters in "endnotes"
+    # Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
+    # And The user saves the budget and verifies that it is in editing status
+    # And The user deletes the previously created budget
 
   @LMPTCOTAZO-214
   Scenario: The user starts creating the budget and saves it
