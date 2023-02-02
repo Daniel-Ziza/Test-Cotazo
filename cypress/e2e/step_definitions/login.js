@@ -4,8 +4,7 @@ import {
   And,
   Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-import LoginPage from '../../pages/LoginPage';
-const loginPage = require('../../pages/LoginPage');
+import loginPage from '../../pages/LoginPage';
 
 Given('The user opens cotazo website', () => {
   cy.on('uncaught:exception', (err, runnable) => {
@@ -45,6 +44,13 @@ When('The user provides incorrect credentials', () => {
 });
 
 When('The user creates an invalid user and password', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   username = loginPage.generateInvalidUser();
   password = loginPage.generateInvalidPassword();
   Cypress.env('invalidUser', username);
@@ -93,7 +99,7 @@ Then('The user verifies that the login has been unlocked', () => {
     return false;
   });
 
-  LoginPage.verifyErrorMessage();
+  loginPage.verifyErrorMessage();
 })
 
 When('The user repeats wrong login 5 times after the first lockout', () => {
@@ -109,7 +115,7 @@ When('The user repeats wrong login 5 times after the first lockout', () => {
     loginPage.typeUsername(Cypress.env('invalidUser'));
     loginPage.typePassword(Cypress.env('invalidPassword'));
     loginPage.clickLogin();
-    LoginPage.elements.errorMessage().should('contain.text', 'Login está bloqueado, aguarde 60 segundos e tente novamente.');
+    loginPage.elements.errorMessage().should('contain.text', 'Login está bloqueado, aguarde 60 segundos e tente novamente.');
     cy.wait(60000);
   }
   loginPage.typeUsername(Cypress.env('invalidUser'));
@@ -157,7 +163,9 @@ When('The user clicks on the employee login link', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
+  cy.slowDown(500);
   loginPage.elements.loginAsEmployeeBtn().click();
+  cy.slowDownEnd();
 });
 
 And('The user logs in with his login credentials', () => {

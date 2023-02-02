@@ -1,4 +1,4 @@
-class loginPage {
+class LoginPage {
   elements = {
     usernameInput: () => cy.get('[placeholder="utilizador"]'),
     passwordInput: () => cy.get('[placeholder="palavra-passe"]'),
@@ -7,9 +7,6 @@ class loginPage {
     errorMessage: () => cy.get('[class="cotazo-login-error"]'),
     assistanceRequestWithoutLogin: () => cy.get('.cotazo-login-assistance-click-here'),
     loginAsEmployeeBtn: () => cy.get('[class="cotazo-login-collaborator-click-here-clickable"]'),
-    usernameAdeoInput: () => cy.get('[name="pf.username"]'),
-    passwordAdeoInput: () => cy.get('[name="pf.pass"]'),
-    signOnAdeoBtn: () => cy.get('[id="my_sign_on_button"]')
   };
 
   typeUsername(username) {
@@ -43,7 +40,7 @@ class loginPage {
       if (text.includes('Utilizador ou palavra-passe incorrectos')) {
         assert(true, 'I have found the error message');
       }
-      else if (text.includes('Login está bloqueado, aguarde 59 segundos e tente novamente.')) {
+      else if (text.includes('Login está bloqueado, aguarde 60 segundos e tente novamente.')) {
         assert(true, 'Login is blocked for 1 min');
       }
       else if (text.includes('Login está bloqueado, aguarde 5 minutos e tente novamente.')) {
@@ -84,10 +81,13 @@ class loginPage {
   };
 
   singInWithAdeo() {
-    this.elements.usernameAdeoInput().clear().type(Cypress.env('ADEO_USERNAME'));
-    this.elements.passwordAdeoInput().clear().type(Cypress.env('ADEO_PASSWORD'));
-    this.elements.signOnAdeoBtn().click();
+    cy.origin('https://idpb2e-prp.adeo.com', () => {
+      cy.get('[id="username"]').type(Cypress.env('ADEO_USERNAME'));
+      cy.get('[id="my_password"]').clear().type(Cypress.env('ADEO_PASSWORD'));
+      cy.get('[id="my_sign_on_button"]').click();
+    })
+
   }
 }
 
-module.exports = new loginPage();
+module.exports = new LoginPage();
