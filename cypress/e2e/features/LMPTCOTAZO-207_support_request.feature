@@ -73,7 +73,6 @@ Feature to create a support request
 
   @LMPTCOTAZO-243
   Scenario: Negative flow of support request creation
-    Given The user opens cotazo website
     When The user goes to the support request
     And The user enters invalid "email" values
     And The subject is in read-only

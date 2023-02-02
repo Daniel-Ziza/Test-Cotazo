@@ -6,10 +6,7 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 import loginPage from '../../pages/LoginPage';
 import inProgressBudgetsListPage from "../../pages/budget/inProgress/InProgressBudgetsListPage";
-import LoginPage from '../../pages/LoginPage';
-const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
-const pendingBudgetsEditPage = require('../../pages/budget/pending/PendingBudgetsEditPage');
 const homePage = require('../../pages/HomePage');
 
 Given('The user logs in Cotazo', () => {
