@@ -4,13 +4,13 @@ Feature: Budget creation steps
 
   Background: Pre-Condition: login to cotazo
     #@LMPTCOTAZO-208
-    Given The user logs in Cotazo teste
+    Given The user logs in Cotazo
 
   @LMPTCOTAZO-209 @LMPTCOTAZO-201
   Scenario: The user leaves the budget information form empty
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And the user leaves the editable fields empty
     Then The "Continue" button is disabled
 
@@ -18,7 +18,7 @@ Feature: Budget creation steps
   Scenario: The user fills the budget information form with invalid values
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And User enters invalid "zip code"
     And User enters invalid "phone number"
     And User enters invalid "email"
@@ -28,7 +28,7 @@ Feature: Budget creation steps
   Scenario: The user checks actions that can be performed on the Service Information page
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user searches for the service description "Km extra Abrigo Metal"
@@ -51,7 +51,7 @@ Feature: Budget creation steps
   Scenario: The user checks actions that can be performed on the Material Information page
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user continues to the next step
@@ -107,7 +107,7 @@ Feature: Budget creation steps
   Scenario: The user verifies the actions that can be performed on the Final Notes page
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user goes to the "end notes" page
     Then The user verifies that he can format the text in endnotes
@@ -116,7 +116,7 @@ Feature: Budget creation steps
   Scenario: Verification of character limit in text boxes in budget creation
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user searches for the service description "Trab. Complementar Abrigo Metal"
@@ -140,7 +140,7 @@ Feature: Budget creation steps
   Scenario: The user starts creating the budget and saves it
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user selects a group of service
@@ -160,7 +160,7 @@ Feature: Budget creation steps
   Scenario: User creates budget and only concludes it
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user selects a group of service
@@ -180,7 +180,7 @@ Feature: Budget creation steps
   Scenario: The user starts with budget creation, and tries to finish with missing information
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user continues to the next step

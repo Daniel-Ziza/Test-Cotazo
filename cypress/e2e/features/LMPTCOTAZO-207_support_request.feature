@@ -1,6 +1,6 @@
 Feature: Support request
 
-Feature to create a support request
+  Feature to create a support request
 
   Background:
     #@LMPTCOTAZO-196
@@ -11,11 +11,14 @@ Feature to create a support request
     When The user goes to the support request
     And The user fills in the support request form and send it
     And The user returns to the login page
+    And An "administrator" logs in to cotazo
     Then The administrator can see the support request for access problems
     When The user logs out
-    And The "installer" cannot see the request on the support request page
+    And An "installer" logs in to cotazo
+    Then The "installer" cannot see the request on the support request page
     When The user logs out
-    And The "technician" cannot see the request on the support request page
+    And An "technician" logs in to cotazo
+    Then The "technician" cannot see the request on the support request page
 
   @LMPTCOTAZO-240
   Scenario: Support request by an installer in Cotazo
@@ -23,10 +26,12 @@ Feature to create a support request
     And The user goes to the support request page
     And The "installer" creates a new support request
     Then The "installer" verifies that he can see the created request
-    When The user logs out
-    And The "administrator" can see the request on the support request page
-    When The user logs out
-    And The "technician" cannot see the request on the support request page
+    And The user logs out
+    When An "administrator" logs in to cotazo
+    Then The "administrator" can see the request on the support request page
+    And The user logs out
+    When An "technician" logs in to cotazo
+    Then The "technician" cannot see the request on the support request page
 
   @LMPTCOTAZO-241
   Scenario: Support request by an technician in Cotazo
@@ -34,10 +39,12 @@ Feature to create a support request
     And The user goes to the support request page
     And The "technician" creates a new support request
     Then The "technician" verifies that he can see the created request
-    When The user logs out
-    And The "administrator" can see the request on the support request page
-    When The user logs out
-    And The "installer" can see the request on the support request page
+    And The user logs out
+    When An "administrator" logs in to cotazo
+    Then The "administrator" can see the request on the support request page
+    And The user logs out
+    When An "administrator" logs in to cotazo
+    Then The "installer" can see the request on the support request page
 
   @LMPTCOTAZO-242
   Scenario: Flow of a support request management

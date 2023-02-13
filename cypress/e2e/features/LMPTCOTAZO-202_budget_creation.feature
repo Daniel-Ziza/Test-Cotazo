@@ -2,15 +2,27 @@ Feature: Budget creation
 
   Feature for creating a new budget
 
-  Background:
-    #@LMPTCOTAZO-208
-    Given The user logs in Cotazo
+  Scenario: Create a service order - Prerequisetes for test on desktop
+    Given The user successfully access the INSTALA system using a pre-existing URL containing an auth token
+    And The user clicks on service order creation
+    When The user fills out the service order creation form
+    Then The user clicks on the save button
+    And Search for service order
+    And The link to the terms and conditions of sale is obtained
+    And The user accepts the terms of service
+    And The user searches for the service order
+    And The user makes a manual distribution of the service
+    And The technician agrees to perform the service
+    And The client confirms the service
+    And The technician starts the service
+    And The technician terminates the service
 
   @LMPTCOTAZO-217
   Scenario: The user successfully completes and synchronizes a budget
+    Given The user logs in Cotazo
     When The user clicks on the button budgets to be created
     And The user searches in cotazo for the service order created in the prerequisites
-    And Check if the modal appears or not
+    And Check if the modal appears or not in the "desktop" version
     And The information of the filled service order appears
     And The user continues to the next step
     And The user searches for the service description "Km extra Abrigo Metal"
