@@ -54,7 +54,7 @@ And('The user searches in cotazo for the service order created in the prerequisi
   pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 2);
 });
 
-And('Check if the modal appears or not', () => {
+And('Check if the modal appears or not in the {string} version', (version) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -63,14 +63,35 @@ And('Check if the modal appears or not', () => {
     return false;
   });
   cy.slowDown(600);
-  cy.document().then((doc) => {
-    if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
-      assert(true, 'Modal shown');
-      pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtn().click();
-    } else {
-      assert(true, 'Modal not shown');
-    }
-  });
+  if (version === 'mobile'){
+    cy.document().then((doc) => {
+      if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
+        assert(true, 'Modal shown');
+        pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtnMobile().click();
+      } else {
+        assert(true, 'Modal not shown');
+      }
+    });
+  } else if(version === 'desktop'){
+    cy.document().then((doc) => {
+      if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
+        assert(true, 'Modal shown');
+        pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtn().click();
+      } else {
+        assert(true, 'Modal not shown');
+      }
+    });
+  } else{
+    cy.document().then((doc) => {
+      if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
+        assert(true, 'Modal shown');
+        pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtnTablet().click();
+      } else {
+        assert(true, 'Modal not shown');
+      }
+    });
+  }
+
   cy.slowDownEnd();
 });
 
@@ -684,6 +705,13 @@ And('The user removes the material from the list', () => {
 });
 
 Then('The user verifies that message is appropriate for {string}', (element) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
   if (element === 'incomplete file') {
     pendingBudgetsEditPage.commonPageElements.materialImportMessage().should('contains.text', 'O Ficheiro a importar está incompleto, por favor garanta a existencia das colunas todas.');
     pendingBudgetsEditPage.commonPageElements.closeModalBtn().click();

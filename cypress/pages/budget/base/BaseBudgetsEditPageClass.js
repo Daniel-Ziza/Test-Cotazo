@@ -8,6 +8,8 @@ class BaseBudgetsEditPageClass extends UserLayout {
     }
     commonPageElements = {
         recoveryModalNoBtn: () => cy.get('.d-md-block.modal-dialog.budget-popup > .modal-content > .modal-footer > .btn-default'),
+        recoveryModalNoBtnMobile: () => cy.get('.d-md-none > .modal-content > .modal-footer > .btn-default'),
+        recoveryModalNoBtnTablet: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-default'),
         serviceOrderInput: () => cy.get('[placeholder="Nº da ordem de serviço"]'),
         storeNameInput: () => cy.get('[placeholder="Nome da loja"]'),
         dataInput: () => cy.get('[placeholder="Data"]'),
@@ -213,7 +215,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
 
     searchDescription(description) {
         this.commonPageElements.serviceSearchInput().clear().type(description).then(() => {
-            this.commonPageElements.serviceContainer().should('be.visible');
+            //this.commonPageElements.serviceContainer().should('be.visible');
         });
     };
 

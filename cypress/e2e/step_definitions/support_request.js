@@ -63,7 +63,6 @@ Then('The administrator can see the support request for access problems', () => 
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    loginPage.singIn('administrator');
     homePage.elements.supportRequestBtn().click();
     supportRequestManagementPage.verifyCreateSupportRequest(Cypress.env('requestNumber'), 'access problems');
 });
@@ -136,7 +135,6 @@ Then('The {string} cannot see the request on the support request page', (userTyp
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    loginPage.singIn(userType);
     homePage.elements.supportRequestBtn().click();
     supportRequestManagementPage.verifyCreateSupportRequest(Cypress.env('requestNumber'));
 });
@@ -149,7 +147,6 @@ Then('The {string} can see the request on the support request page', (element) =
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    loginPage.singIn(element);
     homePage.elements.supportRequestBtn().click();
     supportRequestManagementPage.verifyCreateSupportRequest(Cypress.env('requestNumber'), 'any issue');
 });
@@ -223,6 +220,7 @@ Then('The administrator checks the comment received', () => {
     supportRequestManagementPage.searchIncident(Cypress.env('requestNumber'));
     supportRequestManagementPage.elements.editSupportRequestBtn().click()
     supportRequestManagementPage.checkComment(Cypress.env('comment'));
+    cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link').click();
     homePage.elements.supportRequestBtn().click();
 });
 
@@ -280,3 +278,14 @@ And('The user checks search filter by {string}', (filter) => {
     });
     supportRequestManagementPage.verifyFilter(filter);
 });
+
+And('The user clicks on toggle button', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+    cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link').click();
+})
