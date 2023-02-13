@@ -81,7 +81,7 @@ class LoginPage {
   };
 
   singInWithAdeo() {
-    cy.origin('https://idpb2e-prp.adeo.com', () => {
+    cy.origin(Cypress.env('URL_ADEO'), () => {
       cy.get('[id="username"]').type(Cypress.env('ADEO_USERNAME'));
       cy.get('[id="my_password"]').clear().type(Cypress.env('ADEO_PASSWORD'));
       cy.get('[id="my_sign_on_button"]').click();
