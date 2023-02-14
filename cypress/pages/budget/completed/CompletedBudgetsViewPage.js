@@ -4,4 +4,4 @@ class CompletedBudgetsViewPage extends BaseBudgetViewPageClass {
     pageElements = {};
 }
 
-export default new CompletedBudgetsViewPage()
+module.exports = new CompletedBudgetsViewPage()

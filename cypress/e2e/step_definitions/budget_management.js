@@ -6,7 +6,6 @@ import {
 import moment, { duration } from 'moment';
 import { slowCypressDown } from "cypress-slow-down";
 import 'cypress-slow-down/commands'
-const loginPage = require('../../pages/LoginPage');
 const homePage = require('../../pages/HomePage');
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const inProgressBudgetsEditPage = require('../../pages/budget/inProgress/InProgressBudgetsEditPage');
@@ -425,6 +424,7 @@ Then('The user verifies that he can add multiple extra jobs with the same refere
     })
   })
 })
+
 And('The user tries to write more than {string} characters in {string}', (counter, place) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
