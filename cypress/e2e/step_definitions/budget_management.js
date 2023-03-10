@@ -949,3 +949,26 @@ Then('The user synchronizes the budget', () => {
     cy.slowDownEnd();
   });
 });
+
+Given('Change the screen size to {string}', (type) => {
+  if (type === 'mobile') {
+      cy.viewport('iphone-x');
+  } else if (type === 'tablet') {
+      cy.viewport('ipad-mini');
+  } else if (type === 'landscape table'){
+      cy.viewport('ipad-mini', 'landscape');
+  }
+})
+
+When('The user searches the service order in {string}', (type) => {
+  if (type === 'mobile') {
+      cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .form-control')
+          .type(Cypress.env('orderServiceNumber'));
+      cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .input-group-append > .input-group-text').click();
+  } else if (type === 'tablet') {
+      cy.get('.main-header > .form-inline > .input-group > .form-control')
+          .type(Cypress.env('orderServiceNumber'));
+          cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text').click();
+  }
+
+})
