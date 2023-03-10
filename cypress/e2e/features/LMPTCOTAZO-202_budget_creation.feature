@@ -3,7 +3,10 @@ Feature: Budget creation
   Feature for creating a new budget
 
   Scenario: Create a service order - Prerequisetes for test on desktop
-    Given The user successfully access the INSTALA system using a pre-existing URL containing an auth token
+    Given The user enters the instala page
+    When The user enters the authorization data
+    And The system obtains the token information
+    Then The user enters the cockpit page
     And The user clicks on service order creation
     When The user fills out the service order creation form
     Then The user clicks on the save button

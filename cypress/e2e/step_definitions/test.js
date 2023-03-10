@@ -4,26 +4,25 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
+import promisify from 'cypress-promise';
+import { Buffer } from 'buffer';
+
 const prerequisiteInstalaLoginPage = require('../../pages/prerequisites/PrerequisitesInstalaLoginPage');
 
-Given('The user enters the instala page', () => {
-    cy.on('uncaught:exception', (err, runnable) => {
-        return false;
-    });
 
-    cy.on('uncaught exception', (err, runnable) => {
-        return false;
-    });
-    cy.visit(Cypress.env('INSTALA_BASE_URL'));
-});
 
-When('User logs in', () => {
-    cy.on('uncaught:exception', (err, runnable) => {
-        return false;
-    });
 
-    cy.on('uncaught exception', (err, runnable) => {
-        return false;
-    });
-    prerequisiteInstalaLoginPage.loginInstala();
-});
+// When('The user clicks on the button budgets to be created', () => {
+//     cy.on('uncaught:exception', (err, runnable) => {
+//       return false;
+//     });
+  
+//     cy.on('uncaught exception', (err, runnable) => {
+//       return false
+//     });
+//     cy.slowDown(1000);
+//     homePage.elements.toCreateBtn().click();
+//     cy.slowDownEnd();
+//   });
+
+

@@ -10,7 +10,10 @@ Feature Budget refusal flow between Cotazo and Instala
 
   @LMPTCOTAZO-224
   Scenario: Verify that the documents have been synchronized in Instala and indicate that the budget has been sent to the customer
-    Given The user logs in instala
+    Given The user enters the instala page
+    When The user enters the authorization data
+    And The system obtains the token information
+    Then The user enters the cockpit page
     When The user searches for the service order
     Then The user verifies that the budgets are correctly loaded
     And The user indicates that the budget has been sent to the customer
@@ -23,7 +26,10 @@ Feature Budget refusal flow between Cotazo and Instala
 
   @LMPTCOTAZO-226
   Scenario: The user indicates that the quotation was refused by the customer in Instala
-    Given The user logs in instala
+    Given The user enters the instala page
+    When The user enters the authorization data
+    And The system obtains the token information
+    Then The user enters the cockpit page
     When The user searches for the service order
     Then The user indicates that the budget was refused by the customer
 

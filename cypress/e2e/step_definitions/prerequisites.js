@@ -4,12 +4,14 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-import prerequisiteInstalaLoginPage from "../../pages/prerequisites/PrerequisitesInstalaLoginPage";
+import promisify from 'cypress-promise';
+import { Buffer } from 'buffer';
+const prerequisiteInstalaLoginPage = require('../../pages/prerequisites/PrerequisitesInstalaLoginPage');
 const prerequisitesInstalaServiceOrderCreationPage = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderCreationPage');
 const prerequisitesIntalaAcceptanceTermPage = require('../../pages/prerequisites/PrerequisitesIntalaAcceptanceTermPage');
 const prerequisitesInstalaServiceOrderManagement = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement');
 
-Given('The user successfully access the INSTALA system using a pre-existing URL containing an auth token', () => {
+Given('The user enters the instala page', async () => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
@@ -17,11 +19,110 @@ Given('The user successfully access the INSTALA system using a pre-existing URL 
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    cy.visit(Cypress.env('INSTALA_LOGIN_URL'));
-    cy.intercept('GET', '/lm-instala-auth/get-user-info').as('getUserInfo');
-    cy.wait('@getUserInfo').then((interception) => {
+    //Instala Home Page
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
+    //Button to enter authentication page
+    await promisify(prerequisiteInstalaLoginPage.elements.enterInstalaBtn().click());
+    //Obtaining authorization link
+    const currentCypressWindowState = await promisify(cy.window());
+    const instalaLoginUrl = currentCypressWindowState.location;
+    //Saving the authorization page link in cypress environment variables
+    Cypress.env('instalaLoginUrl', instalaLoginUrl);
+
+});
+
+When('The user enters the authorization data', async () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+
+    const instalaLoginUrl = Cypress.env('instalaLoginUrl');
+    console.log('instalaLoginUrl');
+    console.log(instalaLoginUrl);
+    //Go to the authorization page
+    cy.visit(String(instalaLoginUrl)).then(() => {
+        //authorization
+        prerequisiteInstalaLoginPage.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAME'));
+        prerequisiteInstalaLoginPage.elements.passwordInstalaInput().clear().type(Cypress.env('ADEO_PASSWORD'));
+        prerequisiteInstalaLoginPage.elements.signOnBtn().click();
+    });
+
+});
+
+When('The system obtains the token information', async () => {
+    ////Obtaining token
+    const currentCypressWindowState = await promisify(cy.window());
+    const instalaLoginUrl = currentCypressWindowState.location;
+    const urlParts = String(instalaLoginUrl).split('token=');
+    const token = urlParts[1];
+    ////Saving the authentication_Token environment variables
+    Cypress.env('AUTHORIZATION_TOKEN', token);
+
+    const tokenParts = token.split('.');
+    let tokenInfo = {};
+
+    if (tokenParts[1]) {
+        const buffPart1 = Buffer.from(tokenParts[1], 'base64');
+        console.log('buffPart1', buffPart1.toString('ascii'));
+        const payloadPart1 = JSON.parse(buffPart1.toString('ascii'));
+        tokenInfo = {
+            ...tokenInfo,
+            ...payloadPart1
+        }
+    }
+
+    console.log('TOKEN INFO:');
+    console.log(tokenInfo);
+
+
+    const expDate = new Date(0);
+    expDate.setUTCSeconds(tokenInfo.exp);
+
+    const userInfo = {
+        "userType": tokenInfo.userType,
+        "username": tokenInfo.sub,
+        "employeeID": tokenInfo.employeeID,
+        "fullName": tokenInfo.fullName,
+        "title": tokenInfo.title,
+        "locationName": tokenInfo.locationName,
+        "locationCode": tokenInfo.locationCode,
+        "department": tokenInfo.department,
+        "email": tokenInfo.email,
+        "dsLanguage": "pt",
+        "dsCountry": "PT",
+        "dsToken": token,
+        "funcaoAcesso": tokenInfo.funcaoAcesso,
+        "cntryCd": tokenInfo.cntryCd,
+        "buCd": tokenInfo.buCd,
+        "lsPlants": tokenInfo.lsPlants,
+        "lsGroups": [],
+        "accessFunctionList": tokenInfo.accessFunctionList,
+        "allowedCategories": tokenInfo.allowedCategories,
+        "verificationAllIDWall": false,
+        "tokenExpirationTime": expDate.toISOString(),
+    };
+
+
+    //Save token information in the localStorage
+    window.localStorage.setItem('user', JSON.stringify(userInfo));
+
+    cy.clearCookies();
+});
+
+When('The user enters the cockpit page', async () => {
+    cy.intercept('GET', Cypress.env('INSTALA_BASE_URL') + '/lm-instala-api/servc-core/byUser').as('byUser');
+    cy.visit('https://instala-uat.leroymerlin.pt/cockpit')
+
+    cy.wait('@byUser').then((interception) => {
         Cypress.env('API_KEY_TOKEN', interception.request.headers.apikey);
-        Cypress.env('AUTHORIZATION_TOKEN', interception.request.headers.authorization);
+    });
+    cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
+        Cypress.env("orderServiceNumber", serviceOrderNumber);
+        assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`);
     });
     cy.get('#breadcrumb-bar', { timeout: 15000 }).should('be.visible').and('contain', 'Cockpit');
     cy.waitUntil(() => {
@@ -35,6 +136,7 @@ Given('The user successfully access the INSTALA system using a pre-existing URL 
         assert(true, 'the AUTHORIZATION_TOKEN has been obtained');
     });
 });
+
 
 Given('The user logs in Instala', () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -56,7 +158,9 @@ And('The user clicks on service order creation', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
+
     prerequisitesInstalaServiceOrderCreationPage.elements.serviceOrderCreationBtn().click();
+
 });
 
 When('The user fills out the service order creation form', () => {
@@ -96,37 +200,6 @@ Then('The user clicks on the save button', () => {
         Cypress.env('orderServiceNumber', sourceOrderCode);
         cy.task('setServiceOrderNumber', sourceOrderCode);
     });
-    /* cy.wait('@serviceOrderOccurrence').then((responseData2) =>{
-         if (!responseData2.response ||
-             !responseData2.response.body ||
-             !responseData2.response.body.data ||
-             !responseData2.response.body.data[0] ||
-             !responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico) {
-             assert(false, 'The source order code cannot be obtained');
-             throw new Error('The source order code cannot be obtained');
-         }
-         let text = responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico;
-         const myArray = text.split(Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL'));
-         const statusLink = Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL') + myArray[1];
-         assert(true, `The service order status link is: ${statusLink}`);
-         Cypress.env('statusLink', statusLink);
-     });
-     cy.wait('@termsAcceptance').then((responseData3) =>{
-         if (!responseData3.response ||
-             !responseData3.response.body ||
-             !responseData3.response.body.data ||
-             !responseData3.response.body.data[0] ||
-             !responseData3.response.body.data[0]) {
-             assert(false, 'The source order code cannot be obtained');
-             throw new Error('The source order code cannot be obtained');
-         }
-         const acceptanceTermLink = responseData3.response.body.data;
-         assert(true, `The terms and conditions link is: ${acceptanceTermLink}`);
-         Cypress.env('acceptanceTerms', acceptanceTermLink);
-     });
-     cy.waitUntil(()=> typeof Cypress.env('acceptanceTerms') !== 'undefined').then(() => {
-         assert(true, `The url has been obtained ${Cypress.env('acceptanceTerms')}`);
-     }); */
 });
 
 And('The user accepts the terms of service', () => {

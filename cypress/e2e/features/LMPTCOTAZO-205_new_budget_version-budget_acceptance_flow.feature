@@ -36,7 +36,10 @@ Feature Create new budget version (budget approval flow)
 
   @LMPTCOTAZO-230
   Scenario: Verify that the documents have been synchronized in Instala and indicate that the budget has been sent to the customer
-    Given The user logs in instala
+    Given The user enters the instala page
+    When The user enters the authorization data
+    And The system obtains the token information
+    Then The user enters the cockpit page
     When The user searches for the service order
     Then The user verifies that the budgets are correctly loaded
     And The user indicates that the budget has been sent to the customer
@@ -75,7 +78,10 @@ Feature Create new budget version (budget approval flow)
 
   @LMPTCOTAZO-232
   Scenario: Indicate that the quotation was delivered and approved by the customer
-    Given The user logs in instala
+    Given The user enters the instala page
+    When The user enters the authorization data
+    And The system obtains the token information
+    Then The user enters the cockpit page
     When The user searches for the service order
     Then The user indicates that the budget has been sent to the customer
     And The user indicates that the budget was approved by the customer
