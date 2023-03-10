@@ -4,8 +4,8 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-import loginPage from '../../pages/LoginPage';
-import inProgressBudgetsListPage from "../../pages/budget/inProgress/InProgressBudgetsListPage";
+const loginPage = require('../../pages/LoginPage');
+const inProgressBudgetsListPage = require("../../pages/budget/inProgress/InProgressBudgetsListPage");
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
 const homePage = require('../../pages/HomePage');
 
