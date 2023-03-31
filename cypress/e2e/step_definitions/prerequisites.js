@@ -340,11 +340,11 @@ And('The technician agrees to perform the service', () => {
         apiKey: Cypress.env('API_KEY_TOKEN'),
         authorization: Cypress.env('AUTHORIZATION_TOKEN'),
         serviceOrderNumber: Cypress.env('orderServiceNumber'),
-        expectedStatus: '03',
+        expectedStatus: '04',
         maxAttempts: 20,
         interval: 3000
     })).then((statusCode) => {
-        expect(statusCode).to.eq('03');
+        expect(statusCode).to.eq('04');
         console.assert(true, 'The technician has already agreed to perform the service');
     });
 });
