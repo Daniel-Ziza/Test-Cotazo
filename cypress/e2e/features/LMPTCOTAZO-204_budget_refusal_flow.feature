@@ -34,7 +34,7 @@ Feature Budget refusal flow between Cotazo and Instala
     Then The user indicates that the budget was refused by the customer
 
   @LMPTCOTAZO-227
-  Scenario: Verify that the budget is accepted by the customer in Cotazo
+  Scenario: Verify that the budget is refused by the customer in Cotazo
     Given The user logs in Cotazo
     When The user searches a budget
     Then The user should see the tag "budget refused by the customer"

@@ -116,4 +116,4 @@ Feature Create new budget version (budget approval flow)
     And The user searches a budget
     And The user goes to "already launched"
     Then The user verifies that the budget has version "v4"
-    Then The user should see the tag " "
+    Then The user should see the tag "budget Accepted"
