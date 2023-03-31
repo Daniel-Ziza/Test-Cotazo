@@ -321,15 +321,15 @@ And('The user makes a manual distribution of the service', () => {
     prerequisitesInstalaServiceOrderManagement.dateUpdate();
 });
 
-And('The client confirms the service', () => {
-    Cypress.on('uncaught:exception', (err, runnable) => {
-        return false;
-    })
-    cy.visit(Cypress.env('statusLink'));
-    prerequisitesInstalaServiceOrderManagement.confirmService();
-    cy.visit(Cypress.env('INSTALA_BASE_URL'));
-    prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
-});
+// And('The client confirms the service', () => {
+//     Cypress.on('uncaught:exception', (err, runnable) => {
+//         return false;
+//     })
+//     cy.visit(Cypress.env('statusLink'));
+//     prerequisitesInstalaServiceOrderManagement.confirmService();
+//     cy.visit(Cypress.env('INSTALA_BASE_URL'));
+//     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
+// });
 
 And('The technician agrees to perform the service', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {

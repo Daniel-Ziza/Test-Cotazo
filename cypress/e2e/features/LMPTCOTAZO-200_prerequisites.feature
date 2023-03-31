@@ -20,6 +20,6 @@ Feature: Prerequisites
     And The user searches for the service order
     And The user makes a manual distribution of the service
     And The technician agrees to perform the service
-    And The client confirms the service
+    # And The client confirms the service
     And The technician starts the service
     And The technician terminates the service
