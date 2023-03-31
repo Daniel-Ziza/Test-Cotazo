@@ -222,7 +222,7 @@ Then('The user creates and synchronizes a budget and verifies that it is on sent
   cy.slowDown(500);
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/sync/*').as('sync');
   pendingBudgetsEditPage.clickSyncBtn();
-  pendingBudgetsEditPage.commonPageElements.confirmModalBtn().dblclick().then(() => {
+  pendingBudgetsEditPage.commonPageElements.confirmModalBtn().click().then(() => {
     cy.wait('@sync').its('response.statusCode').should('eq', 200).then((responseData) => {
       inProgressBudgetsListPage.commonPageElements.pageSubmittedBtn().click().then(() => {
         cy.slowDownEnd();

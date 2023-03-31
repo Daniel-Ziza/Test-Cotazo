@@ -110,15 +110,15 @@ class BaseBudgetsEditPageClass extends UserLayout {
     }
 
     clickSaveBtn() {
-        this.commonPageElements.saveBtn().dblclick();
+        this.commonPageElements.saveBtn().click();
     };
 
     clickFinishBtn() {
-        this.commonPageElements.finishBtn().dblclick();
+        this.commonPageElements.finishBtn().click();
     };
 
     clickSyncBtn() {
-        this.commonPageElements.syncBtn().dblclick();
+        this.commonPageElements.syncBtn().click();
     };
 
     clickCleanBtn() {
@@ -126,7 +126,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
     };
 
     clickAddBtn() {
-        this.commonPageElements.addBtn().dblclick();
+        this.commonPageElements.addBtn().click();
     };
 
     isButtonDeactivated(nameBtn) {

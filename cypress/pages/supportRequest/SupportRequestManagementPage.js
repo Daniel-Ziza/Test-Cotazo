@@ -47,14 +47,14 @@ class SupportRequestManagementPage {
         }else if(status ==='concluded'){
             this.elements.finishOption().click();
         }
-        this.elements.updateSupportRequestBtn().dblclick();
+        this.elements.updateSupportRequestBtn().click();
     };
 
     sendComment() {
         let comment = 'comment example ' + Math.trunc(Date.now()/1000);
         Cypress.env('comment', comment);
         this.elements.commentsTimeline().type(Cypress.env('comment'));
-        this.elements.sentCommentBtn().dblclick();
+        this.elements.sentCommentBtn().click();
     };
 
     checkStatus(status,incidentNumber) {
