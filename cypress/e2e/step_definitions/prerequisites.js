@@ -21,15 +21,35 @@ Given('The user enters the instala page', async () => {
     });
     //Instala Home Page
     cy.visit(Cypress.env('INSTALA_BASE_URL'));
-    //Button to enter authentication page
-    await promisify(prerequisiteInstalaLoginPage.elements.enterInstalaBtn().click());
-    //Obtaining authorization link
-    const currentCypressWindowState = await promisify(cy.window());
-    const instalaLoginUrl = currentCypressWindowState.location;
-    //Saving the authorization page link in cypress environment variables
-    Cypress.env('instalaLoginUrl', instalaLoginUrl);
-
 });
+
+And('The user clicks the enter button', async () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+
+    prerequisiteInstalaLoginPage.elements.enterInstalaBtn().click()
+});
+
+
+And('The system obtains the instala login url', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+    
+    cy.window().then((win) => {
+        Cypress.env('instalaLoginUrl', win.location);
+    });
+});
+
 
 When('The user enters the authorization data', async () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -54,13 +74,17 @@ When('The user enters the authorization data', async () => {
 });
 
 When('The system obtains the token information', async () => {
+    cy.window().then((win) => {
+        const urlParts = String(win.location).split('token=');
+        const token = urlParts[1];
+        ////Saving the authentication_Token environment variables
+        Cypress.env('AUTHORIZATION_TOKEN', token);
+    });
+});
+
+When('The system uses the token information to signIn', async () => {
     ////Obtaining token
-    const currentCypressWindowState = await promisify(cy.window());
-    const instalaLoginUrl = currentCypressWindowState.location;
-    const urlParts = String(instalaLoginUrl).split('token=');
-    const token = urlParts[1];
-    ////Saving the authentication_Token environment variables
-    Cypress.env('AUTHORIZATION_TOKEN', token);
+    const token = String(Cypress.env('AUTHORIZATION_TOKEN'));
 
     const tokenParts = token.split('.');
     let tokenInfo = {};
@@ -222,7 +246,7 @@ And('The user searches for the service order', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    cy.visit(Cypress.env('INSTALA_BASE_URL') + '/serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 
@@ -235,7 +259,7 @@ And('Search for service order', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    cy.visit(Cypress.env('INSTALA_BASE_URL') + '/serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
     cy.intercept('GET', 'lm-instala-api/orders/services/list-filters?servcOrdCd=*').as('serviceOrderOccurrence'); // this has to be placed in environment variables
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
     //Temporal
@@ -244,12 +268,13 @@ And('Search for service order', () => {
             !responseData2.response.body ||
             !responseData2.response.body.data ||
             !responseData2.response.body.data[0] ||
-            !responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico) {
+            !responseData2.response.body.data[0].serviceOrderOccurrence[1].descOcorOrdemServico) {
             assert(false, 'The source order code cannot be obtained');
             throw new Error('The source order code cannot be obtained');
         }
-        let text = responseData2.response.body.data[0].serviceOrderOccurrence[0].descOcorOrdemServico;
+        let text = responseData2.response.body.data[0].serviceOrderOccurrence[1].descOcorOrdemServico;
         const myArray = text.split(Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL'));
+        cy.log(myArray[1]);
         const statusLink = Cypress.env('INSTALA_CUSTOMER_PORTAL_BASE_URL') + myArray[1];
         assert(true, `The service order status link is: ${statusLink}`);
         Cypress.env('statusLink', statusLink);
@@ -302,7 +327,7 @@ And('The client confirms the service', () => {
     })
     cy.visit(Cypress.env('statusLink'));
     prerequisitesInstalaServiceOrderManagement.confirmService();
-    cy.visit(Cypress.env('INSTALA_BASE_URL') + '/serviceOrder');
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
 });
 

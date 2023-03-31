@@ -19,8 +19,8 @@ class PrerequisitesInstalaServiceOrderCreationPage {
         numberAddressCustomerInput: () => cy.get('[name="customerAddressStreetNumber"]'),
         serviceGroupSelect: () => cy.get('#serviceGroupCode > .css-iwfcan-control'),
         nameServiceSelect: () => cy.get('[id^="react-select-"]'),
-        calendarSelect: () => cy.get('[name="date"]'),
-        turnOrderServiceCreateSelect: () => cy.get('.react-select__placeholder'),
+        calendarSelect: () => cy.get('[id="scheduleDate_body"]'),
+        turnOrderServiceCreateSelect: () => cy.get('[id="scheduleShift"]'),
         turnSelect: () => cy.get('div[id^="react-select-"]'),
         addNewItemBtn: () => cy.get(':nth-child(3) > :nth-child(2) > .button'),
         serviceCodeSelect: () => cy.get('#serviceCode > .react-select__control > .react-select__value-container'),
@@ -55,7 +55,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
         this.elements.turnOrderServiceCreateSelect().click().type('Manhã');
         this.elements.turnSelect().click();
         this.elements.addNewItemBtn().click();
-        this.elements.serviceCodeSelect().click().type('Visita Orç');
+        this.elements.serviceCodeSelect().click().type(Cypress.env('SERVICE_TYPE'));
         this.elements.serviceSelect().click();
         this.elements.serviceQuantityInput().type('1');
         this.elements.serviceValueInput().type('25');

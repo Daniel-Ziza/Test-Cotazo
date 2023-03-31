@@ -22,22 +22,22 @@ const currentDayMonthAndYear = `, ${currentDay} de ${currentMonthName} de ${curr
 
 class PrerequisitesInstalaServiceOrderManagement {
     elements = {
-        searchFieldInput: () => cy.get('[name="currentSearchFieldValue"]'),
+        searchFieldInput: () => cy.get('#sidenav-search-input'),
         searchBtn: () => cy.get('[class="glyph glyph-magnifier"'),
         orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/${Cypress.env('orderServiceNumber')}"] > .heading-4`),
-        //orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/XXXX"] > .heading-4`), //line for test development
-        pickerSelect: () => cy.get('#date'),
+        //orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/59450"] > .heading-4`), //line for test development
+        pickerSelect: () => cy.get('#date-select-distribute'),
         calendarSelect: () => cy.get('.SingleDatePicker__picker'),
-        calendarMonth: () => cy.get('.SingleDatePicker__picker > .DayPicker > div > .DayPicker__focus-region > .transition-container > .CalendarMonthGrid > .CalendarMonth:nth-child(2) > .CalendarMonth__caption'),
+        calendarMonth: () => cy.get(':nth-child(2) > .CalendarMonth > .CalendarMonth_caption > strong'),
         previousMonth: () => cy.get('.SingleDatePicker__picker > .DayPicker > div > .DayPicker__focus-region > .DayPickerNavigation > button.DayPickerNavigation__prev'),
-        daySelect: () => cy.get(`button[aria-label*="${currentDayMonthAndYear}"]`),
-        supplierSelect:() => cy.get('#servcPrvdrNm > .react-select__control'),
+        daySelect: () => cy.get(`[aria-label*="${currentDayMonthAndYear}"]`),
+        supplierSelect: () => cy.get('.provider-select-distribute .react-select__value-container'),
         supplierInput: () => cy.get('#react-select-3-option-0'),
         installerSelect: () => cy.get('#servcPrvdrAgntCd > .react-select__control'),
         installerInput: () => cy.get('#react-select-4-option-0'),
-        commentInput: () => cy.get('#justificativa'),
+        commentInput: () => cy.get('[id="justify"]'),
         serviceOrderUpdateBtn: () => cy.get('.col-xs-3 > .button'),
-        turnOrderServiceManagementSelect: () => cy.get('#idSlotApplication'),
+        turnOrderServiceManagementSelect: () => cy.get('.period-select-distribute > .css-2b097c-container > .react-select__control'),
         confirmServiceBtn: () => cy.get('[class="generic-submit-button mt-1"]'),
         confirmServiceText: () => cy.get('.big-title'),
         customerBudgetContainer: () => cy.get('.service-order-edit-body > :nth-child(2)'),
@@ -48,35 +48,38 @@ class PrerequisitesInstalaServiceOrderManagement {
         customerRefusalCheck: () => cy.get(':nth-child(2) > .text-option'),
     };
 
-    serviceOrderSearch () {
-        this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber'));
+    serviceOrderSearch() {
+        this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber')+'{enter}');
         //this.elements.searchFieldInput().type('XXXXX'); //line for test development
-        this.elements.searchBtn().click();
+        //this.elements.searchBtn().click();
         this.elements.orderServiceSelect().click();
     };
 
-    dateUpdate () {
-        this.elements.pickerSelect().click().then( () => {
-            this.elements.calendarSelect().then(() => {
-                this.elements.calendarMonth().invoke('text').then((textContent) => {
-                    if (!textContent.includes(currentMonthAndYear)) {
-                        this.elements.previousMonth().click();
-                        cy.wait(2000);
-                    }
-                    this.elements.daySelect().click();
-                });
+    dateUpdate() {
+        //click on distribuir
+        cy.get('[id="outline-button"]').contains('Distribuir').click()
+        this.elements.pickerSelect().click().then(() => {
+            this.elements.calendarMonth().invoke('text').then((textContent) => {
+                if (!textContent.includes(currentMonthAndYear)) {
+                    this.elements.previousMonth().click();
+                    cy.wait(2000);
+                }
+                this.elements.daySelect().click();
             });
         });
-        this.elements.turnOrderServiceManagementSelect().select('Manhã');
-        this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME'));
-        this.elements.supplierInput().click();
+        this.elements.turnOrderServiceManagementSelect().type('Tarde{enter}');
         this.elements.commentInput().type('Lorem Ipsum is simply dummy');
-        this.elements.serviceOrderUpdateBtn().click();
+        //select manual distrubution
+        cy.contains('Prestador selecionado (manual)').click()
+        this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
+        //Button distribute
+        cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+
     };
 
-    confirmService () {
+    confirmService() {
         this.elements.confirmServiceBtn().click();
-        this.elements.confirmServiceText().should('contain.text','Realização autorizada');
+        this.elements.confirmServiceText().should('contain.text', 'Realização autorizada');
     };
 }
 
