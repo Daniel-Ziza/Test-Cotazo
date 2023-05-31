@@ -27,7 +27,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         continueBtn: () => cy.get('[class="btn btn-success"]'),
         serviceGroupInput: () => cy.get('[id="manage-budget-services-groups-services_input"]'),
         serviceSearchInput: () => cy.get('[placeholder="Pesquisar por Ref.ª ou Descrição do serviço"]'),
-        addServiceBtn: () => cy.get('.cotazo-autocomplete-options-container-ul > :nth-child(1)'),
+        addServiceBtn: () => cy.get('.cotazo-autocomplete-options-container-ul >'),
         addServiceBtnDisabled: () => cy.get('.service-add > div:nth-child(1)'),
         editBtn: () => cy.get('.budget-rect-icons > :nth-child(1)'),
         serviceQuantityCotazoInput: () => cy.get('.manage-service-inputs-container > :nth-child(1) > :nth-child(1) > .input-group > .form-control'),
