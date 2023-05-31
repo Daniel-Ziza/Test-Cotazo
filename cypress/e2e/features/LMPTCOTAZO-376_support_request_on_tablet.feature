@@ -13,16 +13,19 @@ Feature: Support request on tablet
         When The user goes to the support request
         And The user fills in the support request form and send it
         And The user returns to the login page
+        And The user reloads the page
         And An "administrator" logs in to cotazo
         And The user clicks on toggle button
         Then The administrator can see the support request for access problems
         And The user clicks on toggle button
         When The user logs out
+        And The user reloads the page
         And An "installer" logs in to cotazo
         And The user clicks on toggle button
         And The "installer" cannot see the request on the support request page
         And The user clicks on toggle button
         When The user logs out
+        And The user reloads the page
         And An "technician" logs in to cotazo
         And The user clicks on toggle button
         And The "technician" cannot see the request on the support request page
@@ -36,11 +39,13 @@ Feature: Support request on tablet
         Then The "installer" verifies that he can see the created request
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button
         Then The "administrator" can see the request on the support request page
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "technician" logs in to cotazo
         And The user clicks on toggle button
         Then The "technician" cannot see the request on the support request page
@@ -54,11 +59,13 @@ Feature: Support request on tablet
         Then The "technician" verifies that he can see the created request
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button
         Then The "administrator" can see the request on the support request page
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button
         Then The "installer" can see the request on the support request page
@@ -72,6 +79,7 @@ Feature: Support request on tablet
         And The "administrator" sends a comment
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "installer" logs in to cotazo
         And The user clicks on toggle button
         And The user goes to the support request page
@@ -80,6 +88,7 @@ Feature: Support request on tablet
         And The "installer" sends a comment
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button
         And The user goes to the support request page
@@ -88,12 +97,14 @@ Feature: Support request on tablet
         And The "administrator" sends a comment
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "installer" logs in to cotazo
         And The user clicks on toggle button
         And The user goes to the support request page
         Then The installer checks the status of the support request
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button
         And The user goes to the support request page
@@ -101,6 +112,7 @@ Feature: Support request on tablet
         Then The administrator changes the status of the order to "concluded"
         And The user clicks on toggle button
         And The user logs out
+        And The user reloads the page
         When An "installer" logs in to cotazo
         And The user clicks on toggle button
         And The user goes to the support request page
