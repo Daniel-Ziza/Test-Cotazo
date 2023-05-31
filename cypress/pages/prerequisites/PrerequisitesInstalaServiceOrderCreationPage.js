@@ -19,7 +19,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
         numberAddressCustomerInput: () => cy.get('[name="customerAddressStreetNumber"]'),
         serviceGroupSelect: () => cy.get('#serviceGroupCode > .css-iwfcan-control'),
         nameServiceSelect: () => cy.get('[id^="react-select-"]'),
-        calendarSelect: () => cy.get('[id="scheduleDate_body"]'),
+        calendarSelect: () => cy.get(`[id="${Cypress.env('CALENDAR_ID_IN_SERVICE_ORDER_CREATION')}"]`),
         turnOrderServiceCreateSelect: () => cy.get('[id="scheduleShift"]'),
         turnSelect: () => cy.get('div[id^="react-select-"]'),
         addNewItemBtn: () => cy.get(':nth-child(3) > :nth-child(2) > .button'),
@@ -33,7 +33,7 @@ class PrerequisitesInstalaServiceOrderCreationPage {
 
     generatePyxisNumber() {
         const id = String(Math.floor(Date.now() / 1000) + 8000000000);
-        this.elements.pyxisNumberInput().type(id);
+        this.elements.pyxisNumberInput().type(id)
     };
 
     completeTheForm() {

@@ -26,18 +26,18 @@ class PrerequisitesInstalaServiceOrderManagement {
         searchBtn: () => cy.get('[class="glyph glyph-magnifier"'),
         orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/${Cypress.env('orderServiceNumber')}"] > .heading-4`),
         //orderServiceSelect: () => cy.get(`[href="/serviceOrder/edit/59450"] > .heading-4`), //line for test development
-        pickerSelect: () => cy.get('#date-select-distribute'),
+        pickerSelect: () => cy.get(`${Cypress.env('PICKER_SELECT_ID_IN_SERVICE_ORDER_DETAIL')}`),//cy.get('#date'),//cy.get('#date-select-distribute'),
         calendarSelect: () => cy.get('.SingleDatePicker__picker'),
-        calendarMonth: () => cy.get(':nth-child(2) > .CalendarMonth > .CalendarMonth_caption > strong'),
+        calendarMonth: () => cy.get(`${Cypress.env('CALENDAR_MONTH_IN_SERVICE_ORDER_DETAIL')}`),
         previousMonth: () => cy.get('.SingleDatePicker__picker > .DayPicker > div > .DayPicker__focus-region > .DayPickerNavigation > button.DayPickerNavigation__prev'),
         daySelect: () => cy.get(`[aria-label*="${currentDayMonthAndYear}"]`),
-        supplierSelect: () => cy.get('.provider-select-distribute .react-select__value-container'),
-        supplierInput: () => cy.get('#react-select-3-option-0'),
+        supplierSelect: () => cy.get(`${Cypress.env('SUPPLIER_SELECT_IN_SERVICE_ORDER_DETAIL')}`),
+        supplierInput: () => cy.get(`${Cypress.env('SUPPLIER_INPUT_IN_SERVICE_ORDER_DETAIL')}`),
         installerSelect: () => cy.get('#servcPrvdrAgntCd > .react-select__control'),
         installerInput: () => cy.get('#react-select-4-option-0'),
-        commentInput: () => cy.get('[id="justify"]'),
+        commentInput: () => cy.get(`${Cypress.env('COMMENT_INPUT_IN_SERVICE_ORDER_DETAIL')}`),
         serviceOrderUpdateBtn: () => cy.get('.col-xs-3 > .button'),
-        turnOrderServiceManagementSelect: () => cy.get('.period-select-distribute > .css-2b097c-container > .react-select__control'),
+        turnOrderServiceManagementSelect: () => cy.get(`${Cypress.env('TURN_SELECT_IN_SERVICE_ORDER_DETAIL')}`),
         confirmServiceBtn: () => cy.get('[class="generic-submit-button mt-1"]'),
         confirmServiceText: () => cy.get('.big-title'),
         customerBudgetContainer: () => cy.get('.service-order-edit-body > :nth-child(2)'),
@@ -55,26 +55,74 @@ class PrerequisitesInstalaServiceOrderManagement {
         this.elements.orderServiceSelect().click();
     };
 
-    dateUpdate() {
-        //click on distribuir
-        cy.get('[id="outline-button"]').contains('Distribuir').click()
-        this.elements.pickerSelect().click().then(() => {
-            this.elements.calendarMonth().invoke('text').then((textContent) => {
-                if (!textContent.includes(currentMonthAndYear)) {
-                    this.elements.previousMonth().click();
-                    cy.wait(2000);
-                }
-                this.elements.daySelect().click();
+    dateUpdatePROD() {
+        this.elements.pickerSelect().click().then( () => {
+            this.elements.calendarSelect().then(() => {
+                this.elements.calendarMonth().invoke('text').then((textContent) => {
+                    if (!textContent.includes(currentMonthAndYear)) {
+                        this.elements.previousMonth().click();
+                        cy.wait(2000);
+                    }
+                    this.elements.daySelect().click();
+                });
             });
         });
-        this.elements.turnOrderServiceManagementSelect().type('Tarde{enter}');
+        this.elements.turnOrderServiceManagementSelect().select('Manhã');
+        this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME'));
+        this.elements.supplierInput().click();
         this.elements.commentInput().type('Lorem Ipsum is simply dummy');
-        //select manual distrubution
-        cy.contains('Prestador selecionado (manual)').click()
-        this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
-        //Button distribute
-        cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+        this.elements.serviceOrderUpdateBtn().click();
+    }
 
+    dateUpdate() {
+        //click on distribuir
+        cy.get('.service-order-edit > :nth-child(1) > :nth-child(2)').then($check => {
+            if ($check.find('#distributed-service > #outline-button').length){
+                cy.get('#distributed-service > #outline-button').click();
+                this.elements.pickerSelect().click().then(() => {
+                    this.elements.calendarMonth().invoke('text').then((textContent) => {
+                        if (!textContent.includes(currentMonthAndYear)) {
+                            this.elements.previousMonth().click();
+                            cy.wait(2000);
+                        }
+                        this.elements.daySelect().click();
+                    });
+                });
+                this.elements.turnOrderServiceManagementSelect().type('Manhã{enter}');
+                this.elements.commentInput().type('Lorem Ipsum is simply dummy');
+                //select manual distrubution
+                cy.contains('Prestador selecionado (manual)').click()
+                this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
+                //Button distribute
+                cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+            } else {
+                cy.visit(Cypress.env('INSTALA_BASE_URL'));
+                this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber')+'{enter}');
+                //this.elements.searchFieldInput().type('60148{enter}'); //line for test development
+                cy.get('.padding').click();
+                cy.get('.tooltip-menu > :nth-child(6)').click();
+                cy.get('[id="dsText"]').type('O Lorem Ipsum é um texto modelo da indústria tipográfica');
+                cy.get('[class="button button-primary button-full"]').click();
+                this.elements.orderServiceSelect().click();
+                cy.get('#distributed-service > #outline-button').click();
+                this.elements.pickerSelect().click().then(() => {
+                    this.elements.calendarMonth().invoke('text').then((textContent) => {
+                        if (!textContent.includes(currentMonthAndYear)) {
+                            this.elements.previousMonth().click();
+                            cy.wait(2000);
+                        }
+                        this.elements.daySelect().click();
+                    });
+                });
+                this.elements.turnOrderServiceManagementSelect().type('Manhã{enter}');
+                this.elements.commentInput().type('Lorem Ipsum is simply dummy');
+                //select manual distrubution
+                cy.contains('Prestador selecionado (manual)').click()
+                this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
+                //Button distribute
+                cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+            }
+        })
     };
 
     confirmService() {
