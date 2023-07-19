@@ -1,8 +1,8 @@
 class LoginPage {
   elements = {
-    usernameInput: () => cy.get('[placeholder="utilizador"]'),
-    passwordInput: () => cy.get('[placeholder="palavra-passe"]'),
-    loginBtn: () => cy.get('[type="submit"]'),
+    usernameInput: () => cy.get('[data-testid="login-usermame-input"]'),
+    passwordInput: () => cy.get('[data-testid="login-password-input"]'),
+    loginBtn: () => cy.get('[data-testid="login-button"]'),
     dashboardText: () => cy.get('[class="text-dark"]'),
     errorMessage: () => cy.get('[class="cotazo-login-error"]'),
     assistanceRequestWithoutLogin: () => cy.get('.cotazo-login-assistance-click-here'),
@@ -82,7 +82,7 @@ class LoginPage {
 
   singInWithAdeo() {
     cy.origin(Cypress.env('URL_ADEO'), () => {
-      cy.get('[id="username"]').type(Cypress.env('ADEO_USERNAME'));
+      cy.get('[id="username"]').clear().type(Cypress.env('ADEO_USERNAME'));
       cy.get('[id="my_password"]').clear().type(Cypress.env('ADEO_PASSWORD'));
       cy.get('[id="my_sign_on_button"]').click();
     })
