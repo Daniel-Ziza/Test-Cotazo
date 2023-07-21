@@ -12,7 +12,7 @@ Feature: Budget creation steps
     And The user searches in cotazo for the service order created in the prerequisites
     And Check if the modal appears or not in the "desktop" version
     And the user leaves the editable fields empty
-    Then The "Continue" button is disabled
+    Then The "Continue" button is disabled in "desktop"
 
   @LMPTCOTAZO-210 @LMPTCOTAZO-201
   Scenario: The user fills the budget information form with invalid values
@@ -22,7 +22,7 @@ Feature: Budget creation steps
     And User enters invalid "zip code"
     And User enters invalid "phone number"
     And User enters invalid "email"
-    Then The "Continue" button is disabled
+    Then The "Continue" button is disabled in "desktop"
 
   @LMPTCOTAZO-211 @LMPTCOTAZO-201
   Scenario: The user checks actions that can be performed on the Service Information page
@@ -32,19 +32,19 @@ Feature: Budget creation steps
     And The information of the filled service order appears
     And The user continues to the next step
     And The user searches for the service description "Km extra Abrigo Metal"
-    And The user enters invalid quantity
+    And The user enters invalid quantity in "desktop"
     Then The "service information" table is empty
-    And The user adds a valid service
-    And The user edits the quantity of the service
+    And The user adds a valid service in "desktop"
+    And The user edits the quantity of the service in "desktop"
     Then The user verifies that the edit is correct
     And The user removes the previously added service
     Then The "service information" table is empty
     And The user searches for the service description "Trab. Complementar Abrigo Metal"
-    And The user leaves the new service description empty and tries to add the service
+    And The user leaves the new service description empty and tries to add the service in "desktop"
     Then The "service information" table is empty
-    And The user adds a new description of the service and inserts
+    And The user adds a new description of the service and inserts in "desktop"
     And The "service information" table is not empty
-    And The user adds a new description of the service and inserts
+    And The user adds a new description of the service and inserts in "desktop"
     Then The user verifies that he can add multiple extra jobs with the same reference number
 
   @LMPTCOTAZO-212 @LMPTCOTAZO-201
@@ -56,28 +56,28 @@ Feature: Budget creation steps
     And The user continues to the next step
     And The user continues to the next step
     And The user leaves the material data empty
-    Then The "Add" button is disabled
+    Then The "Add" button is disabled in "desktop"
     And The user writes a valid "description"
     And User enters invalid "quantity"
-    Then The "Add" button is disabled
+    Then The "Add" button is disabled in "desktop"
     And The user writes a valid "description"
     And The user writes a valid "quantity"
     And User enters invalid "unit"
-    And  The user clicks on the "add" button
+    And  The user clicks on the "add" button in "desktop"
     Then An error message appears
-    And  The user clicks on the "clean" button
+    And  The user clicks on the "clean" button in "desktop"
     Then The user verifies that all fields have been cleaned
     And The user writes a valid "description"
     And The user writes a valid "quantity"
     And The user writes a valid "unit"
     And The user writes a valid "observation"
-    And  The user clicks on the "add" button
+    And  The user clicks on the "add" button in "desktop"
     Then The "material information" table is not empty
     And The user writes a valid "description"
     And The user writes a valid "quantity"
     And The user writes a valid "unit"
     And The user writes a valid "observation"
-    And  The user clicks on the "add" button
+    And  The user clicks on the "add" button in "desktop"
     Then An error message appears
     And The user edits an added material
     And The user removes the material from the list
@@ -122,7 +122,7 @@ Feature: Budget creation steps
     And The user searches for the service description "Trab. Complementar Abrigo Metal"
     And The user tries to write more than "250" characters in "extra work"
     Then The user verifies that the character counter shows "250/250" characters in "extra work"
-    And The user adds a new description of the service and inserts
+    And The user adds a new description of the service and inserts in "desktop"
     And The user continues to the next step
     When The user tries to write more than "250" characters in "material description"
     Then The user verifies that the character counter shows "250/250" characters in "material description"
@@ -188,5 +188,5 @@ Feature: Budget creation steps
     Then The message appears "A lista de serviços para o orçamento encontra-se vazia."
     And The message appears "A lista de materiais para o orçamento encontra-se vazia."
     And The message appears "O Campo de Duração da Obra encontra-se vazio"
-    And The "Conclude" button is disabled
-    And The "Conclude and Synchronize" button is disabled
+    And The "Conclude" button is disabled in "desktop"
+    And The "Conclude and Synchronize" button is disabled in "desktop"
