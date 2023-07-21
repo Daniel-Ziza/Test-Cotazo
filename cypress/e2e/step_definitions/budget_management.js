@@ -113,7 +113,7 @@ And('The user continues to the next step', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.clickContinue();
+  pendingBudgetsEditPage.commonPageElements.continueBtn().click();
 });
 
 And('The user selects a group of service', () => {
@@ -125,7 +125,7 @@ And('The user selects a group of service', () => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.serviceGroupInput().click();
-  pendingBudgetsEditPage.commonPageElements.addServiceBtn().click();
+  pendingBudgetsEditPage.commonPageElements.addServiceBtn().contains('Abrigo Metal').click();
 });
 
 And('The user selects {string}', (service) => {
@@ -243,7 +243,7 @@ Then('The message appears {string}', (message) => {
   pendingBudgetsEditPage.commonPageElements.missingInformationMessage().should('contains.text', message);
 });
 
-Then('The {string} button is disabled', (nameBtn) => {
+Then('The {string} button is disabled in {string}', (nameBtn, type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -251,7 +251,12 @@ Then('The {string} button is disabled', (nameBtn) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.isButtonDeactivated(nameBtn);
+  if (type === 'desktop' || type === 'tablet') {
+    pendingBudgetsEditPage.isButtonDeactivated(nameBtn);
+  } else {
+    pendingBudgetsEditPage.isMobileButtonDeactivated(nameBtn);
+  }
+  
 });
 
 And('the user leaves the editable fields empty', () => {
@@ -287,7 +292,7 @@ And('The user searches for the service description {string}', (description) => {
   pendingBudgetsEditPage.searchDescription(description);
 });
 
-And('The user enters invalid quantity', () => {
+And('The user enters invalid quantity in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -295,7 +300,7 @@ And('The user enters invalid quantity', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.verifyServiceQuantityCotazo();
+  pendingBudgetsEditPage.verifyServiceQuantityCotazo(type);
 });
 
 Then('The {string} table is empty', (element) => {
@@ -316,7 +321,7 @@ Then('The {string} table is empty', (element) => {
   }
 });
 
-And('The user adds a valid service', () => {
+And('The user adds a valid service in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -324,12 +329,19 @@ And('The user adds a valid service', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('1').then(() => {
-    pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
-  });
+  if (type === 'desktop' || type === 'tablet'){
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(0).clear().type('1').then(() => {
+      pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  }else{
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('1').then(() => {
+      pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabledMobile().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  }
+
 });
 
-And('The user edits the quantity of the service', () => {
+And('The user edits the quantity of the service in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -337,10 +349,19 @@ And('The user edits the quantity of the service', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.editBtn().click();
-  pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('2').then(() => {
-    pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
-  });
+
+  if (type === 'desktop'  || type === 'tablet'){
+    pendingBudgetsEditPage.commonPageElements.editBtn().click();
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(0).clear().type('2').then(() => {
+      pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  } else {
+    pendingBudgetsEditPage.commonPageElements.editBtn().click();
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('2').then(() => {
+      pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabledMobile().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  }
+
 });
 
 And('The user modifies the quantity of service', () => {
@@ -376,7 +397,7 @@ And('The user verifies that the edit is correct', () => {
   });
 });
 
-And('The user leaves the new service description empty and tries to add the service', () => {
+And('The user leaves the new service description empty and tries to add the service in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -384,12 +405,19 @@ And('The user leaves the new service description empty and tries to add the serv
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().then(() => {
-    pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
-  });
+  if (type === 'desktop' || type === 'tablet'){
+    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().then(() => {
+      pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
+    });
+  } else {
+    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionMobileInput().clear().then(() => {
+      pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
+    });
+  }
+
 });
 
-And('The user adds a new description of the service and inserts', () => {
+And('The user adds a new description of the service and inserts in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -398,9 +426,16 @@ And('The user adds a new description of the service and inserts', () => {
     return false;
   });
   let messageText = utils.randomString(10)
-  pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test ' + messageText).then(() => {
-    pendingBudgetsEditPage.commonPageElements.addExtraServiceBtn().should('not.have.class', 'cotazo-icon-disabled').click();
-  });
+  if (type === 'desktop' || type === 'tablet'){
+    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test ' + messageText).then(() => {
+      pendingBudgetsEditPage.commonPageElements.addExtraServiceBtn().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  } else {
+    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionMobileInput().clear().type('new service description test ' + messageText).then(() => {
+      pendingBudgetsEditPage.commonPageElements.addExtraServiceMobileBtn().should('not.have.class', 'cotazo-icon-disabled').click();
+    });
+  }
+
 });
 
 Then('The user verifies that he can add multiple extra jobs with the same reference number', () => {
@@ -522,7 +557,7 @@ And('The user writes a valid {string}', (element) => {
   pendingBudgetsEditPage.typeValidElement(element);
 });
 
-And('The user clicks on the {string} button', (btn) => {
+And('The user clicks on the {string} button in {string}', (btn, type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -530,12 +565,23 @@ And('The user clicks on the {string} button', (btn) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (btn === 'add') {
-    pendingBudgetsEditPage.clickAddBtn();
+  if (type === 'desktop' || type === 'tablet'){
+    if (btn === 'add') {
+      pendingBudgetsEditPage.commonPageElements.addBtn().click();;
+    }
+    if (btn === 'clean') {
+      pendingBudgetsEditPage.commonPageElements.cleanBtn().click();
+    }
+  }else {
+    if (btn === 'add') {
+      pendingBudgetsEditPage.commonPageElements.addMobileBtn().click();
+    }
+    if (btn === 'clean') {
+      pendingBudgetsEditPage.commonPageElements.cleanMobileBtn().click();
+    }
   }
-  if (btn === 'clean') {
-    pendingBudgetsEditPage.clickCleanBtn();
-  }
+
+
 });
 
 Then('An error message appears', () => {
@@ -816,22 +862,22 @@ And('The user deletes the previously created budget', () => {
     FEATURES BUDGET ACCEPTANCE FLOW AND BUDGET REFUSAL FLOW
 */
 
-Given('The user logs in instala', () => {
-  cy.on('uncaught:exception', (err, runnable) => {
-    return false;
-  });
+// Given('The user logs in instala', () => {
+//   cy.on('uncaught:exception', (err, runnable) => {
+//     return false;
+//   });
 
-  cy.on('uncaught exception', (err, runnable) => {
-    return false;
-  });
-  cy.visit(Cypress.env('INSTALA_LOGIN_URL'));
-  // Set as cypress env vars some values defined by previous tests.
-  cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
-    Cypress.env("orderServiceNumber", serviceOrderNumber);
-    assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`);
-  });
-  cy.get('#breadcrumb-bar', { timeout: 15000 }).should('be.visible').and('contain', 'Cockpit');
-});
+//   cy.on('uncaught exception', (err, runnable) => {
+//     return false;
+//   });
+//   cy.visit(Cypress.env('INSTALA_LOGIN_URL'));
+//   // Set as cypress env vars some values defined by previous tests.
+//   cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
+//     Cypress.env("orderServiceNumber", serviceOrderNumber);
+//     assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`);
+//   });
+//   cy.get('#breadcrumb-bar', { timeout: 15000 }).should('be.visible').and('contain', 'Cockpit');
+// });
 
 When('The user searches a budget', () => {
   cy.on('uncaught:exception', (err, runnable) => {
@@ -842,7 +888,7 @@ When('The user searches a budget', () => {
     return false;
   });
   cy.slowDown(500);
-  homePage.elements.searchBox().type(Cypress.env('orderServiceNumber'));
+  homePage.elements.searchBox().clear().type(Cypress.env('orderServiceNumber'));
   homePage.elements.searchHomePageBtn().click();
   cy.slowDownEnd();
 });
