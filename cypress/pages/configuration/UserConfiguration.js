@@ -1,8 +1,8 @@
 class userConfiguration {
    
     elements = {
-        userSearchText: () => cy.get('[id="Procurar utilizador..."]'),
-        userSearchBtn: () => cy.get('.cotazo-assistance-search-btn'),
+        userSearchText: () => cy.get('[data-testid="cotazo-users-search-input"]'),
+        userSearchBtn: () => cy.get('[data-testid="cotazo-users-search-search-btn"]'),
         actionUserBtn: () => cy.get('.budget-rect-icon-div'),
         viewUserActions: () => cy.get('.cotazo-users-table-actions'),
         pageDescriptionTitleUser: () => cy.get('.manage-title'),

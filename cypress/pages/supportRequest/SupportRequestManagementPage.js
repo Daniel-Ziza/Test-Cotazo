@@ -1,11 +1,11 @@
 class SupportRequestManagementPage {
     elements = {
-        incidentNumber: () => cy.get('[id="Número de Incidente"]'),
+        incidentNumber: () => cy.get('[data-testid="assistance_search_request_number"]'),
         searchSupportRequestBtn: () => cy.get('.cotazo-assistance-search-btn'),
         supportRequestInformationTable: () => cy.get('.table-responsive', {timeout:4000}),
         createNewIncidentBtn: () => cy.get('[id="assistance.create.btn.id"]'),
         editSupportRequestBtn: () => cy.get('[class=" budget-rect-icon-div"]'),
-        statusSupportRequestInput: () => cy.get('[id="cotazo-services-search-groups_input"]'),
+        statusSupportRequestInput: () => cy.get('[data-testid="cotazo-assistance-states_input"]'),
         analyzingOption: () => cy.get('.cotazo-assistance-state-badge-option-ANALYZING'),
         pendingOption: () => cy.get('.cotazo-assistance-state-badge-option-PENDING'),
         finishOption: () => cy.get('.cotazo-assistance-state-badge-option-FINISH'),

@@ -22,7 +22,7 @@ class userProfileConfiguration {
     }
 
     elements = {
-        profileSearchText: () => cy.get('[id="Procurar perfil..."]'),
+        profileSearchText: () => cy.get('[data-testid="cotazo-profiles-search-input"]'),
         profileSearchBtn: () => cy.get('.cotazo-assistance-search-btn'),
         editProfileBtn: () => cy.get('.cotazo-table-actions-more-than-one > :nth-child(1)'),
         actionUserProfileBtn: () => cy.get('.cotazo-table-actions-more-than-one > :nth-child(2)'),
@@ -82,7 +82,7 @@ class userProfileConfiguration {
             searchLocator ='.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
         }
         if (feature === 'Support Request') {
-            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(7)';
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(8)';
         }
         if (feature === 'Budget analysis') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(4) > :nth-child(2) > :nth-child(2)';
