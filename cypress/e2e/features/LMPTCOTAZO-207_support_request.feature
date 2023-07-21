@@ -15,7 +15,7 @@ Feature: Support request
     And An "administrator" logs in to cotazo
     Then The administrator can see the support request for access problems
     When The user logs out
-    And The user reloads the page
+    Given The user opens cotazo website 
     And An "installer" logs in to cotazo
     Then The "installer" cannot see the request on the support request page
     When The user logs out
@@ -34,7 +34,7 @@ Feature: Support request
     When An "administrator" logs in to cotazo
     Then The "administrator" can see the request on the support request page
     And The user logs out
-    And The user reloads the page
+    Given The user opens cotazo website
     When An "technician" logs in to cotazo
     Then The "technician" cannot see the request on the support request page
 
@@ -49,8 +49,8 @@ Feature: Support request
     When An "administrator" logs in to cotazo
     Then The "administrator" can see the request on the support request page
     And The user logs out
-    And The user reloads the page
-    When An "administrator" logs in to cotazo
+    Given The user opens cotazo website
+    When An "installer" logs in to cotazo
     Then The "installer" can see the request on the support request page
 
   @LMPTCOTAZO-242
@@ -60,7 +60,7 @@ Feature: Support request
     Then The administrator changes the status of the order to "in analysis"
     And The "administrator" sends a comment
     And The user logs out
-    And The user reloads the page
+    Given The user opens cotazo website
     When An "installer" logs in to cotazo
     And The user goes to the support request page
     Then The installer checks the status of the support request
@@ -74,7 +74,7 @@ Feature: Support request
     Then The administrator changes the status of the order to "pending"
     And The "administrator" sends a comment
     And The user logs out
-    And The user reloads the page
+    Given The user opens cotazo website
     When An "installer" logs in to cotazo
     And The user goes to the support request page
     Then The installer checks the status of the support request
@@ -85,7 +85,7 @@ Feature: Support request
     Then The administrator checks the comment received
     Then The administrator changes the status of the order to "concluded"
     And The user logs out
-    And The user reloads the page
+    Given The user opens cotazo website
     When An "installer" logs in to cotazo
     And The user goes to the support request page
     Then The installer checks the status of the support request
