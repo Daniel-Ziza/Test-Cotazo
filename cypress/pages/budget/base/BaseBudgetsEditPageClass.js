@@ -99,8 +99,6 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.taxIDInput().invoke('val').should('not.be.empty');
         this.commonPageElements.phoneNumberInput().invoke('val').should('not.be.empty');
         this.commonPageElements.emailInput().invoke('val').should('not.be.empty');
-        this.commonPageElements.taxTypeSelect().click();
-        cy.contains('IVA Obra À Taxa Normal').click();
     };
 
     typeMaterialInformationForm(description, quantity, unit, observation) {
