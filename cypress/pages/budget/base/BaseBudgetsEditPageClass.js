@@ -4,78 +4,85 @@ class BaseBudgetsEditPageClass extends UserLayout {
     commonPageLocators = {
         recoveryModal: '[data-testid="-web"]',
         serviceAddBtn: '[class=" budget-rect-icon-div"]',
+        serviceAddMobileBtn: '[data-testid="manage-budget-service-add-edit-btn-mobile"]'
 
     }
     commonPageElements = {
-        recoveryModalNoBtn: () => cy.get('.d-md-block.modal-dialog.budget-popup > .modal-content > .modal-footer > .btn-default'),
-        recoveryModalNoBtnMobile: () => cy.get('.d-md-none > .modal-content > .modal-footer > .btn-default'),
-        recoveryModalNoBtnTablet: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-default'),
-        serviceOrderInput: () => cy.get('[placeholder="Nº da ordem de serviço"]'),
-        storeNameInput: () => cy.get('[placeholder="Nome da loja"]'),
-        dataInput: () => cy.get('[placeholder="Data"]'),
-        firstNameInput: () => cy.get('[placeholder="Primeiro nome"]'),
-        lastNameInput: () => cy.get('[placeholder="Apelido"]'),
+        recoveryModalNoBtn: () => cy.get('[data-testid="-web-no"]'),
+        recoveryModalNoBtnMobile: () => cy.get('[data-testid="-mobile-no"]'),
+        serviceOrderInput: () => cy.get('[data-testid="manage-budget-cli-service-order"]'),
+        storeNameInput: () => cy.get('[data-testid="manage-budget-cli-store"]'),
+        dataInput: () => cy.get('[data-testid="manage-budget-cli-date"]'),
+        firstNameInput: () => cy.get('[data-testid="manage-budget-cli-firstname"]'),
+        lastNameInput: () => cy.get('[data-testid="manage-budget-cli-lastname"]'),
         addressEdit: () => cy.get('[data-testid="manage-budget-cli-address-edit"]'),
-        addressInput: () => cy.get('[placeholder="Morada"]'),
+        addressInput: () => cy.get('[data-testid="manage-budget-cli-address"]'),
         numberEdit: () => cy.get('[data-testid="manage-budget-cli-address-number-edit"]'),
-        numberInput: () => cy.get('[placeholder="Número"]'),
+        numberInput: () => cy.get('[data-testid="manage-budget-cli-address-number"]'),
         zipNumberEdit: () => cy.get('[data-testid="manage-budget-cli-postal-code-edit"]'),
-        zipNumberInput: () => cy.get('[placeholder="Código postal"]'),
+        zipNumberInput: () => cy.get('[data-testid="manage-budget-cli-postal-code"]'),
         locationEdit: () => cy.get('[data-testid="manage-budget-cli-locality-edit"]'),
-        locationInput: () => cy.get('[placeholder="Localidade"]'),
-        taxIDInput: () => cy.get('[placeholder="NIF"]'),
+        locationInput: () => cy.get('[data-testid="manage-budget-cli-locality"]'),
+        taxIDInput: () => cy.get('[data-testid="manage-budget-cli-tax"]'),
         phoneNumberEdit: () => cy.get('[data-testid="manage-budget-cli-phone-edit"]'),
-        phoneNumberInput: () => cy.get('[placeholder="Nº Telemóvel"]'),
+        phoneNumberInput: () => cy.get('[data-testid="manage-budget-cli-phone"]'),
         emailEdit: () => cy.get('[data-testid="manage-budget-cli-email-edit"]'),
-        emailInput: () => cy.get('[placeholder="Email do cliente"]'),
-        regionInput: () => cy.get('[placeholder="Região"]'),
+        emailInput: () => cy.get('[data-testid="manage-budget-cli-email"]'),
+        regionInput: () => cy.get('[data-testid="manage-budget-region-id_input"]'),
         saveBtn: () => cy.get('[class="btn btn-default manage-form-footer-btns-space "]'),
         continueBtn: () => cy.get('[data-testid="manage-budget-next-btn"]'),
-        serviceGroupInput: () => cy.get('[id="manage-budget-services-groups-services_input"]'),
-        serviceSearchInput: () => cy.get('[placeholder="Pesquisar por Ref.ª ou Descrição do serviço"]'),
-        addServiceBtn: () => cy.get('.cotazo-autocomplete-options-container-ul >'),
-        addServiceBtnDisabled: () => cy.get('.service-add > div:nth-child(1)'),
-        addServiceBtnDisabledMobile: () => cy.get('.manage-service-icon-div-mobile'),
-        editBtn: () => cy.get('.budget-rect-icons > :nth-child(1)'),
+        serviceGroupInput: () => cy.get('[data-testid="manage-budget-services-groups-services_input"]'),
+        serviceSearchInput: () => cy.get('[data-testid="manage-budget-services-search-by-service"]'),
+        addServiceBtn: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-web"]'),
+        serviceGroupSelect: () => cy.get('[class="cotazo-autocomplete-options-value   "]'),
+        addServiceBtnDisabled: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-web"]'),
+        addServiceBtnDisabledMobile: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-mobile"]'),
+        editBtn: () => cy.get('[data-testid="manage-budget-service-edit-btn"]'),
+        editMaterialBtn: () => cy.get('[data-testid="manage-budget-material-edit-btn"]'),
         serviceQuantityCotazoInput: () => cy.get('[data-testid="manage-budget-service-qt-web"]'),
+        serviceQuantityCotazoMobileInput: () => cy.get('[data-testid="manage-budget-service-qt-mobile"]'),
         serviceList: () => cy.get('[class="manage-services-table-row-height "]'),
+        serviceListMobile: () => cy.get('[class="manage-services-table-row-height-mobile d-md-none"]'),
         materialDescriptionInput: () => cy.get('[data-testid="manage-budget-material-input-description"]'), 
-        materialQuantityInput: () => cy.get('[placeholder="Quantidade"]'),
-        materialUnitInput: () => cy.get('[placeholder="Unidade"]'),
-        materialObservationsInput: () => cy.get('[placeholder="Observações"]'),
+        materialQuantityInput: () => cy.get('[data-testid="manage-budget-material-input-quantity"]'),
+        materialUnitInput: () => cy.get('[data-testid="manage-budget-material-input-unit"]'),
+        materialObservationsInput: () => cy.get('[data-testid="manage-budget-material-input-obs"]'),
         materialErrorMessage: () => cy.get('.manage-budget-add-material-error'),
-        cleanBtn: () => cy.get('[class="btn btn-default manage-form-footer-btns-space undefined"]'),
+        cleanBtn: () => cy.get('[data-testid="manage-budget-material-clear-btn"]'),
         cleanMobileBtn: () => cy.get(':nth-child(4) > .manage-budget-form-two-btn-add > .btn-default'),
-        addBtn: () => cy.get('[class="btn btn-success undefined"]'),
+        addBtn: () => cy.get('[data-testid="manage-budget-material-add-material-btn"]'),
         addMobileBtn: () => cy.get('[class="btn btn-success manage-form-mobile-btn-min-width"]'),
-        addMaterialBtn: () => cy.get('.manage-budget-materials-btns > .manage-budget-form-two-btn-add > .btn-success'),
+        addMaterialBtn: () =>cy.get('[data-testid="manage-budget-material-add-material-btn"]'),
         exportBtn: () => cy.get('.manage-budget-materials-exportimport-btns- > .manage-form-footer-btns-space'),
+        exportMobileBtn: () => cy.get('.manage-budget-materials-exportimport-btns-mobile > .manage-form-footer-btns-space'),
         importBtn: () => cy.get('.manage-budget-materials-exportimport-btns- > :nth-child(2) > input'),
-        workDurationInput: () => cy.get('[placeholder="Duração prevista da obra"]'),
+        importMobileBtn: () => cy.get('.manage-budget-materials-exportimport-btns-mobile > :nth-child(2)'),
+        workDurationInput: () => cy.get('[data-testid="manage-budget-work-duration"]'),
         workEndNotesInput: () => cy.get('.jodit-workplace'),
         finishBtn: () => cy.get('[class="btn btn-success"]'),
         syncBtn: () => cy.get('[class="btn btn-success cotazo-spinner-loading-button manage-form-footer-btns-last d-none d-md-block"]'),
         modal: () => cy.get('.modal-dialog.budget-popup'),
         confirmModalBtn: () => cy.get('.modal-dialog.budget-popup > .modal-content > .modal-footer > .btn-success'),
         missingInformationMessage: () => cy.get('[class="manage-budget-form col-xs-14 col-md-10 col-md-offset-2 offset-md-1"]'),
-        removeBtn: () => cy.get('.budget-rect-icons > :nth-child(2)'),
+        removeBtn: () => cy.get('[data-testid="manage-budget-service-trash-btn"]'),
+        removeMaterialBtn: () => cy.get('[data-testid="manage-budget-material-trash-btn"]'),
         informationTable: () => cy.get('[class="table-responsive p-0 "]'),
         quantityInformationTable: () => cy.get('tbody > tr > .manage-service-col-qt'),
         unitPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pu'),
         totalPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pt'),
-        newServiceDescriptionInput: () => cy.get('.manage-services-new-description-description-container > :nth-child(1) > .input-group > .form-control'),
-        newServiceDescriptionMobileInput: () =>cy.get('.manage-services-new-description-mobile-container > .col-lg-12 > :nth-child(1) > .input-group > .form-control'),
-        addExtraServiceBtnDisabled: () => cy.get('.manage-services-new-description-container-icon > .cotazo-icon-disabled'),
+        newServiceDescriptionInput: () => cy.get('[data-testid="manage-budget-service-new-description-web"]'),
+        newServiceDescriptionMobileInput: () =>cy.get('[data-testid="manage-budget-service-new-description-mobile"]'),
+        addExtraServiceMobileBtnDisabled: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-mobile"]'),
+        addExtraServiceBtnDisabled: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-web"]'),
         addExtraServiceBtn: () => cy.get('.manage-services-new-description-container-icon'),
-        addExtraServiceMobileBtn: () =>cy.get('.manage-service-icon-div-mobile'),
+        addExtraServiceMobileBtn: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-mobile"]'),
         descriptionTable: () => cy.get('tbody > tr > .col-lg-4'),
         materialImportMessage: () => cy.get('.d-none > .modal-content > :nth-child(3)'),
         importConfirmationBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn-success'),
-        closeModalBtn: () => cy.get('.d-none > .modal-content > .modal-footer > .btn'),
-        stepFourBtn: () => cy.get('.budget-steps > :nth-child(7)'),
-        stepThreeBtn: () => cy.get('.budget-steps > :nth-child(5)'),
+        closeModalBtn: () => cy.get('[data-testid="-web-yes"]'),
+        stepFourBtn: () => cy.get('[data-testid="manage.budget.step.final.notes"]'),
+        stepThreeBtn: () => cy.get('[data-testid="manage.budget.step.materials.info"]'),
         formatBox: () => cy.get('.jodit-ui-group_line_true > .jodit-ui-group'),
-        taxTypeSelect: () => cy.get('[name="manage-budget-work-vat-id-Tipo de IVA"]'),
         characterCounterExtraWork: () => cy.get('.manage-services-new-description-description-container > :nth-child(1) > .input-group > .cotazo-input-char-counter'),
         characterCounterMaterialDescription: () => cy.get('.col-lg-6 .cotazo-input-char-counter'),
         characterCounterMaterialObservation: () => cy.get('.col-lg-12 > :nth-child(1) > .input-group > .cotazo-input-char-counter'),
@@ -101,12 +108,16 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.emailInput().invoke('val').should('not.be.empty');
     };
 
-    typeMaterialInformationForm(description, quantity, unit, observation) {
+    typeMaterialInformationForm(description, quantity, unit, observation, type) {
         this.commonPageElements.materialDescriptionInput().type(description);
         this.commonPageElements.materialQuantityInput().type(quantity);
         this.commonPageElements.materialUnitInput().type(unit);
         this.commonPageElements.materialObservationsInput().type(observation);
-        this.commonPageElements.addBtn().dblclick();
+        if (type === 'mobile'){
+            this.commonPageElements.addBtn().eq(1).dblclick();
+        }else {
+            this.commonPageElements.addBtn().eq(0).dblclick();
+        }
     }
 
     typeFinalNotesForm(unit, notes) {
@@ -242,16 +253,16 @@ class BaseBudgetsEditPageClass extends UserLayout {
                 this.commonPageElements.addServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
             });
         } else {
-            this.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('0').then(() => {
+            this.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().type('0').then(() => {
                 this.commonPageElements.addServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
             });
-            this.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('1').then(() => {
+            this.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().type('1').then(() => {
                 this.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled');
             });
-            this.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().then(() => {
+            this.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().then(() => {
                 this.commonPageElements.addServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
             });
-            this.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('ABC').then(() => {
+            this.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().type('ABC').then(() => {
                 this.commonPageElements.addServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
             });
         }

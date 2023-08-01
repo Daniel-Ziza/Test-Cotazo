@@ -20,10 +20,12 @@ Given('The user logs in Cotazo', () => {
     cy.visit("/");
     loginPage.singIn('installer');
     // Set as cypress env vars some values defined by previous tests.
-    cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
-        Cypress.env("orderServiceNumber", serviceOrderNumber);
-        assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`)
-    });
+    // cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
+    //     Cypress.env("orderServiceNumber", serviceOrderNumber);
+    //     assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`)
+    // });
+    
+    Cypress.env('orderServiceNumber', Cypress.env('SERVICE_ORDER_NUMBER'));
 });
 
 And('The user goes to {string}', (element) => {

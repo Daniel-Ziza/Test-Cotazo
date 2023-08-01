@@ -62,7 +62,8 @@ And('Check if the modal appears or not in the {string} version', (version) => {
     return false;
   });
   cy.slowDown(600);
-  if (version === 'mobile'){
+
+  if (version === 'mobile') {
     cy.document().then((doc) => {
       if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
         assert(true, 'Modal shown');
@@ -71,20 +72,11 @@ And('Check if the modal appears or not in the {string} version', (version) => {
         assert(true, 'Modal not shown');
       }
     });
-  } else if(version === 'desktop'){
+  } else {
     cy.document().then((doc) => {
       if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
         assert(true, 'Modal shown');
         pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtn().click();
-      } else {
-        assert(true, 'Modal not shown');
-      }
-    });
-  } else{
-    cy.document().then((doc) => {
-      if (doc.querySelectorAll(pendingBudgetsEditPage.commonPageLocators.recoveryModal).length) {
-        assert(true, 'Modal shown');
-        pendingBudgetsEditPage.commonPageElements.recoveryModalNoBtnTablet().click();
       } else {
         assert(true, 'Modal not shown');
       }
@@ -125,10 +117,10 @@ And('The user selects a group of service', () => {
     return false;
   });
   pendingBudgetsEditPage.commonPageElements.serviceGroupInput().click();
-  pendingBudgetsEditPage.commonPageElements.addServiceBtn().contains('Abrigo Metal').click();
+  pendingBudgetsEditPage.commonPageElements.serviceGroupSelect().contains('Abrigo Metal').click();
 });
 
-And('The user selects {string}', (service) => {
+And('The user selects {string} in {string}', (service, type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -136,11 +128,21 @@ And('The user selects {string}', (service) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.serviceList().each($el => {
-    if ($el.text().includes(service)) {
-      cy.wrap($el).find(pendingBudgetsEditPage.commonPageLocators.serviceAddBtn).click();
-    }
-  });
+
+  if (type === 'mobile') {
+    pendingBudgetsEditPage.commonPageElements.serviceListMobile().each($el => {
+      if ($el.text().includes(service)) {
+        cy.wrap($el).find(pendingBudgetsEditPage.commonPageLocators.serviceAddMobileBtn).click();
+      }
+    });
+  } else {
+    pendingBudgetsEditPage.commonPageElements.serviceList().each($el => {
+      if ($el.text().includes(service)) {
+        cy.wrap($el).find(pendingBudgetsEditPage.commonPageLocators.serviceAddBtn).click();
+      }
+    });
+  }
+
 });
 
 And('The user completes the material information form', (table) => {
@@ -152,7 +154,7 @@ And('The user completes the material information form', (table) => {
     return false;
   });
   table.hashes().forEach((row) => {
-    pendingBudgetsEditPage.typeMaterialInformationForm(row.description, row.quantity, row.unit, row.observation);
+    pendingBudgetsEditPage.typeMaterialInformationForm(row.description, row.quantity, row.unit, row.observation, row.type);
   });
 });
 
@@ -171,7 +173,7 @@ And('The user completes the final notes form', (table) => {
   });
 });
 
-Then('The user saves the budget and verifies that it is in editing status', () => {
+Then('The user saves the budget and verifies that it is in editing status in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -184,10 +186,18 @@ Then('The user saves the budget and verifies that it is in editing status', () =
   pendingBudgetsEditPage.clickSaveBtn();
   cy.wait('@save').its('response.statusCode').should('eq', 200).then(() => {
     cy.visit("/budgets").then(() => {
-      inProgressBudgetsListPage.commonPageElements.pageEditBtn().click().then(() => {
-        cy.slowDownEnd();
-        inProgressBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
-      });
+      if (type === 'mobile') {
+        inProgressBudgetsListPage.commonPageElements.pageEditBtn().eq(1).click().then(() => {
+          cy.slowDownEnd();
+          inProgressBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
+        });
+      } else {
+        inProgressBudgetsListPage.commonPageElements.pageEditBtn().eq(0).click().then(() => {
+          cy.slowDownEnd();
+          inProgressBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
+        });
+      }
+
     });
   });
 });
@@ -243,7 +253,7 @@ Then('The message appears {string}', (message) => {
   pendingBudgetsEditPage.commonPageElements.missingInformationMessage().should('contains.text', message);
 });
 
-Then('The {string} button is disabled in {string}', (nameBtn, type) => {
+Then('The {string} button is disabled', (nameBtn) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -251,12 +261,7 @@ Then('The {string} button is disabled in {string}', (nameBtn, type) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (type === 'desktop' || type === 'tablet') {
-    pendingBudgetsEditPage.isButtonDeactivated(nameBtn);
-  } else {
-    pendingBudgetsEditPage.isMobileButtonDeactivated(nameBtn);
-  }
-  
+  pendingBudgetsEditPage.isButtonDeactivated(nameBtn);
 });
 
 And('the user leaves the editable fields empty', () => {
@@ -329,12 +334,12 @@ And('The user adds a valid service in {string}', (type) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (type === 'desktop' || type === 'tablet'){
+  if (type === 'desktop' || type === 'tablet') {
     pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(0).clear().type('1').then(() => {
       pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
     });
-  }else{
-    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('1').then(() => {
+  } else {
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().type('1').then(() => {
       pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabledMobile().should('not.have.class', 'cotazo-icon-disabled').click();
     });
   }
@@ -350,14 +355,14 @@ And('The user edits the quantity of the service in {string}', (type) => {
     return false;
   });
 
-  if (type === 'desktop'  || type === 'tablet'){
+  if (type === 'desktop' || type === 'tablet') {
     pendingBudgetsEditPage.commonPageElements.editBtn().click();
     pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(0).clear().type('2').then(() => {
       pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabled().should('not.have.class', 'cotazo-icon-disabled').click();
     });
   } else {
     pendingBudgetsEditPage.commonPageElements.editBtn().click();
-    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().eq(1).clear().type('2').then(() => {
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoMobileInput().eq(0).clear().type('2').then(() => {
       pendingBudgetsEditPage.commonPageElements.addServiceBtnDisabledMobile().should('not.have.class', 'cotazo-icon-disabled').click();
     });
   }
@@ -405,13 +410,13 @@ And('The user leaves the new service description empty and tries to add the serv
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (type === 'desktop' || type === 'tablet'){
+  if (type === 'desktop' || type === 'tablet') {
     pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().then(() => {
       pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
     });
   } else {
     pendingBudgetsEditPage.commonPageElements.newServiceDescriptionMobileInput().clear().then(() => {
-      pendingBudgetsEditPage.commonPageElements.addExtraServiceBtnDisabled().should('have.class', 'cotazo-icon-disabled');
+      pendingBudgetsEditPage.commonPageElements.addExtraServiceMobileBtnDisabled().should('have.class', 'cotazo-icon-disabled');
     });
   }
 
@@ -426,7 +431,7 @@ And('The user adds a new description of the service and inserts in {string}', (t
     return false;
   });
   let messageText = utils.randomString(10)
-  if (type === 'desktop' || type === 'tablet'){
+  if (type === 'desktop' || type === 'tablet') {
     pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().clear().type('new service description test ' + messageText).then(() => {
       pendingBudgetsEditPage.commonPageElements.addExtraServiceBtn().should('not.have.class', 'cotazo-icon-disabled').click();
     });
@@ -460,7 +465,7 @@ Then('The user verifies that he can add multiple extra jobs with the same refere
   })
 })
 
-And('The user tries to write more than {string} characters in {string}', (counter, place) => {
+And('The user tries to write more than {string} characters in {string} in {string}', (counter, place, type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -469,30 +474,59 @@ And('The user tries to write more than {string} characters in {string}', (counte
     return false;
   });
   let messageText = utils.randomString(parseInt(counter) + 1);
-  if (place === 'extra work') {
-    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().type(messageText);
-    pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().invoke('text').then(newMessage => {
-      expect(messageText).to.not.equal(newMessage);
-    })
+
+  if (type === 'mobile') {
+    if (place === 'extra work') {
+      pendingBudgetsEditPage.commonPageElements.newServiceDescriptionMobileInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.newServiceDescriptionMobileInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'material description') {
+      pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'material observation') {
+      pendingBudgetsEditPage.commonPageElements.materialObservationsInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.materialObservationsInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'endnotes') {
+      pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.workEndNotesInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+  } else {
+    if (place === 'extra work') {
+      pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.newServiceDescriptionInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'material description') {
+      pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'material observation') {
+      pendingBudgetsEditPage.commonPageElements.materialObservationsInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.materialObservationsInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
+    if (place === 'endnotes') {
+      pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type(messageText);
+      pendingBudgetsEditPage.commonPageElements.workEndNotesInput().invoke('text').then(newMessage => {
+        expect(messageText).to.not.equal(newMessage);
+      })
+    }
   }
-  if (place === 'material description') {
-    pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().type(messageText);
-    pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().invoke('text').then(newMessage => {
-      expect(messageText).to.not.equal(newMessage);
-    })
-  }
-  if (place === 'material observation') {
-    pendingBudgetsEditPage.commonPageElements.materialObservationsInput().type(messageText);
-    pendingBudgetsEditPage.commonPageElements.materialObservationsInput().invoke('text').then(newMessage => {
-      expect(messageText).to.not.equal(newMessage);
-    })
-  }
-  if (place === 'endnotes') {
-    pendingBudgetsEditPage.commonPageElements.workEndNotesInput().type(messageText);
-    pendingBudgetsEditPage.commonPageElements.workEndNotesInput().invoke('text').then(newMessage => {
-      expect(messageText).to.not.equal(newMessage);
-    })
-  }
+
 });
 
 Then('The user verifies that the character counter shows {string} characters in {string}', (counter, place) => {
@@ -565,14 +599,14 @@ And('The user clicks on the {string} button in {string}', (btn, type) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (type === 'desktop' || type === 'tablet'){
+  if (type === 'desktop' || type === 'tablet') {
     if (btn === 'add') {
-      pendingBudgetsEditPage.commonPageElements.addBtn().click();;
+      pendingBudgetsEditPage.commonPageElements.addBtn().eq(0).click();;
     }
     if (btn === 'clean') {
-      pendingBudgetsEditPage.commonPageElements.cleanBtn().click();
+      pendingBudgetsEditPage.commonPageElements.cleanBtn().eq(0).click();
     }
-  }else {
+  } else {
     if (btn === 'add') {
       pendingBudgetsEditPage.commonPageElements.addMobileBtn().click();
     }
@@ -616,7 +650,7 @@ Then('The user verifies that all fields have been cleaned', () => {
   pendingBudgetsEditPage.verifyMaterialDataClean();
 });
 
-And('The user exports the list of materials', () => {
+And('The user exports the list of materials in {string}', (btn) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -624,7 +658,12 @@ And('The user exports the list of materials', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.exportBtn().click();
+  if (btn === 'mobile') {
+    pendingBudgetsEditPage.commonPageElements.exportMobileBtn().click();
+  } else {
+    pendingBudgetsEditPage.commonPageElements.exportBtn().click();
+  }
+
 });
 
 Then('The user verifies that the List of Materials has been downloaded', () => {
@@ -641,7 +680,7 @@ Then('The user verifies that the List of Materials has been downloaded', () => {
   cy.readFile(`cypress\\Downloads\\Lista de Materiais ${day}_${month}_${year}.xlsx`).should('exist');
 });
 
-And('The user loads a file with {string}', (element) => {
+And('The user loads a file with {string} in {string}', (element, type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -649,59 +688,116 @@ And('The user loads a file with {string}', (element) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (element === 'incomplete file') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_1.xlsx`);
-      });
-  }
-  if (element === 'bad format file') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_2.pdf`);
-      });
-  }
-  if (element === 'missing required fields') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_3.xlsx`);
-      });
-  }
-  if (element === 'empty file') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_4.xlsx`);
-      });
-  }
-  if (element === 'equal descriptions') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_5.xlsx`);
-      });
-  }
-  if (element === 'invalid quantity') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_6.xlsx`);
-      });
-  }
-  if (element === 'invalid unit') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_7.xlsx`);
-      });
-  }
-  if (element === 'fields with more characters than allowed') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_9.xlsx`);
-      });
-  }
-  if (element === 'valid file') {
-    pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
-      .should('have.attr', 'style', 'display:block').then(() => {
-        pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_8.xlsx`);
-      });
+  if (type === 'mobile') {
+    if (element === 'incomplete file') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_1.xlsx`);
+        });
+    }
+    if (element === 'bad format file') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_2.pdf`);
+        });
+    }
+    if (element === 'missing required fields') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_3.xlsx`);
+        });
+    }
+    if (element === 'empty file') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_4.xlsx`);
+        });
+    }
+    if (element === 'equal descriptions') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_5.xlsx`);
+        });
+    }
+    if (element === 'invalid quantity') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_6.xlsx`);
+        });
+    }
+    if (element === 'invalid unit') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_7.xlsx`);
+        });
+    }
+    if (element === 'fields with more characters than allowed') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_9.xlsx`);
+        });
+    }
+    if (element === 'valid file') {
+      pendingBudgetsEditPage.commonPageElements.importMobileBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importMobileBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_8.xlsx`);
+        });
+    }
+  } else {
+    if (element === 'incomplete file') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_1.xlsx`);
+        });
+    }
+    if (element === 'bad format file') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_2.pdf`);
+        });
+    }
+    if (element === 'missing required fields') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_3.xlsx`);
+        });
+    }
+    if (element === 'empty file') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_4.xlsx`);
+        });
+    }
+    if (element === 'equal descriptions') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_5.xlsx`);
+        });
+    }
+    if (element === 'invalid quantity') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_6.xlsx`);
+        });
+    }
+    if (element === 'invalid unit') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_7.xlsx`);
+        });
+    }
+    if (element === 'fields with more characters than allowed') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_9.xlsx`);
+        });
+    }
+    if (element === 'valid file') {
+      pendingBudgetsEditPage.commonPageElements.importBtn().invoke('attr', 'style', 'display:block')
+        .should('have.attr', 'style', 'display:block').then(() => {
+          pendingBudgetsEditPage.commonPageElements.importBtn().selectFile(`cypress\\fixtures\\Lista_de_Materiais_8.xlsx`);
+        });
+    }
   }
 });
 
@@ -717,7 +813,7 @@ And('The user deletes the budget from the current page', () => {
   pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 3);
 });
 
-And('The user edits an added material', () => {
+And('The user edits an added material in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -725,10 +821,14 @@ And('The user edits an added material', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.editBtn().click();
+  pendingBudgetsEditPage.commonPageElements.editMaterialBtn().click();
   let newDescription = 'New example to edit description';
   pendingBudgetsEditPage.commonPageElements.materialDescriptionInput().clear().type(newDescription);
-  pendingBudgetsEditPage.commonPageElements.addMaterialBtn().click();
+  if (type === 'mobile') {
+    pendingBudgetsEditPage.commonPageElements.addMaterialBtn().eq(1).click();
+  } else {
+    pendingBudgetsEditPage.commonPageElements.addMaterialBtn().eq(0).click();
+  }
   pendingBudgetsEditPage.commonPageElements.descriptionTable().invoke('text').then((text) => {
     if (text.includes(newDescription)) {
       assert(true, 'The material has been correctly edited');
@@ -747,7 +847,7 @@ And('The user removes the material from the list', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.removeBtn().click();
+  pendingBudgetsEditPage.commonPageElements.removeMaterialBtn().click();
 });
 
 Then('The user verifies that message is appropriate for {string}', (element) => {
@@ -844,7 +944,7 @@ And('The user removes the previously added service', () => {
   pendingBudgetsEditPage.commonPageElements.removeBtn().click();
 });
 
-And('The user deletes the previously created budget', () => {
+And('The user deletes the previously created budget in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -853,8 +953,14 @@ And('The user deletes the previously created budget', () => {
     return false;
   });
   cy.slowDown(100);
-  pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 3);
-  pendingBudgetsListPage.commonPageElements.budgetDeleteBtn().click();
+  if (type === 'mobile') {
+    pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 3);
+    pendingBudgetsListPage.commonPageElements.budgetDeleteMobileBtn().click();
+  } else {
+    pendingBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 3);
+    pendingBudgetsListPage.commonPageElements.budgetDeleteBtn().click();
+  }
+
   cy.slowDownEnd();
 });
 
@@ -998,23 +1104,23 @@ Then('The user synchronizes the budget', () => {
 
 Given('Change the screen size to {string}', (type) => {
   if (type === 'mobile') {
-      cy.viewport('iphone-x');
+    cy.viewport('iphone-x');
   } else if (type === 'tablet') {
-      cy.viewport('ipad-mini');
-  } else if (type === 'landscape table'){
-      cy.viewport('ipad-mini', 'landscape');
+    cy.viewport('ipad-mini');
+  } else if (type === 'landscape table') {
+    cy.viewport('ipad-mini', 'landscape');
   }
 })
 
 When('The user searches the service order in {string}', (type) => {
   if (type === 'mobile') {
-      cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .form-control')
-          .type(Cypress.env('orderServiceNumber'));
-      cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .input-group-append > .input-group-text').click();
+    cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .form-control')
+      .type(Cypress.env('orderServiceNumber'));
+    cy.get('.budgets-search-web-mobile > .form-inline > .input-group > .input-group-append > .input-group-text').click();
   } else if (type === 'tablet') {
-      cy.get('.main-header > .form-inline > .input-group > .form-control')
-          .type(Cypress.env('orderServiceNumber'));
-          cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text').click();
+    cy.get('.main-header > .form-inline > .input-group > .form-control')
+      .type(Cypress.env('orderServiceNumber'));
+    cy.get('.main-header > .form-inline > .input-group > .input-group-append > .input-group-text').click();
   }
 
 })
