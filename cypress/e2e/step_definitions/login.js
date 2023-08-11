@@ -6,7 +6,7 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 const loginPage = require('../../pages/LoginPage');
 
-Given('The user opens cotazo website', () => {
+Given('The user opens cotazo website {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -14,10 +14,17 @@ Given('The user opens cotazo website', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  cy.visit('/');
+
+  if (type === 'login page'){
+    cy.visit('/');
+  }else {
+    cy.visit(Cypress.env('BASE_URL_USERNAME'));
+  }
+  
+  //Cypress.env('requestNumber', 370)
 });
 
-When('A user provides correct credentials', () => {
+When('A user provides correct credentials with {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -25,12 +32,15 @@ When('A user provides correct credentials', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  loginPage.typeUsername(Cypress.env('COTAZO_INSTALLER_USERNAME'));
-  loginPage.typePassword(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
-  loginPage.clickLogin();
+  if (type === 'username'){
+    loginPage.signInNIF(Cypress.env('COTAZO_INSTALLER_USERNAME'),Cypress.env('COTAZO_INSTALLER_PASSWORD'));
+  } else{
+    loginPage.signInEmail(Cypress.env('COTAZO_INSTALLER_EMAIL'),Cypress.env('COTAZO_INSTALLER_EMAIL_PASSWORD'))
+  }
+  
 });
 
-When('The user provides incorrect credentials', () => {
+When('The user provides incorrect credentials with {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -38,9 +48,12 @@ When('The user provides incorrect credentials', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  loginPage.typeUsername(Cypress.env('invalidUser'));
-  loginPage.typePassword(Cypress.env('invalidPassword'));
-  loginPage.clickLogin();
+
+  if (type === 'username'){
+    loginPage.signInNIF(Cypress.env('invalidUser'),Cypress.env('invalidPassword'));
+  } else{
+    loginPage.signInEmail(Cypress.env('invalidEmail'),Cypress.env('invalidPassword'))
+  }
 });
 
 When('The user creates an invalid user and password', () => {
@@ -57,7 +70,21 @@ When('The user creates an invalid user and password', () => {
   Cypress.env('invalidPassword', password);
 })
 
-And('The user enters an invalid password 5 times in a row', () => {
+When('The user creates an invalid email and password', () => {
+  cy.on('uncaught:exception', (err, runnable) => {
+  return false;
+});
+
+cy.on('uncaught exception', (err, runnable) => {
+  return false;
+});
+email = loginPage.generateInvalidEmail();
+password = loginPage.generateInvalidPassword();
+Cypress.env('invalidEmail', email);
+Cypress.env('invalidPassword', password);
+})
+
+And('The user enters an invalid password 5 times in a row with {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -67,9 +94,11 @@ And('The user enters an invalid password 5 times in a row', () => {
   });
 
   for (var i = 0; i < 5; i++) {
-    loginPage.typeUsername(Cypress.env('invalidUser'));
-    loginPage.typePassword(Cypress.env('invalidPassword'));
-    loginPage.clickLogin();
+    if (type === 'username'){
+      loginPage.signInNIF(Cypress.env('invalidUser'),Cypress.env('invalidPassword'));
+    } else{
+      loginPage.signInEmail(Cypress.env('invalidEmail'),Cypress.env('invalidPassword'))
+    }
   }
 })
 
@@ -102,7 +131,7 @@ Then('The user verifies that the login has been unlocked', () => {
   loginPage.verifyErrorMessage();
 })
 
-When('The user repeats wrong login 5 times after the first lockout', () => {
+When('The user repeats wrong login 5 times after the first lockout with {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -112,15 +141,19 @@ When('The user repeats wrong login 5 times after the first lockout', () => {
   });
 
   for (var i = 0; i < 4; i++) {
-    loginPage.typeUsername(Cypress.env('invalidUser'));
-    loginPage.typePassword(Cypress.env('invalidPassword'));
-    loginPage.clickLogin();
+    if (type === 'username'){
+      loginPage.signInNIF(Cypress.env('invalidUser'),Cypress.env('invalidPassword'));
+    } else{
+      loginPage.signInEmail(Cypress.env('invalidEmail'),Cypress.env('invalidPassword'))
+    }
     loginPage.elements.errorMessage().should('contain.text', 'Login está bloqueado, aguarde 60 segundos e tente novamente.');
     cy.wait(60000);
   }
-  loginPage.typeUsername(Cypress.env('invalidUser'));
-  loginPage.typePassword(Cypress.env('invalidPassword'));
-  loginPage.clickLogin();
+  if (type === 'username'){
+    loginPage.signInNIF(Cypress.env('invalidUser'),Cypress.env('invalidPassword'));
+  } else{
+    loginPage.signInEmail(Cypress.env('invalidEmail'),Cypress.env('invalidPassword'))
+  }
 })
 Then('Main page is displayed', () => {
   cy.on('uncaught:exception', (err, runnable) => {
@@ -178,3 +211,16 @@ And('The user logs in with his login credentials', () => {
   });
   loginPage.singInWithAdeo();
 });
+
+When('The user enters invalid emails', (table) => {
+  cy.on('uncaught:exception', (err, runnable) => {
+    return false;
+  });
+
+  cy.on('uncaught exception', (err, runnable) => {
+    return false;
+  });
+  table.hashes().forEach((row) => {
+    loginPage.verifyEmail(row.email, row.message);
+  });
+})

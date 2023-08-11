@@ -1,4 +1,5 @@
 import UserLayout from '../../../layouts/UserLayout';
+import LoginPage from '../../LoginPage';
 
 class BaseBudgetsEditPageClass extends UserLayout {
     commonPageLocators = {
@@ -62,7 +63,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         finishBtn: () => cy.get('[class="btn btn-success"]'),
         syncBtn: () => cy.get('[class="btn btn-success cotazo-spinner-loading-button manage-form-footer-btns-last d-none d-md-block"]'),
         modal: () => cy.get('.modal-dialog.budget-popup'),
-        confirmModalBtn: () => cy.get('.modal-dialog.budget-popup > .modal-content > .modal-footer > .btn-success'),
+        confirmModalBtn: () => cy.get('[data-testid="-web-yes"]'),
         missingInformationMessage: () => cy.get('[class="manage-budget-form col-xs-14 col-md-10 col-md-offset-2 offset-md-1"]'),
         removeBtn: () => cy.get('[data-testid="manage-budget-service-trash-btn"]'),
         removeMaterialBtn: () => cy.get('[data-testid="manage-budget-material-trash-btn"]'),
@@ -153,6 +154,9 @@ class BaseBudgetsEditPageClass extends UserLayout {
         }
         if (nameBtn === 'Conclude and Synchronize') {
             this.commonPageElements.syncBtn().should('be.disabled');
+        }
+        if (nameBtn === 'Enter'){
+            LoginPage.elements.loginBtn().should('be.disabled');
         }
     };
 
