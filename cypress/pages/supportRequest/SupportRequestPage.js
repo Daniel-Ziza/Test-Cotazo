@@ -5,7 +5,7 @@ class SupportRequestPage {
         technicianEmailInput: () => cy.get('[data-testid="assistance-create-email-input"]'), //cy.get('[id="E-mail para contacto*"]')
         subjectSupportRequestInput: () => cy.get('[data-testid="assistance-create-subject-input"]'),//cy.get('[id="Assunto*"]')
         messageSupportRequestInput: () => cy.get('[data-testid="assistance-create-message-input"]'), //cy.get('[placeholder="Mensagem*"]')
-        sendSupportRequestBtn: () => cy.get('.btn'),
+        sendSupportRequestBtn: () => cy.get('[data-testid="assistance-create-send-btn"]'),
         backToLoginBtn: () => cy.get('.cotazo-login-assistance-click-here'),
         emailErrorMessage: () => cy.get('[class="error invalid-feedback"]'),
         textErrorMessage: () => cy.get(':nth-child(3) > .input-group > .error'),

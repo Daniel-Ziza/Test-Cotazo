@@ -91,7 +91,7 @@ And('The user goes to the support request page', () => {
     homePage.elements.supportRequestBtn().click();
 });
 
-And('The {string} creates a new support request', (user) => {
+And('The {string} creates a new support request in {string}', (user, type) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
@@ -99,11 +99,15 @@ And('The {string} creates a new support request', (user) => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    supportRequestManagementPage.elements.createNewIncidentBtn().contains('Criar Incidente').click();
+    if (type === 'mobile') {
+        supportRequestManagementPage.elements.createNewIncidentBtn().eq(1).click();
+    } else {
+        supportRequestManagementPage.elements.createNewIncidentBtn().eq(0).click();
+    }
     supportRequestPage.createSupportRequestWithLogin();
     cy.intercept('POST', '/lm-cotazo-core/assistance').as('createAssistance');
     supportRequestPage.elements.sendSupportRequestBtn().click();
-    
+
     cy.wait('@createAssistance').then((responseData) => {
         if (!responseData.response ||
             !responseData.response.body ||
@@ -280,7 +284,7 @@ And('The user checks search filter by {string}', (filter) => {
     supportRequestManagementPage.verifyFilter(filter);
 });
 
-And('The user clicks on toggle button', () => {
+And('The user clicks on toggle button in {string}', (type) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
@@ -288,5 +292,11 @@ And('The user clicks on toggle button', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link').click();
+
+    if (type === 'mobile') {
+        homePage.elements.toggleMobileBtn().click();
+    } else {
+        homePage.elements.toggleBtn().click();
+    }
+
 })

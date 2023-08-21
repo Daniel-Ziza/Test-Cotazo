@@ -1,7 +1,7 @@
 class SupportRequestManagementPage {
     elements = {
         incidentNumber: () => cy.get('[data-testid="assistance_search_request_number"]'),
-        searchSupportRequestBtn: () => cy.get('.cotazo-assistance-search-btn'),
+        searchSupportRequestBtn: () => cy.get('[data-testid="assistance-search-filter-btn"]'),
         supportRequestInformationTable: () => cy.get('.table-responsive', {timeout:4000}),
         createNewIncidentBtn: () => cy.get('[id="assistance.create.btn.id"]'),
         editSupportRequestBtn: () => cy.get('[class=" budget-rect-icon-div"]'),

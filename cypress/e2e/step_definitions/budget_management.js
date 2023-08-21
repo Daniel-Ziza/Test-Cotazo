@@ -369,7 +369,7 @@ And('The user edits the quantity of the service in {string}', (type) => {
 
 });
 
-And('The user modifies the quantity of service', () => {
+And('The user modifies the quantity of service in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -377,7 +377,11 @@ And('The user modifies the quantity of service', () => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('4');
+  if (type === 'mobile'){
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoMobileInput().clear().type('4');
+  }else{
+    pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('4');
+  }
 
 });
 

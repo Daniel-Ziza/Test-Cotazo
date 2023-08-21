@@ -20,7 +20,7 @@ And('The user searches for the profile {string}', (profile) => {
         return false;
     });
     let text = profile.toUpperCase();
-    cy.slowDown(500);
+    cy.slowDown(700);
     userProfileConfiguration.searchProfile(text);
     cy.slowDownEnd();
 });
