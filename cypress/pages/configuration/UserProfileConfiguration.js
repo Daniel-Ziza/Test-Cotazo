@@ -113,6 +113,7 @@ class userProfileConfiguration {
         }
         //Access budget
         if (access === 'see budget') {
+            cy.slowDown(250);
             homePage.elements.budgetAccessContainer().should('be.visible');
             pendingBudgetsListPage.commonPageElements.viewServiceOrderBtn().should('be.visible');
             pendingBudgetsListPage.commonPageElements.pageCreateButton().click();
@@ -127,6 +128,7 @@ class userProfileConfiguration {
             archivedBudgetListPage.commonPageElements.viewServiceOrderBtn().should('be.visible');
             archivedBudgetListPage.commonPageElements.viewFistOSArchived().click();
             archivedBudgetListPage.commonPageElements.viewServiceOrderBtn().should('be.visible');
+            cy.slowDownEnd();
             cy.visit("/budgets");
         }
         if (access === 'add budget') {
@@ -166,10 +168,12 @@ class userProfileConfiguration {
             cy.visit("/budgets");
         }
         if (access === 'conclude budget') {
+            cy.slowDown(200);
             pendingBudgetsListPage.commonPageElements.pageEditBtn().click();
             pendingBudgetsListPage.commonPageElements.editBtnFirstOS().click();
             inProgressBudgetsEditPage.commonPageElements.stepFourBtn().click();
             inProgressBudgetsEditPage.commonPageElements.finishBtn().should('be.visible');
+            cy.slowDownEnd();
             cy.visit("/budgets");
         }
         if (access === 'sync budget') {

@@ -11,11 +11,12 @@ class LoginPage {
     loginAsEmployeeBtn: () => cy.get('[class="cotazo-login-collaborator-click-here-clickable"]'),
   };
 
-  signInNIF(username, password) {
-    this.elements.usernameInput().clear().type(username);
-    this.elements.passwordInput().clear().type(password);
-    this.elements.loginBtn().click();
-  }
+  //Deplecated
+  // signInNIF(username, password) {
+  //   this.elements.usernameInput().clear().type(username);
+  //   this.elements.passwordInput().clear().type(password);
+  //   this.elements.loginBtn().click();
+  // }
 
   signInEmail(email, password) {
     this.elements.emailInput().clear().type(email);
@@ -28,9 +29,7 @@ class LoginPage {
   }
 
   verifyText() {
-    //this.elements.dashboardText().should('contains.text', 'Painel de controlo');
-    cy.get('.cotazo-error-content-container-base').should('be.visible')
-
+    this.elements.dashboardText().should('contains.text', 'Painel de controlo');
   };
 
   generateInvalidEmail() {
@@ -72,17 +71,17 @@ class LoginPage {
       this.singInWithAdeo();
     }
     if (userType === 'installer') {
-      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_INSTALLER_USERNAME'));
+      this.elements.emailInput().clear().type(Cypress.env('COTAZO_INSTALLER_USERNAME'));
       this.elements.passwordInput().clear().type(Cypress.env('COTAZO_INSTALLER_PASSWORD'));
       this.elements.loginBtn().click();
     }
     if (userType === 'technician') {
-      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_TECHNICIAN_USERNAME'));
+      this.elements.emailInput().clear().type(Cypress.env('COTAZO_TECHNICIAN_USERNAME'));
       this.elements.passwordInput().clear().type(Cypress.env('COTAZO_TECHNICIAN_PASSWORD'));
       this.elements.loginBtn().click();
     }
     if (userType === 'moderator') {
-      this.elements.usernameInput().clear().type(Cypress.env('COTAZO_MODERATOR_USERNAME'));
+      this.elements.emailInput().clear().type(Cypress.env('COTAZO_MODERATOR_USERNAME'));
       this.elements.passwordInput().clear().type(Cypress.env('COTAZO_MODERATOR_PASSWORD'));
       this.elements.loginBtn().click();
     }

@@ -6,7 +6,7 @@ class BaseBudgetsListPageClass extends UserLayout {
         previousPageButton: () => cy.get('.row.cotazo-page-controls.budget-page-controls > a:first-child').next(),
         nextPageButton: () => cy.get('.row.cotazo-page-controls.budget-page-controls > a:last-child').prev(),
         pageCreateButton: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_CREATE'),
-        pageEditBtn: () => cy.get('.cotazo-state-text-EDIT'),
+        pageEditBtn: () => cy.get(':nth-child(3) > .d-none > .budget-painel-tab'),//cy.get('.cotazo-state-text-EDIT'),
         pageSubmittedBtn: () => cy.get('.budget-painel-each-tab > a.cotazo-state-text-SUBMITTED'),
         pagePendingBtn: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_LAUNCH'),
         pageArchivedBtn: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-ARCHIVE'),

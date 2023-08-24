@@ -18,7 +18,9 @@ Given('The user logs in Cotazo', () => {
         return false;
     });
     cy.visit("/");
-    loginPage.singIn('installer');
+        loginPage.singIn('installer');
+    
+    //It is necessary to update the automatic tests for the creation of service orders in Instala
     // Set as cypress env vars some values defined by previous tests.
     // cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
     //     Cypress.env("orderServiceNumber", serviceOrderNumber);
