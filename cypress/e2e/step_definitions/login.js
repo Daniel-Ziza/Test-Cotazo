@@ -15,7 +15,7 @@ Given('The user opens cotazo website', () => {
     return false;
   });
   cy.visit('/');
-  //Cypress.env('requestNumber', 370)
+  //Cypress.env('requestNumber',14) this command is for punctual tests
 });
 
 When('A user provides correct credentials', () => {

@@ -225,8 +225,6 @@ Then('The administrator checks the comment received', () => {
     supportRequestManagementPage.searchIncident(Cypress.env('requestNumber'));
     supportRequestManagementPage.elements.editSupportRequestBtn().click()
     supportRequestManagementPage.checkComment(Cypress.env('comment'));
-    cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link').click();
-    homePage.elements.supportRequestBtn().click();
 });
 
 And('The user enters invalid {string} values', (element) => {
@@ -262,7 +260,7 @@ Then('The support request cannot be sent', () => {
     supportRequestPage.elements.sendSupportRequestBtn().should('be.disabled');
 });
 
-And('The user go to the create new support request', () => {
+And('The user go to the create new support request in {string}', (type) => {
     cy.on('uncaught:exception', (err, runnable) => {
         return false;
     });
@@ -270,7 +268,11 @@ And('The user go to the create new support request', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    supportRequestManagementPage.elements.createNewIncidentBtn().contains('Criar Incidente').click();
+    if (type === 'mobile') {
+        supportRequestManagementPage.elements.createNewIncidentBtn().eq(1).click();
+    } else {
+        supportRequestManagementPage.elements.createNewIncidentBtn().eq(0).click();
+    }
 });
 
 And('The user checks search filter by {string}', (filter) => {

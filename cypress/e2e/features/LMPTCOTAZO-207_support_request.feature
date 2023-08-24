@@ -15,7 +15,7 @@ Feature: Support request
     And An "administrator" logs in to cotazo
     Then The administrator can see the support request for access problems
     When The user logs out
-    Given The user opens cotazo website 
+    Given The user opens cotazo website
     And An "installer" logs in to cotazo
     Then The "installer" cannot see the request on the support request page
     When The user logs out
@@ -27,7 +27,7 @@ Feature: Support request
   Scenario: Support request by an installer in Cotazo
     When An "installer" logs in to cotazo
     And The user goes to the support request page
-    And The "installer" creates a new support request
+    And The "installer" creates a new support request in "desktop"
     Then The "installer" verifies that he can see the created request
     And The user logs out
     And The user reloads the page
@@ -42,7 +42,7 @@ Feature: Support request
   Scenario: Support request by an technician in Cotazo
     When An "technician" logs in to cotazo
     And The user goes to the support request page
-    And The "technician" creates a new support request
+    And The "technician" creates a new support request in "desktop"
     Then The "technician" verifies that he can see the created request
     And The user logs out
     And The user reloads the page
@@ -71,6 +71,7 @@ Feature: Support request
     When An "administrator" logs in to cotazo
     And The user goes to the support request page
     Then The administrator checks the comment received
+    And The user goes to the support request page
     Then The administrator changes the status of the order to "pending"
     And The "administrator" sends a comment
     And The user logs out
@@ -83,6 +84,7 @@ Feature: Support request
     When An "administrator" logs in to cotazo
     And The user goes to the support request page
     Then The administrator checks the comment received
+    And The user goes to the support request page
     Then The administrator changes the status of the order to "concluded"
     And The user logs out
     Given The user opens cotazo website
@@ -100,7 +102,7 @@ Feature: Support request
     And The user returns to the login page
     When An "installer" logs in to cotazo
     And The user goes to the support request page
-    And The user go to the create new support request
+    And The user go to the create new support request in "desktop"
     And The user enters invalid "subject" values
     And The user enters invalid "messages" values
     Then The support request cannot be sent
