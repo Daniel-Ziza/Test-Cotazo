@@ -14,15 +14,18 @@ Feature: User Profile Configuration
         And The user searches for the profile "Installer"
         And The user profile is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "installer" logs in to cotazo
         Then The user has no access to the system
         And The user logs out
+        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User profiles"
         And The user searches for the profile "Installer"
         And The user profile is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "installer" logs in to cotazo
         Then Main page is displayed
 
@@ -34,15 +37,18 @@ Feature: User Profile Configuration
         And The user searches for the profile "technician"
         And The user profile is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "technician" logs in to cotazo
         Then The user has no access to the system
         And The user logs out
+        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User profiles"
         And The user searches for the profile "technician"
         And The user profile is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "technician" logs in to cotazo
         Then Main page is displayed
 
@@ -57,15 +63,17 @@ Feature: User Profile Configuration
         And The user searches for the profile "collaborator"
         And The user profile is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         Then The user has no access to the system
         And The user logs out
-        And The user opens cotazo website
+        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User profiles"
         And The user searches for the profile "collaborator"
         And The user profile is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         Then Main page is displayed

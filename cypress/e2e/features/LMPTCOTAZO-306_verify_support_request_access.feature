@@ -24,6 +24,7 @@ Feature: Differentiated access - Support Request
             | Pedidos de suporte | 2      |
             | Adicionar mensagem | 1      |
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -44,6 +45,7 @@ Feature: Differentiated access - Support Request
         And The user edits profile
         And The user deactivates the "add" action of the "Adicionar mensagem" access in the "Support Request" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -66,6 +68,7 @@ Feature: Differentiated access - Support Request
         And The user edits profile
         And The user deactivates the "edit" action of the "Pedidos de suporte" access in the "Support Request" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -88,6 +91,7 @@ Feature: Differentiated access - Support Request
         And The user edits profile
         And The user deactivates the "view" action of the "Pedidos de suporte" access in the "Support Request" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"

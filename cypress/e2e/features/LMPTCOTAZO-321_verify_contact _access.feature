@@ -25,6 +25,7 @@ Feature: Differentiated access - Contact
             | Contatos | 2      |
             | Contatos | 3      |
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -46,6 +47,7 @@ Feature: Differentiated access - Contact
         And The user edits profile
         And The user deactivates the "delete" action of the "Contatos" access in the "Contact" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -70,6 +72,7 @@ Feature: Differentiated access - Contact
         And The user edits profile
         And The user deactivates the "edit" action of the "Contatos" access in the "Contact" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -94,6 +97,7 @@ Feature: Differentiated access - Contact
         And The user edits profile
         And The user deactivates the "add" action of the "Contatos" access in the "Contact" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -118,6 +122,7 @@ Feature: Differentiated access - Contact
         And The user edits profile
         And The user deactivates the "view" action of the "Contatos" access in the "Contact" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"

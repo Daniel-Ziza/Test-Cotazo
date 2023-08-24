@@ -14,6 +14,7 @@ Feature: User Configuration
         And The user searches for the user "installer"
         And The user is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "installer" logs in to cotazo
         Then An error is displayed
         When An "moderator" logs in to cotazo
@@ -22,6 +23,7 @@ Feature: User Configuration
         And The user searches for the user "installer"
         And The user is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "installer" logs in to cotazo
         Then Main page is displayed
 
@@ -33,6 +35,7 @@ Feature: User Configuration
         And The user searches for the user "technician"
         And The user is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "technician" logs in to cotazo
         Then An error is displayed
         When An "moderator" logs in to cotazo
@@ -41,6 +44,7 @@ Feature: User Configuration
         And The user searches for the user "technician"
         And The user is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "technician" logs in to cotazo
         Then Main page is displayed
 
@@ -52,13 +56,16 @@ Feature: User Configuration
         And The user searches for the user "collaborator"
         And The user is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         Then An error is displayed
+        Given The user opens cotazo website
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"
         And The user goes to "User"
         And The user searches for the user "collaborator"
         And The user is activated
         And The user logs out
+        Given The user opens cotazo website
         And The user goes to "click here"
         Then Main page is displayed

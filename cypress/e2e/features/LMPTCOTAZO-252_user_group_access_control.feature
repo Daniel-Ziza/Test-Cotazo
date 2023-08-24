@@ -17,6 +17,7 @@ Feature: User Group Configuration
         And The user searches for the group
         And The user group is disabled
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         Then The user has no access to the system
         And The user logs out
@@ -27,5 +28,6 @@ Feature: User Group Configuration
         And The user searches for the group
         And The user group is activated
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         Then Main page is displayed

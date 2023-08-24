@@ -27,4 +27,4 @@ Feature: Budget creation
     And The user completes the final notes form
       | duration | End_Notes         |
       | 2h       | example End Notes |
-    #Then The user creates and synchronizes a budget and verifies that it is on sent
+    Then The user creates and synchronizes a budget and verifies that it is on sent

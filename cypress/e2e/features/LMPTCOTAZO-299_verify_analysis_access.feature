@@ -23,6 +23,7 @@ Feature: Differentiated access - Analysis
             | Acesso a todas as lojas | 0      |
             | Análises                | 0      |
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         And The user verifies that he does not have access to "Início"
@@ -43,6 +44,7 @@ Feature: Differentiated access - Analysis
         And The user edits profile
         And The user deactivates the "view" action of the "Exportar" access in the "Budget analysis" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -67,6 +69,7 @@ Feature: Differentiated access - Analysis
         And The user edits profile
         And The user deactivates the "view" action of the "Orçamentos" access in the "Analysis" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -90,6 +93,7 @@ Feature: Differentiated access - Analysis
         And The user edits profile
         And The user deactivates the "view" action of the "Importar" access in the "Analysis" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -113,6 +117,7 @@ Feature: Differentiated access - Analysis
         And The user edits profile
         And The user deactivates the "view" action of the "Exportar" access in the "Analysis" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
@@ -136,6 +141,7 @@ Feature: Differentiated access - Analysis
         And The user edits profile
         And The user deactivates the "view" action of the "Pagamentos" access in the "Analysis" functionality
         And The user logs out
+        Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
         And The user reloads the page
         Then The user verifies that he does not have access to "Início"
