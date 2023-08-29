@@ -1,4 +1,4 @@
-class budgetAnalysis {
+export class BudgetAnalysis {
     elements = {
         headerTitleBudgetAnalysis: () => cy.get('.text-dark'),
         budgetAnalysisFilters: () => cy.get('.cotazo-search-data-sub-container'),
@@ -11,4 +11,4 @@ class budgetAnalysis {
 
 }
 
-module.exports = new budgetAnalysis();
+export const budgetAnalysis = new BudgetAnalysis();

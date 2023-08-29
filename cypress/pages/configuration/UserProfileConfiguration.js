@@ -1,4 +1,4 @@
-import {homePage} from '../HomePage';
+import { homePage } from '../HomePage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
@@ -11,7 +11,7 @@ const serviceConfiguration = require('./ServicesConfiguration');
 const userConfiguration = require('../../pages/configuration/UserConfiguration');
 const userGroupConfiguration = require('../../pages/configuration/UserGroupConfiguration');
 const paymentAnalysis = require('../../pages/analysis/PaymentAnalysis');
-const budgetAnalysis = require('../../pages/analysis/BudgetAnalysis');
+import { budgetAnalysis } from '../analysis/BudgetAnalysis';
 const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
 const contactPage = require('../../pages/contact/ContactPage');
 const contactManagementPage = require('../../pages/contact/ContactManagementPage');
@@ -78,8 +78,8 @@ class userProfileConfiguration {
         if (feature === 'Configuration') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(5)';
         }
-        if (feature === 'Contact'){
-            searchLocator ='.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
+        if (feature === 'Contact') {
+            searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(6)';
         }
         if (feature === 'Support Request') {
             searchLocator = '.cotazo-page-table-container > .cotazo-subcontainer > div > :nth-child(8)';
@@ -358,21 +358,21 @@ class userProfileConfiguration {
         }
 
         //Contact Access
-        if(access === 'see contact'){
+        if (access === 'see contact') {
             homePage.toGo('Contatos');
             cy.slowDown(150);
             contactPage.elements.titleContactPage().should('contain.text', 'Contatos');
             contactPage.elements.contactFilter().should('be.visible');
-            contactPage.elements.contactTable().should('be.visible');           
+            contactPage.elements.contactTable().should('be.visible');
             cy.slowDownEnd();
         }
-        if(access === 'add contact'){
+        if (access === 'add contact') {
             contactPage.elements.createNewContactBtn().should('be.visible').and('not.be.disabled');
         }
-        if(access === 'edit contact'){
+        if (access === 'edit contact') {
             contactPage.elements.editContactBtn().should('be.visible').and('not.be.disabled');
         }
-        if(access === 'delete contact'){
+        if (access === 'delete contact') {
             contactPage.elements.deleteContactBtn().should('be.visible').and('not.be.disabled');
         }
     }
