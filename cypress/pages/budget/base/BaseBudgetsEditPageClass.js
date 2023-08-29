@@ -1,5 +1,5 @@
 import UserLayout from '../../../layouts/UserLayout';
-import LoginPage from '../../LoginPage';
+import { loginPage } from '../../LoginPage';
 
 class BaseBudgetsEditPageClass extends UserLayout {
     commonPageLocators = {
@@ -156,7 +156,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
             this.commonPageElements.syncBtn().should('be.disabled');
         }
         if (nameBtn === 'Enter'){
-            LoginPage.elements.loginBtn().should('be.disabled');
+            loginPage.elements.loginBtn().should('be.disabled');
         }
     };
 

@@ -4,7 +4,7 @@ import {
   And,
   Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-const loginPage = require('../../pages/LoginPage');
+import { loginPage } from '../../pages/LoginPage';
 
 Given('The user opens cotazo website', () => {
   cy.on('uncaught:exception', (err, runnable) => {

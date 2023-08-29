@@ -1,4 +1,4 @@
-class LoginPage {
+export class LoginPage {
   elements = {
     usernameInput: () => cy.get('[data-testid="login-usermame-input"]'),
     passwordInput: () => cy.get('[data-testid="login-password-input"]'),
@@ -102,4 +102,4 @@ class LoginPage {
   }
 }
 
-module.exports = new LoginPage();
+export const loginPage = new LoginPage();
