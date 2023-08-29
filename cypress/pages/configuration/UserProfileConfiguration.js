@@ -3,7 +3,7 @@ const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudget
 const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
-const archivedBudgetListPage = require('../../pages/budget/archived/ArchivedBudgetListPage');
+import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';
 const inProgressBudgetsEditPage = require('../../pages/budget/inProgress/InProgressBudgetsEditPage');
 const translationConfiguration = require('../../pages/configuration/TranslationConfiguration');
 const parametersConfiguration = require('../../pages/configuration/ParametersConfiguration');
