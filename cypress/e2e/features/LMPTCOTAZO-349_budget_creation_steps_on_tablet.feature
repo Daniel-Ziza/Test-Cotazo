@@ -167,7 +167,7 @@ Feature: Budget creation steps on tablet
     And The user completes the final notes form
       | duration | End_Notes         |
       | 2h       | example End Notes |
-    Then The user completes the budget and verifies that it is pending
+    Then The user completes the budget and verifies that it is pending in "tablet"
     And The user deletes the previously created budget in "tablet"
 
   @LMPTCOTAZO-360

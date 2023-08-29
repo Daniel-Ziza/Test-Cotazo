@@ -187,7 +187,7 @@ Then('The user saves the budget and verifies that it is in editing status in {st
   cy.wait('@save').its('response.statusCode').should('eq', 200).then(() => {
     cy.visit("/budgets").then(() => {
       if (type === 'mobile') {
-        inProgressBudgetsListPage.commonPageElements.pageEditBtn().eq(1).click().then(() => {
+        inProgressBudgetsListPage.commonPageElements.pageEditMobileBtn().click().then(() => {
           cy.slowDownEnd();
           inProgressBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
         });
@@ -202,7 +202,7 @@ Then('The user saves the budget and verifies that it is in editing status in {st
   });
 });
 
-Then('The user completes the budget and verifies that it is pending', () => {
+Then('The user completes the budget and verifies that it is pending in {string}', (type) => {
   cy.on('uncaught:exception', (err, runnable) => {
     return false;
   });
@@ -214,10 +214,18 @@ Then('The user completes the budget and verifies that it is pending', () => {
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
   pendingBudgetsEditPage.clickFinishBtn();
   cy.wait('@create').its('response.statusCode').should('eq', 200).then((responseData) => {
-    inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click().then(() => {
-      cy.slowDownEnd();
-      completedBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
-    });
+    if (type === 'mobile'){
+      inProgressBudgetsListPage.commonPageElements.pagePendingMobileBtn().click().then(() => {
+        cy.slowDownEnd();
+        completedBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
+      });
+    } else {
+      inProgressBudgetsListPage.commonPageElements.pagePendingBtn().click().then(() => {
+        cy.slowDownEnd();
+        completedBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
+      });
+    }
+
   });
 });
 
