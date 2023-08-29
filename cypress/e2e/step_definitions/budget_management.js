@@ -6,7 +6,7 @@ import {
 import moment, { duration } from 'moment';
 import { slowCypressDown } from "cypress-slow-down";
 import 'cypress-slow-down/commands'
-const homePage = require('../../pages/HomePage');
+import {homePage} from '../../pages/HomePage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const inProgressBudgetsEditPage = require('../../pages/budget/inProgress/InProgressBudgetsEditPage');
 const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')

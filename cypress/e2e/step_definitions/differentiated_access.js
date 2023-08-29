@@ -7,7 +7,7 @@ import {
 const userProfileConfiguration = require('../../pages/configuration/UserProfileConfiguration');
 const userConfiguration = require('../../pages/configuration/UserConfiguration');
 const userGroupConfiguration = require('../../pages/configuration/UserGroupConfiguration');
-const homePage = require('../../pages/HomePage');
+import {homePage} from '../../pages/HomePage';
 
 //steps for user features 
 

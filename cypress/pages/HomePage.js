@@ -1,5 +1,5 @@
 import moment, { duration } from 'moment';
-class HomePage {
+export class HomePage {
     elements = {
         toCreateBtn: () => cy.get(':nth-child(1) > :nth-child(1) > :nth-child(1) > .small-box > .cotazo-card-bottom > .budget-painel-badge-name'),
         supportRequestBtn: () => cy.get('[data-testid="menu.item.assistance"]'),
@@ -32,4 +32,4 @@ class HomePage {
     }
 }
 
-module.exports = new HomePage();
+export const homePage = new HomePage();

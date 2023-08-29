@@ -6,7 +6,7 @@ import {
 
 import { loginPage } from '../../pages/LoginPage';
 const supportRequestPage = require('../../pages/supportRequest/SupportRequestPage');
-const homePage = require('../../pages/HomePage');
+import {homePage} from '../../pages/HomePage';
 const supportRequestManagementPage = require('../../pages/supportRequest/SupportRequestManagementPage');
 
 When('The user goes to the support request', () => {

@@ -1,4 +1,4 @@
-const homePage = require('../../pages/HomePage');
+import {homePage} from '../HomePage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');

@@ -7,7 +7,7 @@ import {
 import {loginPage} from '../../pages/LoginPage';
 const inProgressBudgetsListPage = require("../../pages/budget/inProgress/InProgressBudgetsListPage");
 const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
-const homePage = require('../../pages/HomePage');
+import {homePage} from '../../pages/HomePage';
 
 Given('The user logs in Cotazo', () => {
     cy.on('uncaught:exception', (err, runnable) => {
