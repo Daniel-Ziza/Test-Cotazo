@@ -10,7 +10,7 @@ const parametersConfiguration = require('../../pages/configuration/ParametersCon
 const serviceConfiguration = require('./ServicesConfiguration');
 const userConfiguration = require('../../pages/configuration/UserConfiguration');
 const userGroupConfiguration = require('../../pages/configuration/UserGroupConfiguration');
-const paymentAnalysis = require('../../pages/analysis/PaymentAnalysis');
+import { paymentAnalysis } from '../analysis/PaymentAnalysis';
 import { budgetAnalysis } from '../analysis/BudgetAnalysis';
 const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
 const contactPage = require('../../pages/contact/ContactPage');
