@@ -4,7 +4,7 @@ const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgr
 import {completedBudgetsListPage} from '../budget/completed/CompletedBudgetsListPage';
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
 import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';
-const inProgressBudgetsEditPage = require('../../pages/budget/inProgress/InProgressBudgetsEditPage');
+import {inProgressBudgetsEditPage} from '../budget/inProgress/InProgressBudgetsEditPage';
 const translationConfiguration = require('../../pages/configuration/TranslationConfiguration');
 const parametersConfiguration = require('../../pages/configuration/ParametersConfiguration');
 const serviceConfiguration = require('./ServicesConfiguration');
