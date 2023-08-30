@@ -5,7 +5,7 @@ import {
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
 import {loginPage} from '../../pages/LoginPage';
-const inProgressBudgetsListPage = require("../../pages/budget/inProgress/InProgressBudgetsListPage");
+import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
 import {homePage} from '../../pages/HomePage';
 

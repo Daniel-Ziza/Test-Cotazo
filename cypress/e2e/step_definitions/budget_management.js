@@ -9,7 +9,7 @@ import 'cypress-slow-down/commands'
 import {homePage} from '../../pages/HomePage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 import {inProgressBudgetsEditPage} from '../../pages/budget/inProgress/InProgressBudgetsEditPage';
-const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')
+import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
 const pendingBudgetsEditPage = require('../../pages/budget/pending/PendingBudgetsEditPage');
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
