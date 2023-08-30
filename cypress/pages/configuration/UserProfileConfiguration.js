@@ -14,7 +14,6 @@ import { paymentAnalysis } from '../analysis/PaymentAnalysis';
 import { budgetAnalysis } from '../analysis/BudgetAnalysis';
 const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
 const contactPage = require('../../pages/contact/ContactPage');
-const contactManagementPage = require('../../pages/contact/ContactManagementPage');
 
 export class UserProfileConfiguration {
     locator = {
