@@ -1,6 +1,6 @@
 import { homePage } from '../HomePage';
-const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
-import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
+import {pendingBudgetsListPage} from '../budget/pending/PendingBudgetsListPage';
+import {inProgressBudgetsListPage} from '../budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../budget/completed/CompletedBudgetsListPage';
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
 import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';

@@ -7,7 +7,7 @@ import moment, { duration } from 'moment';
 import { slowCypressDown } from "cypress-slow-down";
 import 'cypress-slow-down/commands'
 import {homePage} from '../../pages/HomePage';
-const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
+import {pendingBudgetsListPage} from '../../pages/budget/pending/PendingBudgetsListPage';
 import {inProgressBudgetsEditPage} from '../../pages/budget/inProgress/InProgressBudgetsEditPage';
 import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
