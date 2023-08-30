@@ -47,3 +47,6 @@
 !configuration/ParametersConfiguration.js
 !configuration/ServicesConfiguration.js
 !configuration/TranslationConfiguration.js
+!contact
+!contact/ContactManagementPage.js
+!contact/ContactPage.js
