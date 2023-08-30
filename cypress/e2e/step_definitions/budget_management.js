@@ -10,7 +10,7 @@ import {homePage} from '../../pages/HomePage';
 const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudgetsListPage');
 const inProgressBudgetsEditPage = require('../../pages/budget/inProgress/InProgressBudgetsEditPage');
 const inProgressBudgetsListPage = require('../../pages/budget/inProgress/InProgressBudgetsListPage')
-const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
+import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
 const pendingBudgetsEditPage = require('../../pages/budget/pending/PendingBudgetsEditPage');
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
 const utils = require('../../utils');

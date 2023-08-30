@@ -6,7 +6,7 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 import {loginPage} from '../../pages/LoginPage';
 const inProgressBudgetsListPage = require("../../pages/budget/inProgress/InProgressBudgetsListPage");
-const completedBudgetsListPage = require('../../pages/budget/completed/CompletedBudgetsListPage');
+import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
 import {homePage} from '../../pages/HomePage';
 
 Given('The user logs in Cotazo', () => {
