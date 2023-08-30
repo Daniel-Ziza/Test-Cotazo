@@ -5,9 +5,9 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 
 import { loginPage } from '../../pages/LoginPage';
-const supportRequestPage = require('../../pages/supportRequest/SupportRequestPage');
+import {supportRequestPage} from '../../pages/supportRequest/SupportRequestPage';
 import {homePage} from '../../pages/HomePage';
-const supportRequestManagementPage = require('../../pages/supportRequest/SupportRequestManagementPage');
+import {supportRequestManagementPage} from '../../pages/supportRequest/SupportRequestManagementPage';
 
 When('The user goes to the support request', () => {
     cy.on('uncaught:exception', (err, runnable) => {

@@ -12,7 +12,7 @@ import {userConfiguration} from '../configuration/UserConfiguration';
 import {userGroupConfiguration} from '../configuration/UserGroupConfiguration';
 import { paymentAnalysis } from '../analysis/PaymentAnalysis';
 import { budgetAnalysis } from '../analysis/BudgetAnalysis';
-const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
+import {supportRequestPage} from '../supportRequest/SupportRequestPage';
 import {contactPage} from '../contact/ContactPage';
 
 export class UserProfileConfiguration {
@@ -324,14 +324,14 @@ export class UserProfileConfiguration {
         if (access === 'add message to support request') {
             homePage.toGo('Pedidos de Suporte');
             cy.slowDown(200);
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
-            supportRequest.elements.statusSelect().click();
-            supportRequest.elements.optionAnalyzing().click();
-            supportRequest.elements.searchSupportRequestBtn().click();
-            supportRequest.elements.viewFistSupportRequest().click();
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
-            supportRequest.elements.sentCommentBtn().should('be.disabled');
-            supportRequest.elements.commentsTimeline().should('be.visible')
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequestPage.elements.statusSelect().click();
+            supportRequestPage.elements.optionAnalyzing().click();
+            supportRequestPage.elements.searchSupportRequestBtn().click();
+            supportRequestPage.elements.viewFistSupportRequest().click();
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequestPage.elements.sentCommentBtn().should('be.disabled');
+            supportRequestPage.elements.commentsTimeline().should('be.visible')
                 .type('example text').invoke('text').then((text) => {
                     if (text === 'example text') {
                         supportRequest.elements.sentCommentBtn().should('not.be.disabled');
@@ -342,17 +342,17 @@ export class UserProfileConfiguration {
         if (access === 'edit support request') {
             homePage.toGo('Pedidos de Suporte');
             cy.slowDown(200);
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
-            supportRequest.elements.statusSelect().click();
-            supportRequest.elements.optionAnalyzing().click();
-            supportRequest.elements.searchSupportRequestBtn().click();
-            supportRequest.elements.viewFistSupportRequest().click();
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
-            supportRequest.elements.statusSupportRequestInput().should('not.be.disabled');
-            supportRequest.elements.updateSupportRequestBtn().should('be.disabled');
-            supportRequest.elements.statusSupportRequestInput().click();
-            supportRequest.elements.pendingOption().click();
-            supportRequest.elements.updateSupportRequestBtn().should('not.be.disabled');
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequestPage.elements.statusSelect().click();
+            supportRequestPage.elements.optionAnalyzing().click();
+            supportRequestPage.elements.searchSupportRequestBtn().click();
+            supportRequestPage.elements.viewFistSupportRequest().click();
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequestPage.elements.statusSupportRequestInput().should('not.be.disabled');
+            supportRequestPage.elements.updateSupportRequestBtn().should('be.disabled');
+            supportRequestPage.elements.statusSupportRequestInput().click();
+            supportRequestPage.elements.pendingOption().click();
+            supportRequestPage.elements.updateSupportRequestBtn().should('not.be.disabled');
             cy.slowDownEnd();
         }
 
@@ -599,27 +599,27 @@ export class UserProfileConfiguration {
         if (access === 'add message to support request') {
             homePage.toGo('Pedido de Suporte');
             cy.slowDown(200);
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
-            supportRequest.elements.statusSelect().click();
-            supportRequest.elements.optionAnalyzing().click();
-            supportRequest.elements.searchSupportRequestBtn().click();
-            supportRequest.elements.viewFistSupportRequest().click();
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
-            supportRequest.elements.sentCommentBtn().should('not.exist');
-            supportRequest.elements.commentsTimeline().should('not.exist');
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequestPage.elements.statusSelect().click();
+            supportRequestPage.elements.optionAnalyzing().click();
+            supportRequestPage.elements.searchSupportRequestBtn().click();
+            supportRequestPage.elements.viewFistSupportRequest().click();
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequestPage.elements.sentCommentBtn().should('not.exist');
+            supportRequestPage.elements.commentsTimeline().should('not.exist');
             cy.slowDownEnd();
         }
         if (access === 'edit support request') {
             homePage.toGo('Pedidos de Suporte');
             cy.slowDown(200);
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
-            supportRequest.elements.statusSelect().click();
-            supportRequest.elements.optionAnalyzing().click();
-            supportRequest.elements.searchSupportRequestBtn().click();
-            supportRequest.elements.viewFistSupportRequest().click();
-            supportRequest.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
-            supportRequest.elements.statusSupportRequestInput().should('not.exist');
-            supportRequest.elements.updateSupportRequestBtn().should('not.exist');
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Pedido de Suporte');
+            supportRequestPage.elements.statusSelect().click();
+            supportRequestPage.elements.optionAnalyzing().click();
+            supportRequestPage.elements.searchSupportRequestBtn().click();
+            supportRequestPage.elements.viewFistSupportRequest().click();
+            supportRequestPage.elements.pageDescriptionTitleSupportRequest().should('contain.text', 'Analisar Pedido de Suporte');
+            supportRequestPage.elements.statusSupportRequestInput().should('not.exist');
+            supportRequestPage.elements.updateSupportRequestBtn().should('not.exist');
             cy.slowDownEnd();
         }
 

@@ -1,4 +1,4 @@
-class SupportRequestManagementPage {
+export class SupportRequestManagementPage {
     elements = {
         incidentNumber: () => cy.get('[data-testid="assistance_search_request_number"]'),
         searchSupportRequestBtn: () => cy.get('[data-testid="assistance-search-filter-btn"]'),
@@ -129,4 +129,4 @@ class SupportRequestManagementPage {
     }
 }
 
-module.exports = new SupportRequestManagementPage();
+export const supportRequestManagementPage = new SupportRequestManagementPage();

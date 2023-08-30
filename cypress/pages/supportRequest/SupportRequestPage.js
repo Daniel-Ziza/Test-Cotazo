@@ -1,6 +1,6 @@
 const utils = require('../../utils');
 
-class SupportRequestPage {
+export class SupportRequestPage {
     elements = {
         technicianEmailInput: () => cy.get('[data-testid="assistance-create-email-input"]'), //cy.get('[id="E-mail para contacto*"]')
         subjectSupportRequestInput: () => cy.get('[data-testid="assistance-create-subject-input"]'),//cy.get('[id="Assunto*"]')
@@ -58,4 +58,4 @@ class SupportRequestPage {
     }
 }
 
-module.exports = new SupportRequestPage();
+export const supportRequestPage = new SupportRequestPage();
