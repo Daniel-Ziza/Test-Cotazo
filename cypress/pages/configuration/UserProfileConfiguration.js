@@ -2,7 +2,7 @@ import { homePage } from '../HomePage';
 import {pendingBudgetsListPage} from '../budget/pending/PendingBudgetsListPage';
 import {inProgressBudgetsListPage} from '../budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../budget/completed/CompletedBudgetsListPage';
-const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
+import {sentBudgetsListPage} from '../budget/sent/SentBudgetsListPage';
 import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';
 import {inProgressBudgetsEditPage} from '../budget/inProgress/InProgressBudgetsEditPage';
 const translationConfiguration = require('../../pages/configuration/TranslationConfiguration');

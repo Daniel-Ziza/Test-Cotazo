@@ -12,7 +12,7 @@ import {inProgressBudgetsEditPage} from '../../pages/budget/inProgress/InProgres
 import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
 import {pendingBudgetsEditPage} from '../../pages/budget/pending/PendingBudgetsEditPage';
-const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
+import {sentBudgetsListPage} from '../../pages/budget/sent/SentBudgetsListPage';
 const utils = require('../../utils');
 
 slowCypressDown(false);

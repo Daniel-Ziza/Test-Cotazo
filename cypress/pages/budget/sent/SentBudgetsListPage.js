@@ -1,7 +1,7 @@
 import BaseBudgetListPageClass from '../base/BaseBudgetsListPageClass';
 
-class SentBudgetsListPage extends BaseBudgetListPageClass {
+export class SentBudgetsListPage extends BaseBudgetListPageClass {
     pageElements = {};
 }
 
-module.exports = new SentBudgetsListPage()
+export const sentBudgetsListPage = new SentBudgetsListPage()
