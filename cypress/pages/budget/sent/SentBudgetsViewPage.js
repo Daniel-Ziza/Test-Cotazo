@@ -1,7 +1,7 @@
 import BaseQuotationViewPageClass from '../base/BaseBudgetsViewPageClass';
 
-class SentBudgetsViewPage extends BaseQuotationViewPageClass {
+export class SentBudgetsViewPage extends BaseQuotationViewPageClass {
     pageElements = {};
 }
 
-export default new SentBudgetsViewPage()
+export const sentBudgetsViewPage = new SentBudgetsViewPage()
