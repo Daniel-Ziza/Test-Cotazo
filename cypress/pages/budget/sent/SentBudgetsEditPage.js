@@ -1,7 +1,7 @@
 import BaseBudgetEditPageClass from '../base/BaseBudgetsEditPageClass';
 
-class SentBudgetsEditPage extends BaseBudgetEditPageClass {
+export class SentBudgetsEditPage extends BaseBudgetEditPageClass {
     pageElements = {};
 }
 
-module.exports = new SentBudgetsEditPage()
+export const sentBudgetsEditPage = new SentBudgetsEditPage()
