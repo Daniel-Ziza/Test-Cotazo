@@ -4,9 +4,9 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-const userProfileConfiguration = require('../../pages/configuration/UserProfileConfiguration');
-const userConfiguration = require('../../pages/configuration/UserConfiguration');
-const userGroupConfiguration = require('../../pages/configuration/UserGroupConfiguration');
+import {userProfileConfiguration} from '../../pages/configuration/UserProfileConfiguration';
+import {userConfiguration} from '../../pages/configuration/UserConfiguration';
+import {userGroupConfiguration} from '../../pages/configuration/UserGroupConfiguration';
 import {homePage} from '../../pages/HomePage';
 
 //steps for user features 

@@ -1,4 +1,4 @@
-class userConfiguration {
+export class UserConfiguration {
    
     elements = {
         userSearchText: () => cy.get('[data-testid="cotazo-users-search-input"]'),
@@ -27,4 +27,4 @@ class userConfiguration {
 
 }
 
-module.exports = new userConfiguration();
+export const userConfiguration = new UserConfiguration();

@@ -1,4 +1,4 @@
-class serviceConfiguration {
+export class ServiceConfiguration {
     elements = {
         configurationBtn: () => cy.get('.nav-pills > :nth-child(3) > :nth-child(1) > .nav-link'),
         serviceBtn: () => cy.get('.menu-is-opening > .nav > :nth-child(3) > .cotazo-menu-nav-li-background-div > .nav-link'),
@@ -20,4 +20,4 @@ class serviceConfiguration {
 
 }
 
-module.exports = new serviceConfiguration();
+export const serviceConfiguration = new ServiceConfiguration();

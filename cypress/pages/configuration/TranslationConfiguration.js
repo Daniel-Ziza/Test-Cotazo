@@ -1,4 +1,4 @@
-class TraductionConfiguration {
+export class TranslationConfiguration {
    
     elements = {
         translationAction: () => cy.get('.budget-rect-icons'),
@@ -7,4 +7,4 @@ class TraductionConfiguration {
 
 }
 
-module.exports = new TraductionConfiguration();
+export const translationConfiguration = new TranslationConfiguration();

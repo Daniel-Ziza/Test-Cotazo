@@ -1,4 +1,4 @@
-class userGroupConfiguration {
+export class UserGroupConfiguration {
 
     elements = {
         userGroupSearchText: () => cy.get('[data-testid="cotazo-access-groups-search-input"]'),
@@ -15,4 +15,4 @@ class userGroupConfiguration {
     }
 }
 
-module.exports = new userGroupConfiguration();
+export const userGroupConfiguration = new UserGroupConfiguration();

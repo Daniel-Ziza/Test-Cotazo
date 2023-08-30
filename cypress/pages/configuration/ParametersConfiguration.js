@@ -1,4 +1,4 @@
-class ParametersConfiguration {
+export class ParametersConfiguration {
    
     elements = {
         parametersAction: () => cy.get('.budget-rect-icons'),
@@ -7,4 +7,4 @@ class ParametersConfiguration {
 
 }
 
-module.exports = new ParametersConfiguration();
+export const parametersConfiguration = new ParametersConfiguration();

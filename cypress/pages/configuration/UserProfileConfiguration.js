@@ -5,18 +5,18 @@ import {completedBudgetsListPage} from '../budget/completed/CompletedBudgetsList
 import {sentBudgetsListPage} from '../budget/sent/SentBudgetsListPage';
 import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';
 import {inProgressBudgetsEditPage} from '../budget/inProgress/InProgressBudgetsEditPage';
-const translationConfiguration = require('../../pages/configuration/TranslationConfiguration');
-const parametersConfiguration = require('../../pages/configuration/ParametersConfiguration');
-const serviceConfiguration = require('./ServicesConfiguration');
-const userConfiguration = require('../../pages/configuration/UserConfiguration');
-const userGroupConfiguration = require('../../pages/configuration/UserGroupConfiguration');
+import {translationConfiguration} from '../configuration/TranslationConfiguration';
+import {parametersConfiguration} from '../configuration/ParametersConfiguration';
+import {serviceConfiguration} from '../configuration/ServicesConfiguration';
+import {userConfiguration} from '../configuration/UserConfiguration';
+import {userGroupConfiguration} from '../configuration/UserGroupConfiguration';
 import { paymentAnalysis } from '../analysis/PaymentAnalysis';
 import { budgetAnalysis } from '../analysis/BudgetAnalysis';
 const supportRequest = require('../../pages/supportRequest/SupportRequestManagementPage');
 const contactPage = require('../../pages/contact/ContactPage');
 const contactManagementPage = require('../../pages/contact/ContactManagementPage');
 
-class userProfileConfiguration {
+export class UserProfileConfiguration {
     locator = {
         permissionsActionContainer: '.cotazo-profile-action-container'
     }
@@ -637,4 +637,4 @@ class userProfileConfiguration {
         }
     }
 }
-module.exports = new userProfileConfiguration();
+export const userProfileConfiguration = new UserProfileConfiguration();
