@@ -11,7 +11,7 @@ const pendingBudgetsListPage = require('../../pages/budget/pending/PendingBudget
 import {inProgressBudgetsEditPage} from '../../pages/budget/inProgress/InProgressBudgetsEditPage';
 import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
 import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
-const pendingBudgetsEditPage = require('../../pages/budget/pending/PendingBudgetsEditPage');
+import {pendingBudgetsEditPage} from '../../pages/budget/pending/PendingBudgetsEditPage';
 const sentBudgetsListPage = require('../../pages/budget/sent/SentBudgetsListPage');
 const utils = require('../../utils');
 
