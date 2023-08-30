@@ -1,7 +1,7 @@
 import BaseBudgetViewPageClass from '../base/BaseBudgetsViewPageClass';
 
-class PendingBudgetsViewPage extends BaseBudgetViewPageClass {
+export class PendingBudgetsViewPage extends BaseBudgetViewPageClass {
     pageElements = {};
 }
 
-export default new PendingBudgetsViewPage()
+export const pendingBudgetsViewPage = new PendingBudgetsViewPage()
