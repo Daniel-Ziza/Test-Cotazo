@@ -6,10 +6,10 @@ import {
 } from '@badeball/cypress-cucumber-preprocessor';
 import promisify from 'cypress-promise';
 import { Buffer } from 'buffer';
-const prerequisiteInstalaLoginPage = require('../../pages/prerequisites/PrerequisitesInstalaLoginPage');
-const prerequisitesInstalaServiceOrderCreationPage = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderCreationPage');
-const prerequisitesIntalaAcceptanceTermPage = require('../../pages/prerequisites/PrerequisitesIntalaAcceptanceTermPage');
-const prerequisitesInstalaServiceOrderManagement = require('../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement');
+import {prerequisitesInstalaLoginPage} from '../../pages/prerequisites/PrerequisitesInstalaLoginPage';
+import {prerequisitesInstalaServiceOrderCreationPage} from '../../pages/prerequisites/PrerequisitesInstalaServiceOrderCreationPage';
+import {prerequisitesIntalaAcceptanceTermPage} from '../../pages/prerequisites/PrerequisitesIntalaAcceptanceTermPage';
+import {prerequisitesInstalaServiceOrderManagement} from '../../pages/prerequisites/PrerequisitesInstalaServiceOrderManagement';
 
 Given('The user enters the instala page', async () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -32,7 +32,7 @@ And('The user clicks the enter button', async () => {
         return false;
     });
 
-    prerequisiteInstalaLoginPage.elements.enterInstalaBtn().click()
+    prerequisitesInstalaLoginPage.elements.enterInstalaBtn().click()
 });
 
 
@@ -66,9 +66,25 @@ When('The user enters the authorization data', async () => {
     //Go to the authorization page
     cy.visit(String(instalaLoginUrl)).then(() => {
         //authorization
-        prerequisiteInstalaLoginPage.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAME'));
-        prerequisiteInstalaLoginPage.elements.passwordInstalaInput().clear().type(Cypress.env('ADEO_PASSWORD'));
-        prerequisiteInstalaLoginPage.elements.signOnBtn().click();
+        prerequisitesInstalaLoginPage.elements.usernameInstalaInput().type(Cypress.env('ADEO_USERNAME'));
+        prerequisitesInstalaLoginPage.elements.passwordInstalaInput().clear().type(Cypress.env('ADEO_PASSWORD'));
+        
+      
+
+        // workaround to skip error caused by unnecessary redirection during instala login process
+        prerequisitesInstalaLoginPage.elements.signOnBtn().click();
+        
+        /*.then(() => {
+            cy.wait(3000).then(() => {
+                cy.url().then((url) => {
+                   if (url.includes(Cypress.env('INSTALA_PING_AUTH_SUBDOMAIN'))) {
+                    cy.visit(Cypress.env('PING_AUTH_URL_SCHEMA') + url.replace('http://','').replace('https://', ''))
+                   }
+                })
+            });
+        });*/
+
+        
     });
 
 });
@@ -79,6 +95,7 @@ When('The system obtains the token information', async () => {
         const token = urlParts[1];
         ////Saving the authentication_Token environment variables
         Cypress.env('AUTHORIZATION_TOKEN', token);
+        console.log(token)
     });
 });
 
@@ -139,7 +156,7 @@ When('The system uses the token information to signIn', async () => {
 
 When('The user enters the cockpit page', async () => {
     cy.intercept('GET', Cypress.env('INSTALA_BASE_URL') + '/lm-instala-api/servc-core/byUser').as('byUser');
-    cy.visit('https://instala-uat.leroymerlin.pt/cockpit')
+    cy.visit(Cypress.env('INSTALA_BASE_URL') + Cypress.env('INSTALA_COCKPIT_PATH'))
 
     cy.wait('@byUser').then((interception) => {
         Cypress.env('API_KEY_TOKEN', interception.request.headers.apikey);
@@ -162,17 +179,17 @@ When('The user enters the cockpit page', async () => {
 });
 
 
-Given('The user logs in Instala', () => {
-    cy.on('uncaught:exception', (err, runnable) => {
-        return false;
-    });
+// Given('The user logs in Instala', () => {
+//     cy.on('uncaught:exception', (err, runnable) => {
+//         return false;
+//     });
 
-    cy.on('uncaught exception', (err, runnable) => {
-        return false;
-    });
-    cy.visit(Cypress.env('INSTALA_BASE_URL'));
-    prerequisiteInstalaLoginPage.loginInstala();
-})
+//     cy.on('uncaught exception', (err, runnable) => {
+//         return false;
+//     });
+//     cy.visit(Cypress.env('INSTALA_BASE_URL'));
+//     prerequisitesInstalaLoginPage.loginInstala();
+// })
 
 And('The user clicks on service order creation', () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -321,15 +338,26 @@ And('The user makes a manual distribution of the service', () => {
     prerequisitesInstalaServiceOrderManagement.dateUpdate();
 });
 
-// And('The client confirms the service', () => {
-//     Cypress.on('uncaught:exception', (err, runnable) => {
-//         return false;
-//     })
-//     cy.visit(Cypress.env('statusLink'));
-//     prerequisitesInstalaServiceOrderManagement.confirmService();
-//     cy.visit(Cypress.env('INSTALA_BASE_URL'));
-//     prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
-// });
+And('The user makes a manual distribution of the service in PROD', () => {
+    cy.on('uncaught:exception', (err, runnable) => {
+        return false;
+    });
+
+    cy.on('uncaught exception', (err, runnable) => {
+        return false;
+    });
+    prerequisitesInstalaServiceOrderManagement.dateUpdatePROD();
+});
+
+And('The client confirms the service', () => {
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        return false;
+    })
+    cy.visit(Cypress.env('statusLink'));
+    prerequisitesInstalaServiceOrderManagement.confirmService();
+    cy.visit(Cypress.env('INSTALA_BASE_URL'));
+    prerequisitesInstalaServiceOrderManagement.serviceOrderSearch();
+});
 
 And('The technician agrees to perform the service', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {

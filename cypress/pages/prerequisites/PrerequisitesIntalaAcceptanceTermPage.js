@@ -1,6 +1,6 @@
-class PrerequisitesIntalaAcceptanceTermPage {
+export class PrerequisitesIntalaAcceptanceTermPage {
     elements = {
-        conditionAcceptanceCheck: () => cy.get(':nth-child(4) > span > input'),
+        conditionAcceptanceCheck: () => cy.get(':nth-child(4) > .mt-text > span > input'),
         signatureInput: () => cy.get('.signature > div'),
         sendAcceptanceTermsBtn: () => cy.get('.button-primary'),
         confirmationAcceptanceTermsLabel: () => cy.get('.container-fluid')
@@ -18,4 +18,4 @@ class PrerequisitesIntalaAcceptanceTermPage {
     };
 }
 
-module.exports = new PrerequisitesIntalaAcceptanceTermPage();
+export const prerequisitesIntalaAcceptanceTermPage = new PrerequisitesIntalaAcceptanceTermPage();

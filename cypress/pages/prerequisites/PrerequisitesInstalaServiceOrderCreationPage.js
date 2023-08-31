@@ -1,7 +1,7 @@
 import moment from 'moment-business-days';
 
 
-class PrerequisitesInstalaServiceOrderCreationPage {
+export class PrerequisitesInstalaServiceOrderCreationPage {
     elements = {
         serviceOrderCreationBtn: () => cy.get('[title="Cadastro de Ordens de Serviço"] > .menu-item > a'),
         storeCodeSelect: () => cy.get('#issuerPlant > .react-select__control'),
@@ -71,4 +71,4 @@ class PrerequisitesInstalaServiceOrderCreationPage {
     };
 }
 
-module.exports = new PrerequisitesInstalaServiceOrderCreationPage();
+export const PrerequisitesInstalaServiceOrderCreationPage = new PrerequisitesInstalaServiceOrderCreationPage();

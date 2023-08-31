@@ -20,7 +20,7 @@ const currentMonthName = monthNamesInPortuguese[currentMonth];
 const currentMonthAndYear = `${currentMonthName} ${currentYear}`;
 const currentDayMonthAndYear = `, ${currentDay} de ${currentMonthName} de ${currentYear}`;
 
-class PrerequisitesInstalaServiceOrderManagement {
+export class PrerequisitesInstalaServiceOrderManagement {
     elements = {
         searchFieldInput: () => cy.get('#sidenav-search-input'),
         searchBtn: () => cy.get('[class="glyph glyph-magnifier"'),
@@ -94,14 +94,14 @@ class PrerequisitesInstalaServiceOrderManagement {
                 cy.contains('Prestador selecionado (manual)').click()
                 this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
                 //Button distribute
-                cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+                cy.get('.modal-body > .footer-buttons > .mc-button--solid').click()
             } else {
                 cy.visit(Cypress.env('INSTALA_BASE_URL'));
                 this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber')+'{enter}');
                 //this.elements.searchFieldInput().type('60148{enter}'); //line for test development
                 cy.get('.padding').click();
                 cy.get('.tooltip-menu > :nth-child(6)').click();
-                cy.get('[id="dsText"]').type('O Lorem Ipsum é um texto modelo da indústria tipográfica');
+                cy.get('.mu-mt-050 > #dsText').type('O Lorem Ipsum é um texto modelo da indústria tipográfica');
                 cy.get('[class="button button-primary button-full"]').click();
                 this.elements.orderServiceSelect().click();
                 cy.get('#distributed-service > #outline-button').click();
@@ -120,7 +120,7 @@ class PrerequisitesInstalaServiceOrderManagement {
                 cy.contains('Prestador selecionado (manual)').click()
                 this.elements.supplierSelect().click().type(Cypress.env('SUPPLIER_NAME') + '{enter}');
                 //Button distribute
-                cy.get('.modal-body > .footer-buttons > .css-1mrxw8b-button').click()
+                cy.get('.modal-body > .footer-buttons > .mc-button--solid').click()
             }
         })
     };
@@ -131,4 +131,4 @@ class PrerequisitesInstalaServiceOrderManagement {
     };
 }
 
-module.exports = new PrerequisitesInstalaServiceOrderManagement();
+export const prerequisitesInstalaServiceOrderManagement = new PrerequisitesInstalaServiceOrderManagement();
