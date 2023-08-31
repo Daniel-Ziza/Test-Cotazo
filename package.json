@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "env-cmd cypress open",
-    "test:run": "env-cmd cypress run --browser chrome --headless"
+    "test:run": "env-cmd cypress run --browser chrome --headed"
   },
   "keywords": [
     "cypress"
