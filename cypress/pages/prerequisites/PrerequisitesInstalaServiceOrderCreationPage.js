@@ -71,4 +71,4 @@ export class PrerequisitesInstalaServiceOrderCreationPage {
     };
 }
 
-export const PrerequisitesInstalaServiceOrderCreationPage = new PrerequisitesInstalaServiceOrderCreationPage();
+export const prerequisitesInstalaServiceOrderCreationPage = new PrerequisitesInstalaServiceOrderCreationPage();
