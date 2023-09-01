@@ -1,5 +1,5 @@
 export class TranslationConfiguration {
-   
+
     elements = {
         translationAction: () => cy.get('.budget-rect-icons'),
     };

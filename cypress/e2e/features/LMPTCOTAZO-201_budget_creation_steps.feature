@@ -128,11 +128,11 @@ Feature: Budget creation steps
     Then The user verifies that the character counter shows "250/250" characters in "material observation"
     And The user loads a file with "fields with more characters than allowed" in "desktop"
     Then The user verifies that message is appropriate for "fields with more characters than allowed"
-    # And The user continues to the next step
-    # When The user tries to write more than "7000" characters in "endnotes"
-    # Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
-    # And The user saves the budget and verifies that it is in editing status
-    # And The user deletes the previously created budget
+  # And The user continues to the next step
+  # When The user tries to write more than "7000" characters in "endnotes"
+  # Then The user verifies that the character counter shows "7000/7000" characters in "endnotes"
+  # And The user saves the budget and verifies that it is in editing status
+  # And The user deletes the previously created budget
 
   @LMPTCOTAZO-214
   Scenario: The user starts creating the budget and saves it

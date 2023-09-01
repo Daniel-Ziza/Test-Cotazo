@@ -49,28 +49,28 @@ Feature: Support request on mobile
         And The user clicks on toggle button in "mobile"
         Then The "technician" cannot see the request on the support request page
 
-@LMPTCOTAZO-385
-Scenario: Support request by an technician in Cotazo
-    When An "technician" logs in to cotazo
-    And The user clicks on toggle button in "mobile"
-    And The user goes to the support request page
-    And The "technician" creates a new support request in "mobile"
-    Then The "technician" verifies that he can see the created request
-    And The user clicks on toggle button in "mobile"
-    And The user logs out
-    And The user reloads the page
-    When An "administrator" logs in to cotazo
-    And The user clicks on toggle button in "mobile"
-    Then The "administrator" can see the request on the support request page
-    And The user clicks on toggle button in "mobile"
-    And The user logs out
-    Given The user opens cotazo website
-    When An "installer" logs in to cotazo
-    And The user clicks on toggle button in "mobile"
-    Then The "installer" can see the request on the support request page
+    @LMPTCOTAZO-385
+    Scenario: Support request by an technician in Cotazo
+        When An "technician" logs in to cotazo
+        And The user clicks on toggle button in "mobile"
+        And The user goes to the support request page
+        And The "technician" creates a new support request in "mobile"
+        Then The "technician" verifies that he can see the created request
+        And The user clicks on toggle button in "mobile"
+        And The user logs out
+        And The user reloads the page
+        When An "administrator" logs in to cotazo
+        And The user clicks on toggle button in "mobile"
+        Then The "administrator" can see the request on the support request page
+        And The user clicks on toggle button in "mobile"
+        And The user logs out
+        Given The user opens cotazo website
+        When An "installer" logs in to cotazo
+        And The user clicks on toggle button in "mobile"
+        Then The "installer" can see the request on the support request page
 
-@LMPTCOTAZO-386
-Scenario: Flow of a support request management
+    @LMPTCOTAZO-386
+    Scenario: Flow of a support request management
         When An "administrator" logs in to cotazo
         And The user clicks on toggle button in "mobile"
         And The user goes to the support request page
@@ -121,18 +121,18 @@ Scenario: Flow of a support request management
         And The user goes to the support request page
         Then The installer checks the status of the support request
 
-@LMPTCOTAZO-387
-Scenario: Negative flow of support request creation
-    When The user goes to the support request
-    And The user enters invalid "email" values
-    And The subject is in read-only
-    And The user enters invalid "messages" values
-    Then The support request cannot be sent
-    And The user returns to the login page
-    When An "installer" logs in to cotazo
-    And The user clicks on toggle button in "mobile"
-    And The user goes to the support request page
-    And The user go to the create new support request in "mobile"
-    And The user enters invalid "subject" values
-    And The user enters invalid "messages" values
-    Then The support request cannot be sent
+    @LMPTCOTAZO-387
+    Scenario: Negative flow of support request creation
+        When The user goes to the support request
+        And The user enters invalid "email" values
+        And The subject is in read-only
+        And The user enters invalid "messages" values
+        Then The support request cannot be sent
+        And The user returns to the login page
+        When An "installer" logs in to cotazo
+        And The user clicks on toggle button in "mobile"
+        And The user goes to the support request page
+        And The user go to the create new support request in "mobile"
+        And The user enters invalid "subject" values
+        And The user enters invalid "messages" values
+        Then The support request cannot be sent

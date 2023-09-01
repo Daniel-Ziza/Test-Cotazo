@@ -6,7 +6,7 @@ class BaseBudgetsListPageClass extends UserLayout {
         previousPageButton: () => cy.get('.row.cotazo-page-controls.budget-page-controls > a:first-child').next(),
         nextPageButton: () => cy.get('.row.cotazo-page-controls.budget-page-controls > a:last-child').prev(),
         pageCreateButton: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_CREATE'),
-        pageEditBtn: () => cy.get(':nth-child(3) > .d-none > .budget-painel-tab'),//cy.get('.cotazo-state-text-EDIT'),
+        pageEditBtn: () => cy.get(':nth-child(3) > .d-none > .budget-painel-tab'),
         pageEditMobileBtn: () => cy.get(':nth-child(3) > .d-md-none > .budget-painel-tab'),
         pageSubmittedBtn: () => cy.get('.budget-painel-each-tab > a.cotazo-state-text-SUBMITTED'),
         pagePendingBtn: () => cy.get('div.budget-painel-each-tab > a.cotazo-state-text-TO_LAUNCH'),
@@ -15,12 +15,12 @@ class BaseBudgetsListPageClass extends UserLayout {
         budgetDeleteBtn: () => cy.get('[data-testid="budget-remove-popup-web-yes"]'),
         budgetDeleteMobileBtn: () => cy.get('[data-testid="budget-remove-popup-mobile-yes"]'),
         statusTag: () => cy.get('.budget-painel-last-budgetevent-status-badget-container > .budget-painel-last-budgetevent-status-badge'),
-        viewServiceOrderBtn: () =>  cy.get('.cotazo-budget-action-view'),//cy.get('.budget-rect-icons > :nth-child(1)'),
-        editServiceOrderBtn: () => cy.get('.cotazo-budget-action-edit'), //cy.get('.budget-rect-icons > :nth-child(2)'),
-        deleteServiceOrderBtn: () => cy.get('.cotazo-budget-action-delete'), //cy.get('.budget-rect-icons > :nth-child(3)'),
-        syncServiceOrderBtn: () => cy.get('.cotazo-budget-action-sync'), //cy.get('.budget-rect-icons > :nth-child(4)'),
-        downloadCustomerBudget: () => cy.get('.cotazo-budget-action-client-pdf'), //cy.get('.budget-rect-icons > :nth-child(3)'),
-        downloadTechnicalBudget: () => cy.get('.cotazo-budget-action-technical-pdf'), //cy.get('.budget-rect-icons > :nth-child(4)'),
+        viewServiceOrderBtn: () => cy.get('.cotazo-budget-action-view'),
+        editServiceOrderBtn: () => cy.get('.cotazo-budget-action-edit'),
+        deleteServiceOrderBtn: () => cy.get('.cotazo-budget-action-delete'),
+        syncServiceOrderBtn: () => cy.get('.cotazo-budget-action-sync'),
+        downloadCustomerBudget: () => cy.get('.cotazo-budget-action-client-pdf'),
+        downloadTechnicalBudget: () => cy.get('.cotazo-budget-action-technical-pdf'),
         budgetIdentifier: () => cy.get('.budget-painel-externalCode'),
         addBudget: () => cy.get('[class="btn btn-success cotazo-spinner-loading-button budget-info-not-found-so-click-here-btn"]', { timeout: 10000 }),
         editBtnFirstOS: () => cy.get(':nth-child(1) > .col-xs-14 > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(3) > .budget-rect-icons > :nth-child(2)'),
@@ -49,7 +49,7 @@ class BaseBudgetsListPageClass extends UserLayout {
         this.commonPageElements.itemCount()
             .invoke('text')
             .then(itemCount => {
-                let maxPageNumber = parseInt(itemCount)/10;
+                let maxPageNumber = parseInt(itemCount) / 10;
                 const maxPageNumberDecimalPart = maxPageNumber % 1;
                 maxPageNumber = parseInt(maxPageNumber.toString());
                 if (maxPageNumberDecimalPart > 0) {
@@ -57,14 +57,14 @@ class BaseBudgetsListPageClass extends UserLayout {
                 }
                 const range = [...Array(maxPageNumber).keys(), maxPageNumber];
                 delete range[0];
-                cy.wrap(range).each( (currentPage) => {
+                cy.wrap(range).each((currentPage) => {
                     cy.document().then((doc) => {
                         if (doc.querySelectorAll('.cotazo-page-container-top > div > div > div.row.mb-2 > h6 > span').length) {
                             cy.get(searchableLocator).each($el => {
                                 if (validServiceOrder === 0 && $el.text().includes(searchableValue) && clicked === false) {
                                     validServiceOrder = validServiceOrder + 1;
                                     assert(true, 'Searchable Value Found');
-                                    if (findBy === 'contactNumber' && actionButtonNumber > 0 ) {
+                                    if (findBy === 'contactNumber' && actionButtonNumber > 0) {
                                         clicked = true;
                                         cy.wrap($el).parent().parent().find(actionButtonLocator).click();
                                     }
@@ -81,7 +81,7 @@ class BaseBudgetsListPageClass extends UserLayout {
                                         assert(true, 'Searchable Value Found');
                                     }
                                 }
-                            }).then( () => {
+                            }).then(() => {
                                 if (currentPage !== maxPageNumber && validServiceOrder === 0) {
                                     this.commonPageElements.nextPageButton().click();
                                 }
@@ -92,7 +92,7 @@ class BaseBudgetsListPageClass extends UserLayout {
                         }
                     });
                 });
-        });
+            });
     };
 
 }

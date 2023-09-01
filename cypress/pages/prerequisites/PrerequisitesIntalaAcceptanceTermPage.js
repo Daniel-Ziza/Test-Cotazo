@@ -10,7 +10,7 @@ export class PrerequisitesIntalaAcceptanceTermPage {
            Function to confirm service conditions in INSTALA
      */
 
-    acceptTerms ()  {
+    acceptTerms() {
         this.elements.conditionAcceptanceCheck().check();
         this.elements.signatureInput().click();
         this.elements.sendAcceptanceTermsBtn().click();

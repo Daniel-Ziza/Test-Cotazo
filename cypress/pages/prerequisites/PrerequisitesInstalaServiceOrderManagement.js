@@ -49,14 +49,14 @@ export class PrerequisitesInstalaServiceOrderManagement {
     };
 
     serviceOrderSearch() {
-        this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber')+'{enter}');
+        this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber') + '{enter}');
         //this.elements.searchFieldInput().type('XXXXX'); //line for test development
         //this.elements.searchBtn().click();
         this.elements.orderServiceSelect().click();
     };
 
     dateUpdatePROD() {
-        this.elements.pickerSelect().click().then( () => {
+        this.elements.pickerSelect().click().then(() => {
             this.elements.calendarSelect().then(() => {
                 this.elements.calendarMonth().invoke('text').then((textContent) => {
                     if (!textContent.includes(currentMonthAndYear)) {
@@ -77,7 +77,7 @@ export class PrerequisitesInstalaServiceOrderManagement {
     dateUpdate() {
         //click on distribuir
         cy.get('.service-order-edit > :nth-child(1) > :nth-child(2)').then($check => {
-            if ($check.find('#distributed-service > #outline-button').length){
+            if ($check.find('#distributed-service > #outline-button').length) {
                 cy.get('#distributed-service > #outline-button').click();
                 this.elements.pickerSelect().click().then(() => {
                     this.elements.calendarMonth().invoke('text').then((textContent) => {
@@ -97,7 +97,7 @@ export class PrerequisitesInstalaServiceOrderManagement {
                 cy.get('.modal-body > .footer-buttons > .mc-button--solid').click()
             } else {
                 cy.visit(Cypress.env('INSTALA_BASE_URL'));
-                this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber')+'{enter}');
+                this.elements.searchFieldInput().type(Cypress.env('orderServiceNumber') + '{enter}');
                 //this.elements.searchFieldInput().type('60148{enter}'); //line for test development
                 cy.get('.padding').click();
                 cy.get('.tooltip-menu > :nth-child(6)').click();

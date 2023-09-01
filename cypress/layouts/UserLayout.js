@@ -3,6 +3,5 @@ class UserLayout {
 
     };
 }
-  
+
 module.exports = UserLayout;
-  

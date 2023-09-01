@@ -4,4 +4,4 @@ export class CompletedBudgetsViewPage extends BaseBudgetViewPageClass {
     pageElements = {};
 }
 
-export const completedBudgetsViewPage= new CompletedBudgetsViewPage()
+export const completedBudgetsViewPage = new CompletedBudgetsViewPage()

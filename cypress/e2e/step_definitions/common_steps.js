@@ -4,10 +4,10 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-import {loginPage} from '../../pages/LoginPage';
-import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
-import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
-import {homePage} from '../../pages/HomePage';
+import { loginPage } from '../../pages/LoginPage';
+import { inProgressBudgetsListPage } from '../../pages/budget/inProgress/InProgressBudgetsListPage';
+import { completedBudgetsListPage } from '../../pages/budget/completed/CompletedBudgetsListPage';
+import { homePage } from '../../pages/HomePage';
 
 Given('The user logs in Cotazo', () => {
     cy.on('uncaught:exception', (err, runnable) => {
@@ -18,15 +18,15 @@ Given('The user logs in Cotazo', () => {
         return false;
     });
     cy.visit("/");
-        loginPage.singIn('installer');
-    
+    loginPage.singIn('installer');
+
     //It is necessary to update the automatic tests for the creation of service orders in Instala
     // Set as cypress env vars some values defined by previous tests.
     // cy.task('getServiceOrderNumber').then((serviceOrderNumber) => {
     //     Cypress.env("orderServiceNumber", serviceOrderNumber);
     //     assert(true, `The Service Order Number ${serviceOrderNumber} has been properly obtained and set as cypress environment variable`)
     // });
-    
+
     Cypress.env('orderServiceNumber', Cypress.env('SERVICE_ORDER_NUMBER'));
 });
 

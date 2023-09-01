@@ -6,13 +6,13 @@ import {
 import moment, { duration } from 'moment';
 import { slowCypressDown } from "cypress-slow-down";
 import 'cypress-slow-down/commands'
-import {homePage} from '../../pages/HomePage';
-import {pendingBudgetsListPage} from '../../pages/budget/pending/PendingBudgetsListPage';
-import {inProgressBudgetsEditPage} from '../../pages/budget/inProgress/InProgressBudgetsEditPage';
-import {inProgressBudgetsListPage} from '../../pages/budget/inProgress/InProgressBudgetsListPage';
-import {completedBudgetsListPage} from '../../pages/budget/completed/CompletedBudgetsListPage';
-import {pendingBudgetsEditPage} from '../../pages/budget/pending/PendingBudgetsEditPage';
-import {sentBudgetsListPage} from '../../pages/budget/sent/SentBudgetsListPage';
+import { homePage } from '../../pages/HomePage';
+import { pendingBudgetsListPage } from '../../pages/budget/pending/PendingBudgetsListPage';
+import { inProgressBudgetsEditPage } from '../../pages/budget/inProgress/InProgressBudgetsEditPage';
+import { inProgressBudgetsListPage } from '../../pages/budget/inProgress/InProgressBudgetsListPage';
+import { completedBudgetsListPage } from '../../pages/budget/completed/CompletedBudgetsListPage';
+import { pendingBudgetsEditPage } from '../../pages/budget/pending/PendingBudgetsEditPage';
+import { sentBudgetsListPage } from '../../pages/budget/sent/SentBudgetsListPage';
 const utils = require('../../utils');
 
 slowCypressDown(false);
@@ -214,7 +214,7 @@ Then('The user completes the budget and verifies that it is pending in {string}'
   cy.intercept('POST', '/lm-cotazo-budget/budget/finish/*').as('create');
   pendingBudgetsEditPage.clickFinishBtn();
   cy.wait('@create').its('response.statusCode').should('eq', 200).then((responseData) => {
-    if (type === 'mobile'){
+    if (type === 'mobile') {
       inProgressBudgetsListPage.commonPageElements.pagePendingMobileBtn().click().then(() => {
         cy.slowDownEnd();
         completedBudgetsListPage.findListItem(Cypress.env('orderServiceNumber'), 'quotationNumber', 0);
@@ -385,9 +385,9 @@ And('The user modifies the quantity of service in {string}', (type) => {
   cy.on('uncaught exception', (err, runnable) => {
     return false;
   });
-  if (type === 'mobile'){
+  if (type === 'mobile') {
     pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoMobileInput().clear().type('4');
-  }else{
+  } else {
     pendingBudgetsEditPage.commonPageElements.serviceQuantityCotazoInput().clear().type('4');
   }
 

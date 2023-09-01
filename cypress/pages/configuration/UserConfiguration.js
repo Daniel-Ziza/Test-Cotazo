@@ -1,5 +1,5 @@
 export class UserConfiguration {
-   
+
     elements = {
         userSearchText: () => cy.get('[data-testid="cotazo-users-search-input"]'),
         userSearchBtn: () => cy.get('[data-testid="cotazo-users-search-search-btn"]'),
@@ -22,8 +22,8 @@ export class UserConfiguration {
             this.elements.userSearchBtn().click();
         }
     }
-    
-    
+
+
 
 }
 

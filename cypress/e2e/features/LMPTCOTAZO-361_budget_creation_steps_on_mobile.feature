@@ -48,7 +48,7 @@ Feature: Budget creation steps on mobile
     And The user adds a new description of the service and inserts in "mobile"
     Then The user verifies that he can add multiple extra jobs with the same reference number
 
-      @LMPTCOTAZO-365
+  @LMPTCOTAZO-365
   Scenario: The user checks actions that can be performed on the Material Information page
     When The user searches the service order in "mobile"
     And The user searches in cotazo for the service order created in the prerequisites
@@ -84,10 +84,10 @@ Feature: Budget creation steps on mobile
     Then The "material information" table is empty
     And The user exports the list of materials in "mobile"
     Then The user verifies that the List of Materials has been downloaded
-    # And The user loads a file with "incomplete file" in "tablet"
-    # Then The user verifies that message is appropriate for "incomplete file"
-    # And The user loads a file with "bad format file" in "tablet"
-    # Then The user verifies that message is appropriate for "bad format file"
+  # And The user loads a file with "incomplete file" in "tablet"
+  # Then The user verifies that message is appropriate for "incomplete file"
+  # And The user loads a file with "bad format file" in "tablet"
+  # Then The user verifies that message is appropriate for "bad format file"
   # And The user loads a file with "missing required fields" in "mobile"
   # Then The user verifies that message is appropriate for "missing required fields"
   # And The user loads a file with "empty file" in "mobile"

@@ -44,7 +44,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         serviceQuantityCotazoMobileInput: () => cy.get('[data-testid="manage-budget-service-qt-mobile"]'),
         serviceList: () => cy.get('[class="manage-services-table-row-height "]'),
         serviceListMobile: () => cy.get('[class="manage-services-table-row-height-mobile d-md-none"]'),
-        materialDescriptionInput: () => cy.get('[data-testid="manage-budget-material-input-description"]'), 
+        materialDescriptionInput: () => cy.get('[data-testid="manage-budget-material-input-description"]'),
         materialQuantityInput: () => cy.get('[data-testid="manage-budget-material-input-quantity"]'),
         materialUnitInput: () => cy.get('[data-testid="manage-budget-material-input-unit"]'),
         materialObservationsInput: () => cy.get('[data-testid="manage-budget-material-input-obs"]'),
@@ -53,7 +53,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         cleanMobileBtn: () => cy.get(':nth-child(4) > .manage-budget-form-two-btn-add > .btn-default'),
         addBtn: () => cy.get('[data-testid="manage-budget-material-add-material-btn"]'),
         addMobileBtn: () => cy.get('[class="btn btn-success manage-form-mobile-btn-min-width"]'),
-        addMaterialBtn: () =>cy.get('[data-testid="manage-budget-material-add-material-btn"]'),
+        addMaterialBtn: () => cy.get('[data-testid="manage-budget-material-add-material-btn"]'),
         exportBtn: () => cy.get('.manage-budget-materials-exportimport-btns- > .manage-form-footer-btns-space'),
         exportMobileBtn: () => cy.get('.manage-budget-materials-exportimport-btns-mobile > .manage-form-footer-btns-space'),
         importBtn: () => cy.get('.manage-budget-materials-exportimport-btns- > :nth-child(2) > input'),
@@ -72,7 +72,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         unitPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pu'),
         totalPriceInformationTable: () => cy.get('tbody > tr > .manage-service-col-pt'),
         newServiceDescriptionInput: () => cy.get('[data-testid="manage-budget-service-new-description-web"]'),
-        newServiceDescriptionMobileInput: () =>cy.get('[data-testid="manage-budget-service-new-description-mobile"]'),
+        newServiceDescriptionMobileInput: () => cy.get('[data-testid="manage-budget-service-new-description-mobile"]'),
         addExtraServiceMobileBtnDisabled: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-mobile"]'),
         addExtraServiceBtnDisabled: () => cy.get('[data-testid="manage-budget-service-add-edit-btn-web"]'),
         addExtraServiceBtn: () => cy.get('.manage-services-new-description-container-icon'),
@@ -114,9 +114,9 @@ class BaseBudgetsEditPageClass extends UserLayout {
         this.commonPageElements.materialQuantityInput().type(quantity);
         this.commonPageElements.materialUnitInput().type(unit);
         this.commonPageElements.materialObservationsInput().type(observation);
-        if (type === 'mobile'){
+        if (type === 'mobile') {
             this.commonPageElements.addBtn().eq(1).dblclick();
-        }else {
+        } else {
             this.commonPageElements.addBtn().eq(0).dblclick();
         }
     }
@@ -155,7 +155,7 @@ class BaseBudgetsEditPageClass extends UserLayout {
         if (nameBtn === 'Conclude and Synchronize') {
             this.commonPageElements.syncBtn().should('be.disabled');
         }
-        if (nameBtn === 'Enter'){
+        if (nameBtn === 'Enter') {
             loginPage.elements.loginBtn().should('be.disabled');
         }
     };

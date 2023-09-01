@@ -5,7 +5,7 @@ import { ArchivedBudgetListPageClass } from '../archived/ArchivedBudgetListPage'
 
 let aggregation = (baseClass, ...mixins) => {
     let base = class _Combined extends baseClass {
-        constructor (...args) {
+        constructor(...args) {
             super(...args);
             mixins.forEach((mixin) => {
                 mixin.prototype.initializer.call(this);
@@ -33,7 +33,7 @@ class AllBudgetsListPage extends aggregation(
     InProgressBudgetsListPageClass,
     SentBudgetsListPageClass,
     ArchivedBudgetListPageClass
-) {}
+) { }
 
 
 export default new AllBudgetsListPage()

@@ -13,7 +13,7 @@ export class HomePage {
         dashboardAnalysisContent: () => cy.get('.cotazo-content-data-sub-container', { timeout: 10000 }),
         exportAnalysisDashboard: () => cy.get('.cotazo-exportimport-btn', { timeout: 10000 }),
         budgetAccessContainer: () => cy.get('[class="cotazo-page-container-top"]', { timeout: 10000 }),
-        toggleBtn:() => cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link'),
+        toggleBtn: () => cy.get('.d-none > .main-header > .navbar-nav > .nav-item > .nav-link'),
         toggleMobileBtn: () => cy.get('.d-md-none > .main-header > .navbar-nav > .nav-item > .nav-link'),
         userProfileBtn: () => cy.get('[data-testid="menu.configurations.profiles"]')
     };

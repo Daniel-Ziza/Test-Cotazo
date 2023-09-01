@@ -18,15 +18,15 @@ export class SupportRequestPage {
     };
 
     createSupportRequestWithLogin() {
-        let subject = 'subject ' + Math.trunc(Date.now()/1000);
+        let subject = 'subject ' + Math.trunc(Date.now() / 1000);
         Cypress.env('subject', subject);
         this.elements.subjectSupportRequestInput().type(Cypress.env('subject'));
         this.elements.messageSupportRequestInput()
             .type('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
     };
 
-    verifyValue(element){
-        if (element === 'email'){
+    verifyValue(element) {
+        if (element === 'email') {
             this.elements.technicianEmailInput().clear().type('exampleEmail@leroymerlin');
             this.elements.emailErrorMessage().should('have.text', 'Email inválido');
             this.elements.technicianEmailInput().clear().type('exampleEmail.leroymerlin.pt');
@@ -34,11 +34,11 @@ export class SupportRequestPage {
             this.elements.technicianEmailInput().clear().type('@leroymerlin.pt');
             this.elements.emailErrorMessage().should('have.text', 'Email inválido');
         }
-        if (element === 'messages'){
+        if (element === 'messages') {
             //verify messageSupportReques <=200
             let messageText = utils.randomString(201);
             this.elements.messageSupportRequestInput().clear().type(messageText);
-            this.elements.messageSupportRequestInput().invoke('text').then(newMessage =>{
+            this.elements.messageSupportRequestInput().invoke('text').then(newMessage => {
                 expect(messageText).to.not.equal(newMessage);
             })
             //verify messageSupportReques >=10
@@ -49,7 +49,7 @@ export class SupportRequestPage {
             this.elements.messageSupportRequestInput().clear();
             this.elements.emailErrorMessage().should('contain.text', 'Campo obrigatório')
         }
-        if(element === 'subject'){
+        if (element === 'subject') {
             //verify subject >10
             let messageText4 = utils.randomString(101);
             this.elements.subjectSupportRequestInput().clear().type(messageText4);

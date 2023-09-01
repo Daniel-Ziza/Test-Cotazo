@@ -1,5 +1,5 @@
 export class ParametersConfiguration {
-   
+
     elements = {
         parametersAction: () => cy.get('.budget-rect-icons'),
     };

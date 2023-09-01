@@ -4,10 +4,10 @@ import {
     And,
     Then,
 } from '@badeball/cypress-cucumber-preprocessor';
-import {userProfileConfiguration} from '../../pages/configuration/UserProfileConfiguration';
-import {userConfiguration} from '../../pages/configuration/UserConfiguration';
-import {userGroupConfiguration} from '../../pages/configuration/UserGroupConfiguration';
-import {homePage} from '../../pages/HomePage';
+import { userProfileConfiguration } from '../../pages/configuration/UserProfileConfiguration';
+import { userConfiguration } from '../../pages/configuration/UserConfiguration';
+import { userGroupConfiguration } from '../../pages/configuration/UserGroupConfiguration';
+import { homePage } from '../../pages/HomePage';
 
 //steps for user features 
 
@@ -208,7 +208,7 @@ And('The user deactivates the {string} action of the {string} access in the {str
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
-    
+
     if (action === 'view') {
         userProfileConfiguration.togglePermission(access, 0, feature);
     }

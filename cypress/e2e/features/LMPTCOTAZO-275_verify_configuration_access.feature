@@ -6,7 +6,7 @@ Feature: Differentiated access - Configuration
         #@LMPTCOTAZO-196
         Given The user opens cotazo website
 
-    @LMPTCOTAZO-276  
+    @LMPTCOTAZO-276
     Scenario: Verfy all accesses on the configuration
         When An "moderator" logs in to cotazo
         And The user goes to "Configuration"

@@ -1,19 +1,19 @@
 import { homePage } from '../HomePage';
-import {pendingBudgetsListPage} from '../budget/pending/PendingBudgetsListPage';
-import {inProgressBudgetsListPage} from '../budget/inProgress/InProgressBudgetsListPage';
-import {completedBudgetsListPage} from '../budget/completed/CompletedBudgetsListPage';
-import {sentBudgetsListPage} from '../budget/sent/SentBudgetsListPage';
+import { pendingBudgetsListPage } from '../budget/pending/PendingBudgetsListPage';
+import { inProgressBudgetsListPage } from '../budget/inProgress/InProgressBudgetsListPage';
+import { completedBudgetsListPage } from '../budget/completed/CompletedBudgetsListPage';
+import { sentBudgetsListPage } from '../budget/sent/SentBudgetsListPage';
 import { archivedBudgetListPage } from '../budget/archived/ArchivedBudgetListPage';
-import {inProgressBudgetsEditPage} from '../budget/inProgress/InProgressBudgetsEditPage';
-import {translationConfiguration} from '../configuration/TranslationConfiguration';
-import {parametersConfiguration} from '../configuration/ParametersConfiguration';
-import {serviceConfiguration} from '../configuration/ServicesConfiguration';
-import {userConfiguration} from '../configuration/UserConfiguration';
-import {userGroupConfiguration} from '../configuration/UserGroupConfiguration';
+import { inProgressBudgetsEditPage } from '../budget/inProgress/InProgressBudgetsEditPage';
+import { translationConfiguration } from '../configuration/TranslationConfiguration';
+import { parametersConfiguration } from '../configuration/ParametersConfiguration';
+import { serviceConfiguration } from '../configuration/ServicesConfiguration';
+import { userConfiguration } from '../configuration/UserConfiguration';
+import { userGroupConfiguration } from '../configuration/UserGroupConfiguration';
 import { paymentAnalysis } from '../analysis/PaymentAnalysis';
 import { budgetAnalysis } from '../analysis/BudgetAnalysis';
-import {supportRequestPage} from '../supportRequest/SupportRequestPage';
-import {contactPage} from '../contact/ContactPage';
+import { supportRequestPage } from '../supportRequest/SupportRequestPage';
+import { contactPage } from '../contact/ContactPage';
 
 export class UserProfileConfiguration {
     locator = {
