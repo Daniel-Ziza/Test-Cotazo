@@ -75,8 +75,8 @@ module.exports = defineConfig({
 
     baseUrl: process.env.BASE_URL,
     chromeWebSecurity: false,
-    experimentalSessionAndOrigin: true,
-    //experimentalModifyObstructiveThirdPartyCode: true,
+    //experimentalSessionAndOrigin: true,
+    experimentalModifyObstructiveThirdPartyCode: true,
     defaultCommandTimeout: 30000,
     responseTimeout: 30000,
     viewportWidth: 1920,
