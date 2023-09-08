@@ -22,7 +22,7 @@ Feature: Differentiated access - Configuration
             | access                 | action |
             | Configurações          | 0      |
             | Traduções              | 2      |
-            | Parametros             | 2      |
+            | Parâmetros             | 2      |
             | Serviços               | 2      |
             | Tipologias             | 2      |
             | IVA                    | 2      |
@@ -711,7 +711,7 @@ Feature: Differentiated access - Configuration
         And The user goes to "User profiles"
         And The user searches for the profile "collaborator"
         And The user edits profile
-        And The user deactivates the "edit" action of the "Parametros" access in the "Configuration" functionality
+        And The user deactivates the "edit" action of the "Parâmetros" access in the "Configuration" functionality
         And The user logs out
         Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
@@ -739,7 +739,7 @@ Feature: Differentiated access - Configuration
         And The user goes to "User profiles"
         And The user searches for the profile "collaborator"
         And The user edits profile
-        And The user deactivates the "view" action of the "Parametros" access in the "Configuration" functionality
+        And The user deactivates the "view" action of the "Parâmetros" access in the "Configuration" functionality
         And The user logs out
         Given The user opens cotazo website
         And An "collaborator" logs in to cotazo
