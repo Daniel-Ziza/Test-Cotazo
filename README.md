@@ -2,7 +2,7 @@
 
 ## 💻 Pre-requisites
 ```
-Before you use this project you only need to have Node Js >= 16.16.0 installed in your computer.
+Before you use this project you only need to have Node Js >= 18.0.0 installed in your computer.
 
 https://nodejs.org/es/download/
 
