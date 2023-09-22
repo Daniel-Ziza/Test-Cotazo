@@ -89,8 +89,10 @@ And('The user activates all available accesses', () => {
     cy.on('uncaught exception', (err, runnable) => {
         return false;
     });
+    cy.slowDown(300);
     cy.get('input[type="checkbox"]').check();
     userProfileConfiguration.elements.saveProfile().click();
+    cy.slowDownEnd();
 });
 
 And('The user obtains the profile associated with his collaborator', () => {

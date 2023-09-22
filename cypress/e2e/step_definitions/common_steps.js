@@ -51,7 +51,7 @@ And('The user goes to {string}', (element) => {
         homePage.toGo('Configurações');
     }
     if (element === 'User profiles') {
-        homePage.toGo('Perfis de Utilizadores');
+        homePage.elements.userProfileBtn().click();
     }
     if (element === 'User') {
         homePage.toGo('Utilizadores');

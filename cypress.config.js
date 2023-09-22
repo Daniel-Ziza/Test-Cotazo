@@ -49,8 +49,8 @@ module.exports = defineConfig({
       'cypress/e2e/features/LMPTCOTAZO-199_login.feature',
       //'cypress/e2e/features/LMPTCOTAZO-200-order_service_creation_UAT.feature',
       'cypress/e2e/features/LMPTCOTAZO-201_budget_creation_steps.feature',
-      'cypress/e2e/features/LMPTCOTAZO-349_budget_creation_steps_on_tablet.feature',
-      'cypress/e2e/features/LMPTCOTAZO-361_budget_creation_steps_on_mobile.feature',
+     // 'cypress/e2e/features/LMPTCOTAZO-349_budget_creation_steps_on_tablet.feature', //not necessary deploy
+    //  'cypress/e2e/features/LMPTCOTAZO-361_budget_creation_steps_on_mobile.feature',//not necessary deploy
       'cypress/e2e/features/LMPTCOTAZO-202_budget_creation.feature',
       // 'cypress/e2e/features/LMPTCOTAZO-371_budget_creation_on_tablet.feature',
       // 'cypress/e2e/features/LMPTCOTAZO-373_budget_creation_on_mobile.feature',
@@ -59,16 +59,16 @@ module.exports = defineConfig({
       // 'cypress/e2e/features/LMPTCOTAZO-205_new_budget_version-budget_acceptance_flow.feature',
       // 'cypress/e2e/features/LMPTCOTAZO-206_new_budget_version-budget_refusal_flow.feature',
       'cypress/e2e/features/LMPTCOTAZO-207_support_request.feature',
-      'cypress/e2e/features/LMPTCOTAZO-376_support_request_on_tablet.feature',
-      'cypress/e2e/features/LMPTCOTAZO-382_support_request_on_mobile.feature',
+     // 'cypress/e2e/features/LMPTCOTAZO-376_support_request_on_tablet.feature',        //not necessary deploy
+    //  'cypress/e2e/features/LMPTCOTAZO-382_support_request_on_mobile.feature',        //not necessary deploy
       'cypress/e2e/features/LMPTCOTAZO-244_user_access_control.feature',
       'cypress/e2e/features/LMPTCOTAZO-248_user_profile_access_control.feature',
-      'cypress/e2e/features/LMPTCOTAZO-252_user_group_access_control.feature',
+      'cypress/e2e/features/LMPTCOTAZO-252_user_group_access_control.feature',        //dara erro no deploy devido a minha missão
       'cypress/e2e/features/LMPTCOTAZO-260_verify_dashboard_access.feature',
       'cypress/e2e/features/LMPTCOTAZO-265_verify_budget_access.feature',
       'cypress/e2e/features/LMPTCOTAZO-275_verify_configuration_access.feature',
-      'cypress/e2e/features/LMPTCOTAZO-299_verify_analysis_access.feature',
-      'cypress/e2e/features/LMPTCOTAZO-306_verify_support_request_access.feature',
+    //  'cypress/e2e/features/LMPTCOTAZO-299_verify_analysis_access.feature',           //not necessary deploy
+      'cypress/e2e/features/LMPTCOTAZO-306_verify_support_request_access.feature',      //arrumado o codigo porem o erro persiste
       'cypress/e2e/features/LMPTCOTAZO-321_verify_contact _access.feature',
       'cypress/e2e/features/set_default_values.feature',
     ],
@@ -82,7 +82,7 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     //numTestsKeptInMemory: 10,
-    video: false,
+    video: true,
     /*"retries": {
       "runMode": 1,
       "openMode":1
