@@ -20,26 +20,5 @@ You can download it here: [Node.js](https://nodejs.org/es/download/).
    Run the following command in the terminal to install the project dependencies:  
    ```bash
    npm install
-   
-🚀 Running the Project
-To execute tests in Cypress:
 
-bash
-Copiar
-Editar
-npm run test
-To execute tests directly in the terminal:
-
-bash
-Copiar
-Editar
-npm run test:run
-To run a specific test:
-
-Open the cypress.config.js file.
-Update the specPattern parameter, specifying the desired test.
-Example:
-javascript
-Copiar
-Editar
-specPattern: 'cypress/e2e/features/test.feature',
+   ## Additional liks: https://jira.adeo.com/confluence/display/lmportugalHD/Cotazo+Testing+Automation
