@@ -21,4 +21,39 @@ You can download it here: [Node.js](https://nodejs.org/es/download/).
    ```bash
    npm install
 
-   ## Additional liks: https://jira.adeo.com/confluence/display/lmportugalHD/Cotazo+Testing+Automation
+---
+   ## 🚀 Running the Project
+
+1. **To execute tests in Cypress:**
+   ```bash
+   npm run test
+
+2. **To execute tests directly in the terminal**
+   ```bash
+   npm run test:run
+
+3. **To run a specific test:**
+   - Open the `cypress.config.js` file.
+   - Update the `specPattern` parameter, specifying the desired test.
+
+   Example:
+   ```bash
+   specPattern: 'cypress/e2e/features/test.feature',
+   
+---
+   ## 📄 Documentation
+
+Access the complete project documentation here: https://jira.adeo.com/confluence/display/lmportugalHD/Cotazo+Testing+Automation
+
+---
+   ## 📂 Repository Structure
+   - `cypress/e2e`: Contains the test files.
+   - `cypress/fixtures`: Contains test data used in the scripts.
+   - `cypress/support`: Contains helper commands and configurations.
+   - `cypress.config.js`: Main configuration file for Cypress.
+
+---
+   ## 🛡️ About
+
+   **Cotazo Testing Automation** is maintained and updated by the QA Engineering team.
+Our goal is to simplify and optimize the test automation process.
